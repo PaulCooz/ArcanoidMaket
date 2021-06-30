@@ -1,29 +1,45 @@
+using System.Collections.Generic;
+using Resources.Scripts.Libs;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlocksGrid : MonoBehaviour
+namespace Resources.Scripts.Models
 {
-    public GridLayoutGroup grid;
-    public RectTransform gridTransform;
-
-    void Start()
+    public class BlocksGrid : MonoBehaviour
     {
-        SetNewGrid(4, 3);
-    }
+        public GridLayoutGroup grid;
+        public RectTransform gridTransform;
+        public SpawnerManager spawnerManager;
 
-    private void SetNewGrid(int rows, int columns)
-    {
-        var rect = gridTransform.rect;
-        var gridSize = new Vector2(rect.width, rect.height);
-        
-        gridSize.x -= 10 * (columns + 1);
-        gridSize.y -= 10 * (rows + 1);
-        
-        grid.constraint = GridLayoutGroup.Constraint.FixedRowCount;
-        grid.constraintCount = rows;
+        public void SetNewGrid(LevelData levelData)
+        {
+            SetNewSize(levelData.height, levelData.width);
+            FillGrid(levelData.data);
+        }
 
-        gridSize.x /= columns;
-        gridSize.y /= rows;
-        grid.cellSize = gridSize;
+        private void SetNewSize(int rows, int columns)
+        {
+            var rect = gridTransform.rect;
+            var gridSize = new Vector2(rect.width, rect.height);
+        
+            gridSize.x -= grid.spacing.x * (columns + 1);
+            gridSize.y -= grid.spacing.y * (rows + 1);
+            gridSize.x /= columns;
+            gridSize.y /= rows;
+        
+            grid.padding.left = (int)grid.spacing.x;
+            grid.padding.top = (int)grid.spacing.y;
+            grid.cellSize = gridSize;
+        }
+
+        private void FillGrid(IEnumerable<int> blocks)
+        {
+            foreach (var blockId in blocks)
+            {
+                var newBlock = spawnerManager.SpawnFromPool(blockId, transform);
+                newBlock.transform.SetParent(transform);
+                newBlock.transform.localScale = Vector3.one;
+            }
+        }
     }
 }

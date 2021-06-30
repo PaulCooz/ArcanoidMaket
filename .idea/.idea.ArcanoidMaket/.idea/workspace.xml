@@ -3,18 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="b2b410ba-a180-4d0f-860f-1d64fc1dfdb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcanoidMaket/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcanoidMaket/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll.mdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll.mdb.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TestBlock.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/TestBlock.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe4.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe5.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +40,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/127E81E1-CB34-41CC-97D2-6B1910DAAE77/1b/960b439c/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BlocksGrid.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Layout/GridLayoutGroup.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/BC3985D3-7B02-41B4-8FC2-1474B2DE25BD/05/25eacfc9/JObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/365BC914-A361-4FD7-BB90-EFEC9046535A/95/31b878f7/0200001Dpdb.il" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -46,6 +51,17 @@
       <option value="$PROJECT_DIR$/Assets/BorderScript.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" />
       <option value="$PROJECT_DIR$/Assets/BlocksGrid.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs" />
+      <option value="$PROJECT_DIR$/Assets/LevelManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/BlocksManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Libs/Structs.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/ObjectPooler.cs" />
+      <option value="$PROJECT_DIR$/Assets/SpawnerManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/LevelManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/SpawnerManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1uaDDnZKkLiFqgOuRHduHC80JOx" />
@@ -99,6 +115,7 @@
       <workItem from="1624894701520" duration="5000" />
       <workItem from="1624975222289" duration="3565000" />
       <workItem from="1624980808070" duration="5386000" />
+      <workItem from="1625042469814" duration="9587000" />
     </task>
     <servers />
   </component>
