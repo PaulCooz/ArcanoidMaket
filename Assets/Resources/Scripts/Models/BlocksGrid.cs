@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Resources.Scripts.Libs;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,32 +12,29 @@ namespace Resources.Scripts.Models
 
         public void SetNewGrid(LevelData levelData)
         {
-            SetNewSize(levelData.height, levelData.width);
-            FillGrid(levelData.data);
-        }
-
-        private void SetNewSize(int rows, int columns)
-        {
             var rect = gridTransform.rect;
-            var gridSize = new Vector2(rect.width, rect.height);
+            var cellSize = new Vector2(rect.width, rect.height);
+
+            var columns = levelData.width;
+            var rows = levelData.height;
         
-            gridSize.x -= grid.spacing.x * (columns + 1);
-            gridSize.y -= grid.spacing.y * (rows + 1);
-            gridSize.x /= columns;
-            gridSize.y /= rows;
+            cellSize.x -= grid.spacing.x * (columns + 1);
+            cellSize.y -= grid.spacing.y * (rows + 1);
+            cellSize.x /= columns;
+            cellSize.y /= rows;
         
             grid.padding.left = (int)grid.spacing.x;
             grid.padding.top = (int)grid.spacing.y;
-            grid.cellSize = gridSize;
-        }
-
-        private void FillGrid(IEnumerable<int> blocks)
-        {
-            foreach (var blockId in blocks)
+            grid.cellSize = cellSize;
+            
+            foreach (var blockId in levelData.data)
             {
-                var newBlock = spawnerManager.SpawnFromPool(blockId, transform);
+                var newBlock = spawnerManager.SpawnFromPool(blockId);
+                
                 newBlock.transform.SetParent(transform);
                 newBlock.transform.localScale = Vector3.one;
+
+                newBlock.Init(cellSize, 5);
             }
         }
     }

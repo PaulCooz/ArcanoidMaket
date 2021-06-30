@@ -6,24 +6,24 @@ namespace Resources.Scripts.Models
 {
     public class SpawnerManager : MonoBehaviour
     {
-        private Dictionary<int, Queue<GameObject>> _poolDictionary;
+        private Dictionary<int, Queue<Block>> _poolDictionary;
         
         public List<Pool> pools;
         
         private void Start()
         {
-            _poolDictionary = new Dictionary<int, Queue<GameObject>>();
+            _poolDictionary = new Dictionary<int, Queue<Block>>();
 
             foreach (var pool in pools)
             {
-                var objectPool = new Queue<GameObject>();
+                var objectPool = new Queue<Block>();
 
                 for(int i = 0; i < pool.poolSize; i++)
                 {
                     var currentTransform = transform;
                     var newObject = Instantiate(pool.pref, currentTransform.position, Quaternion.identity, currentTransform);
                 
-                    newObject.SetActive(false);
+                    newObject.gameObject.SetActive(false);
                     objectPool.Enqueue(newObject);
                 }
                 
@@ -31,7 +31,7 @@ namespace Resources.Scripts.Models
             }
         }
     
-        public GameObject SpawnFromPool(int poolTag, Transform transformForSpawn)
+        public Block SpawnFromPool(int poolTag)
         {
             if (!_poolDictionary.ContainsKey(poolTag))
             {
@@ -40,11 +40,8 @@ namespace Resources.Scripts.Models
             }
             
             var objectToSpawn = _poolDictionary[poolTag].Dequeue();
-            objectToSpawn.SetActive(true);
-
-            objectToSpawn.transform.position = transformForSpawn.position;
-            objectToSpawn.transform.rotation = transformForSpawn.rotation;
-
+            
+            objectToSpawn.gameObject.SetActive(true);
             _poolDictionary[poolTag].Enqueue(objectToSpawn);
 
             return objectToSpawn;

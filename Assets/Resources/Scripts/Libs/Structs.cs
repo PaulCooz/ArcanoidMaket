@@ -1,4 +1,4 @@
-using UnityEngine;
+using Resources.Scripts.Models;
 
 namespace Resources.Scripts.Libs
 {
@@ -14,7 +14,7 @@ namespace Resources.Scripts.Libs
     public struct Pool
     {
         public int tag;
-        public GameObject pref;
+        public Block pref;
         public int poolSize;
     }
 }

@@ -1,22 +1,21 @@
-using System;
-using Resources.Scripts.Libs;
-using Resources.Scripts.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class BlocksManager : MonoBehaviour
+namespace Resources.Scripts.Models
 {
-    public LevelManager levelManager;
-    public BlocksGrid blocksGrid;
-
-    private void Start()
+    public class BlocksManager : MonoBehaviour
     {
-        NextLevel();
-    }
+        public LevelManager levelManager;
+        public BlocksGrid blocksGrid;
 
-    private void NextLevel()
-    {
-        var nextData = levelManager.GetNextLevel();
-        blocksGrid.SetNewGrid(nextData);
+        private void Start()
+        {
+            NextLevel();
+        }
+
+        private void NextLevel()
+        {
+            var nextData = levelManager.GetNextLevel();
+            blocksGrid.SetNewGrid(nextData);
+        }
     }
 }

@@ -3,23 +3,32 @@
   <component name="ChangeListManager">
     <list default="true" id="b2b410ba-a180-4d0f-860f-1d64fc1dfdb2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcanoidMaket/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcanoidMaket/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Ball.physicsMaterial2D" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Ball.physicsMaterial2D" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock0.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock0.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock3.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TestBlock3.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Libs/Structs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Libs/Structs.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TestBlock.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/TestBlock.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/SpawnerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Models/SpawnerManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/ApiUpdaterCheck.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker1-prev.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker1.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker2.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker3.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-AssetImportWorker0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe4.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe5.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe2.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,22 +54,26 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/BC3985D3-7B02-41B4-8FC2-1474B2DE25BD/05/25eacfc9/JObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Image.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/365BC914-A361-4FD7-BB90-EFEC9046535A/95/31b878f7/0200001Dpdb.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0E795E4-8CF0-4D7A-9193-EA9447AF406A/24/53c5da6f/Collision2D.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/BorderScript.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" />
       <option value="$PROJECT_DIR$/Assets/BlocksGrid.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderScript.cs" />
       <option value="$PROJECT_DIR$/Assets/LevelManager.cs" />
       <option value="$PROJECT_DIR$/Assets/BlocksManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BorderManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Libs/Structs.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/ObjectPooler.cs" />
       <option value="$PROJECT_DIR$/Assets/SpawnerManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/LevelManager.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Controls/PlatformMover.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Packs/Pack0/level3.json" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/SpawnerManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Libs/Structs.cs" />
+      <option value="$PROJECT_DIR$/Assets/Block.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/Block.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksManager.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Models/BlocksGrid.cs" />
     </changedPaths>
   </component>
@@ -116,6 +129,9 @@
       <workItem from="1624975222289" duration="3565000" />
       <workItem from="1624980808070" duration="5386000" />
       <workItem from="1625042469814" duration="9587000" />
+      <workItem from="1625060327375" duration="3139000" />
+      <workItem from="1625093109404" duration="2900000" />
+      <workItem from="1625096546474" duration="496000" />
     </task>
     <servers />
   </component>

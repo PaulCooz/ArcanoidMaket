@@ -6,18 +6,10 @@ namespace Resources.Scripts.Controls
     public class PlatformMover : MonoBehaviour
     {
         private const float MovingDuration = 0.1f;
-        private float _minX;
-        private float _maxX;
-    
-        void Start()
-        {
-            var screenSize = Camera.main.ScreenToWorldPoint(Vector3.one) * 2.0f / 3.0f;
+        private const float MinX = -1.8f;
+        private const float MaxX = 1.8f;
 
-            _minX = screenSize.x;
-            _maxX = -screenSize.x;
-        }
-    
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButton(0))
             {
@@ -27,8 +19,8 @@ namespace Resources.Scripts.Controls
                 move.y = currentPosition.y;
                 move.z = currentPosition.z;
 
-                if (move.x < _minX) move.x = _minX;
-                if (move.x > _maxX) move.x = _maxX;
+                if (move.x < MinX) move.x = MinX;
+                if (move.x > MaxX) move.x = MaxX;
 
                 transform.DOMove(move, MovingDuration);
             }
