@@ -1,4 +1,3 @@
-using Libs;
 using UnityEngine;
 
 namespace Models

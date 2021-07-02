@@ -21,7 +21,7 @@ namespace Libs
                 AddWithSame(objectTag);
             }
 
-            var obj = _poolDictionary[tag].Dequeue();
+            var obj = _poolDictionary[objectTag].Dequeue();
             obj.Activate();
 
             return obj;
