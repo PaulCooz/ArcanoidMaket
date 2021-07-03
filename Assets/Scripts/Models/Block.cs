@@ -5,14 +5,20 @@ namespace Models
 {
     public class Block : MonoBehaviour, IPoolable
     {
-        [SerializeField]
-        private Transformer transformer;
+        private Camera _mainCamera;
+        
+        [SerializeField] 
+        private SpriteRenderer spriteRenderer;
 
-        public void Init(float positionX, float positionY, float sizeX, float sizeY, Camera mainCamera)
+        public void Init(Camera mCamera)
         {
-            transformer.Init(mainCamera);
-            transformer.SetPosition(positionX, positionY);
-            transformer.SetSize(sizeX, sizeY);
+            _mainCamera = mCamera;
+        }
+        
+        public void Init(float positionX, float positionY, float sizeX, float sizeY)
+        {
+            transform.position = Transformer.Position(positionX, positionY, _mainCamera);
+            transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
         }
         
         public void Activate()

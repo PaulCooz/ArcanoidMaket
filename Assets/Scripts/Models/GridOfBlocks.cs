@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using Libs;
 using UnityEngine;
 
 namespace Models
@@ -12,6 +11,8 @@ namespace Models
         [SerializeField]
         private SpawnManager spawnManager;
         [SerializeField] [Range(0, 1)]
+        private float height = 0.90f;
+        [SerializeField] [Range(0, 1)]
         private float maxWidth = 1.00f;
         [SerializeField] [Range(0, 1)]
         private float maxHeight = 0.50f;
@@ -21,24 +22,18 @@ namespace Models
         private float spaceByHeight = 0.01f;
         [SerializeField]
         private Camera mainCamera;
-        [SerializeField] 
-        private Transformer transformer;
-
-        private void Start()
-        {
-            transformer.Init(mainCamera);
-            transformer.SetPosition(0.5f, 0.9f);
-        }
 
         public void SetNewGrid(LevelData newData)
         {
             _width = newData.width;
             _height = newData.height;
 
-            for (int i = 0; i < _width * _height; i++)
+            for (var i = 0; i < _width * _height; i++)
             {
                 SetNewCell(newData.data[i], i);
             }
+
+            transform.position = Transformer.Position(0.5f, height, mainCamera);
         }
 
         private void SetNewCell(string blockTag, int currentElement)
@@ -46,16 +41,16 @@ namespace Models
             var newBlock = spawnManager.SpawnBlock(blockTag);
             newBlock.transform.SetParent(transform);
 
-            float sizeX = (maxWidth - spaceByWidth * (_width + 1)) / _width;
-            float sizeY = (maxHeight - spaceByHeight * (_height + 1)) / _height;
+            var sizeX = (maxWidth - spaceByWidth * (_width + 1)) / _width;
+            var sizeY = (maxHeight - spaceByHeight * (_height + 1)) / _height;
 
-            int i = currentElement / _width;
-            int j = currentElement % _width;
+            var i = currentElement / _width;
+            var j = currentElement % _width;
 
-            float positionX = spaceByWidth * (j + 1) + j * sizeX + sizeX / 2;
-            float positionY = spaceByHeight * (_height - i) + (_height - i - 1) * sizeY + sizeY / 2;
+            var positionX = spaceByWidth * (j + 1) + j * sizeX + sizeX / 2;
+            var positionY = spaceByHeight * (_height - i) + (_height - i - 1) * sizeY + sizeY / 2;
             
-            newBlock.Init(positionX, positionY, sizeX, sizeY, mainCamera);
+            newBlock.Init(positionX, positionY, sizeX, sizeY);
         }
     }
 }

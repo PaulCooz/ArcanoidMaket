@@ -6,10 +6,15 @@ namespace Models
     {
         [SerializeField]
         private PoolBlockManager poolBlockManager;
+        [SerializeField]
+        private Camera mainCamera;
         
         public Block SpawnBlock(string blockTag)
         {
-            return poolBlockManager.GetFromPool(blockTag);
+            var block = poolBlockManager.GetFromPool(blockTag);
+            block.Init(mainCamera);
+
+            return block;
         }
     }
 }

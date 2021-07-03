@@ -1,32 +1,22 @@
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Models
 {
-    [System.Serializable]
-    public struct LevelData
-    {
-        public int height;
-        public int width;
-        public string[] data;
-    }
-
     public class LevelManager : MonoBehaviour
     {
-        public TextAsset level;
-    
-        public LevelData GetNextLevel()
-        {
-            var jsonFile = JToken.Parse(level.text);
+        [SerializeField]
+        private GridOfBlocks gridOfBlocks;
+        [SerializeField]
+        private LevelLoader levelLoader;
 
-            var currentLevel = new LevelData
-            {
-                height = (int) jsonFile["height"],
-                width = (int) jsonFile["width"],
-                data = jsonFile["layers"]?.First?["data"]?.ToObject<string[]>()
-            };
-            
-            return currentLevel;
+        private void Start()
+        {
+            LoadNextLevel();
+        }
+
+        private void LoadNextLevel()
+        {
+            gridOfBlocks.SetNewGrid(levelLoader.GetNextLevel());
         }
     }
 }

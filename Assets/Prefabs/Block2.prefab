@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 513515483593906263}
   - component: {fileID: 513515483593906256}
   - component: {fileID: 513515483593906257}
-  - component: {fileID: 691905314140797508}
   m_Layer: 0
   m_Name: Block2
   m_TagString: 3
@@ -97,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcade44e563b6149ab4dc8fc184ed5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformer: {fileID: 691905314140797508}
+  spriteRenderer: {fileID: 513515483593906263}
 --- !u!61 &513515483593906257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -122,19 +121,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.36, y: 0.9}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &691905314140797508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513515483593906258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9e1be959e2e974abee4a12436b0a2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectTransform: {fileID: 513515483593906262}
-  spriteRenderer: {fileID: 513515483593906263}
