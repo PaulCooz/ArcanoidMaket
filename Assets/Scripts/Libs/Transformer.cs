@@ -12,7 +12,7 @@ namespace Libs
                 return Vector2.zero;
             }
 
-            return mainCamera.ScreenToWorldPoint(new Vector3(Screen.width * byWidth, Screen.height * byHeight));
+            return mainCamera.ScreenToWorldPoint(new Vector3(Screen.width * byWidth, Screen.height * byHeight, 0));
         }
 
         public static Vector2 Scale(float byWidth, float byHeight, Camera mainCamera, SpriteRenderer spriteRenderer)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ScriptObjects
 {
@@ -9,5 +10,8 @@ namespace ScriptObjects
         public float platformWidth;
         [SerializeField] [Range(0, 1)] 
         public float platformHeight;
+
+        [SerializeField]
+        public float pushBallForce = 100f;
     }
 }

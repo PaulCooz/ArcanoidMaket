@@ -1,4 +1,3 @@
-using Libs;
 using UnityEngine;
 
 namespace Models
@@ -20,8 +19,6 @@ namespace Models
         private float spaceByWidth = 0.01f;
         [SerializeField] [Range(0, 1)]
         private float spaceByHeight = 0.01f;
-        [SerializeField]
-        private Camera mainCamera;
 
         public void SetNewGrid(LevelData newData)
         {
@@ -32,8 +29,6 @@ namespace Models
             {
                 SetNewCell(newData.data[i], i);
             }
-
-            transform.position = Transformer.Position(0.5f, height, mainCamera);
         }
 
         private void SetNewCell(string blockTag, int currentElement)
@@ -48,8 +43,8 @@ namespace Models
             var j = currentElement % _width;
 
             var positionX = spaceByWidth * (j + 1) + j * sizeX + sizeX / 2;
-            var positionY = spaceByHeight * (_height - i) + (_height - i - 1) * sizeY + sizeY / 2;
-            
+            var positionY = height - (spaceByHeight * (i + 1) + i * sizeY + sizeY / 2);
+
             newBlock.Init(positionX, positionY, sizeX, sizeY);
         }
     }

@@ -1,3 +1,4 @@
+using ScriptObjects;
 using UnityEngine;
 
 namespace Models
@@ -7,6 +8,8 @@ namespace Models
         [SerializeField]
         private PoolBlockManager poolBlockManager;
         [SerializeField]
+        private PoolBallManager poolBallManager;
+        [SerializeField]
         private Camera mainCamera;
         
         public Block SpawnBlock(string blockTag)
@@ -15,6 +18,11 @@ namespace Models
             block.Init(mainCamera);
 
             return block;
+        }
+
+        public Ball SpawnBall(string ballTag)
+        {
+            return poolBallManager.GetFromPool(ballTag);
         }
     }
 }
