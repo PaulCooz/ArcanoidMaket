@@ -1,5 +1,4 @@
-﻿
-namespace Libs
+﻿namespace Libs.Interfaces
 {
     public interface IPoolable
     {

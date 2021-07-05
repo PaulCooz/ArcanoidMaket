@@ -2,13 +2,13 @@ using Libs;
 
 namespace Models
 {
-    public class GridOfBlocks : GridOfObjects<Block>
+    public class GridOfHearts : GridOfObjects<Heart>
     {
-        protected override Block CreateCell(Block cellObject, int i, int j, string tagObject)
+        protected override Heart CreateCell(Heart cellObject, int i, int j, string tagObject)
         {
             var position = GetCellPosition(i, j);
             
-            cellObject = spawnManager.SpawnBlock(tagObject);
+            cellObject = spawnManager.SpawnHeart(tagObject);
             cellObject.transform.SetParent(transform);
             cellObject.Init(position.x, position.y, _cellSize.x, _cellSize.y, spawnManager, mainCamera);
 

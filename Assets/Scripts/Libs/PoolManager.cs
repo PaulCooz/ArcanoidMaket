@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Libs.Interfaces;
 using UnityEngine;
 
 namespace Libs
@@ -37,11 +38,10 @@ namespace Libs
         {
             foreach (var v in poolObjects)
             {
-                if (v.CompareTag(objectTag))
-                {
-                    _poolDictionary[objectTag].Enqueue(Instantiate(v));
-                    return;
-                }
+                if (!v.CompareTag(objectTag)) continue;
+                
+                _poolDictionary[objectTag].Enqueue(Instantiate(v));
+                return;
             }
         }
 

@@ -6,15 +6,13 @@ using UnityEngine;
 
 namespace Models
 {
-    public class Block : MonoBehaviour, IPoolable, IGridable
+    public class Heart : MonoBehaviour, IPoolable, IGridable
     {
         private Camera _mainCamera;
         private SpawnManager _spawnManager;
 
         [SerializeField]
         private SpriteRenderer spriteRenderer;
-
-        public Action OnDeactivate;
 
         public void Init(float positionX, float positionY, float sizeX, float sizeY, SpawnManager spawnManager, Camera mainCamera)
         {
@@ -25,23 +23,18 @@ namespace Models
             transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        public void Pop()
         {
-            if (other.gameObject.CompareTag("ball"))
-            {
-                _spawnManager.Remove(this);
-            }
+            _spawnManager.Remove(this);
         }
-        
+
         public void Activate()
         {
-            OnDeactivate = null;
             gameObject.SetActive(true);
         }
 
         public void Deactivate()
         {
-            OnDeactivate?.Invoke();
             gameObject.SetActive(false);
         }
     }

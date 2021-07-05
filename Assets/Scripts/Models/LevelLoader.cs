@@ -13,7 +13,8 @@ namespace Models
 
     public class LevelLoader : MonoBehaviour
     {
-        public TextAsset level;
+        [SerializeField]
+        private TextAsset level;
     
         public LevelData GetNextLevel()
         {

@@ -9,6 +9,9 @@ TagManager:
   - 3
   - 4
   - ball
+  - bottom
+  - heart
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -54,4 +57,7 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 993733147
+    locked: 0
+  - name: Ui
+    uniqueID: 3239932707
     locked: 0

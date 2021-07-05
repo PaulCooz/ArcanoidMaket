@@ -1,11 +1,11 @@
 using ScriptObjects;
 using UnityEngine;
 
-namespace Models
+namespace Models.Managers
 {
     public class BallManager : MonoBehaviour
     {
-        [SerializeField] 
+        [SerializeField]
         private GameConfig config;
         [SerializeField] 
         private Camera mainCamera;
@@ -13,26 +13,37 @@ namespace Models
         private SpawnManager spawnManager;
         [SerializeField] 
         private Transform platformTransform;
+        [SerializeField] 
+        private HealthManager healthManager;
 
         private float _timerForTest;
         
         private void Start()
         {
             _timerForTest = 0;
+            
+            NewBall();
         }
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && _timerForTest > 2.0f)
+            if (Input.GetKey(KeyCode.Space) && _timerForTest > 1.0f)
             {
                 _timerForTest = 0;
                 
-                var ball = spawnManager.SpawnBall("ball");
-                ball.transform.SetParent(transform);
-                ball.Init(platformTransform.position, config, mainCamera);
+                NewBall();
             }
 
             _timerForTest += Time.deltaTime;
+        }
+
+        private void NewBall()
+        {
+            var ball = spawnManager.SpawnBall("ball");
+            
+            ball.transform.SetParent(transform);
+            ball.Init(platformTransform.position, config, mainCamera, spawnManager);
+            ball.OnDeactivate += healthManager.PopHeart;
         }
     }
 }

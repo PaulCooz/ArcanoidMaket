@@ -1,6 +1,6 @@
 using Libs;
 
-namespace Models
+namespace Models.Managers
 {
     public class PoolBlockManager : PoolManager<Block> {}
 }

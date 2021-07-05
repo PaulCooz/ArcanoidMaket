@@ -16,7 +16,7 @@ namespace Controllers
         private Camera mainCamera;
         [SerializeField] 
         private float speed = 2.0f;
-        [SerializeField] 
+        [SerializeField]
         private GameConfig config;
 
         private void Start()

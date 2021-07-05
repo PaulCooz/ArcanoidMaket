@@ -1,0 +1,4 @@
+{
+	"startMessage" : ["start", "поехали"],
+	"gameOverMessage" : ["game over", "игра проиграна"]
+}
