@@ -1,4 +1,3 @@
-using System;
 using Libs;
 using Libs.Interfaces;
 using Models.Managers;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 namespace Models
 {
-    public class Heart : MonoBehaviour, IPoolable, IGridable
+    public class Heart : MonoBehaviour, IPoolable
     {
         private Camera _mainCamera;
         private SpawnManager _spawnManager;

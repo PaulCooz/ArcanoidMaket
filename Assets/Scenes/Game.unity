@@ -268,6 +268,7 @@ MonoBehaviour:
   maxWidth: 1
   spaceByHeight: 0.01
   spaceByWidth: 0.02
+  config: {fileID: 11400000, guid: 756cd583de1afee4b91b0484ead633a5, type: 2}
 --- !u!1 &424455648
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +555,7 @@ MonoBehaviour:
   maxWidth: 0.4
   spaceByHeight: 0
   spaceByWidth: 0.01
+  config: {fileID: 11400000, guid: 756cd583de1afee4b91b0484ead633a5, type: 2}
 --- !u!1 &1062824282
 GameObject:
   m_ObjectHideFlags: 0

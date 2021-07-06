@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Models
 {
-    public class Block : MonoBehaviour, IPoolable, IGridable
+    public class Block : MonoBehaviour, IPoolable
     {
         private Camera _mainCamera;
         private SpawnManager _spawnManager;

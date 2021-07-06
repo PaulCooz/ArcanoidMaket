@@ -1,10 +1,12 @@
+using System;
 using Libs.Interfaces;
 using Models.Managers;
+using ScriptObjects;
 using UnityEngine;
 
 namespace Libs
 {
-    public class GridOfObjects<T> : MonoBehaviour where T : MonoBehaviour, IGridable
+    public class GridOfObjects<T> : MonoBehaviour where T : MonoBehaviour
     {
         private int _height;
         private int _width;
@@ -26,6 +28,8 @@ namespace Libs
         private float spaceByHeight = 0.01f;
         [SerializeField] [Range(0, 1)]
         private float spaceByWidth = 0.01f;
+        [SerializeField] 
+        private GameConfig config;
 
         public T[,] NewGrid(int gridHeight, int gridWidth, string[] tags)
         {
@@ -38,6 +42,8 @@ namespace Libs
             {
                 for (var j = 0; j < _width; j++)
                 {
+                    if (tags[i * _width + j] == config.EmptyCellName) continue;
+                    
                     grid[i, j] = CreateCell(grid[i, j], i, j, tags[i * _width + j]);
                 }
             }
@@ -45,14 +51,10 @@ namespace Libs
             return grid;
         }
 
-        protected virtual T CreateCell(T cellObject, int i, int j, string tagObject)
+        protected virtual T CreateCell(T monoBehaviour, int i, int i1, string s)
         {
-            var position = GetCellPosition(i, j);
-        
-            cellObject.transform.SetParent(transform);
-            cellObject.Init(position.x, position.y, _cellSize.x, _cellSize.y, spawnManager, mainCamera);
-
-            return cellObject;
+            Debug.LogWarning("can't create cell (not overridden)");
+            throw new NotImplementedException();
         }
 
         private Vector2 GetCellSize()
