@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 513515483593906256}
   - component: {fileID: 513515483593906257}
   m_Layer: 0
-  m_Name: Block2
-  m_TagString: 3
+  m_Name: Block
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1815acf86656bee46a4751c0defb4908, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.53207546, g: 0.9725089, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 513515483593906263}
+  id: 0
 --- !u!61 &513515483593906257
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ namespace Logics
     {
         public void BallTouched(Balls.Ball ball, Collision2D collision)
         {
-            if (collision.gameObject == gameObject)
+            if (collision.gameObject.transform == gameObject.transform)
             {
                 ball.Remove();
             }

@@ -49,6 +49,7 @@ namespace Logics.Balls
         public void Activate()
         {
             OnDeactivate = null;
+            OnBallCollision = null;
             ballRigidbody.velocity = Vector2.zero;
             gameObject.SetActive(true);
         }

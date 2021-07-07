@@ -13,6 +13,8 @@ namespace Logics
         [SerializeField]
         private EdgeCollider2D bottomEdgeCollider;
         [SerializeField] [Range(0, 1)]
+        private float bordersMaxHeight = 0.9f;
+        [SerializeField] [Range(0, 1)]
         private float bottomAddLength = 0.2f;
 
         private void Start()
@@ -22,8 +24,8 @@ namespace Logics
                 new List<Vector2>
                 {
                     Transformer.Position(0, 0, mainCamera),
-                    Transformer.Position(0, 1, mainCamera),
-                    Transformer.Position(1, 1, mainCamera),
+                    Transformer.Position(0, bordersMaxHeight, mainCamera),
+                    Transformer.Position(1, bordersMaxHeight, mainCamera),
                     Transformer.Position(1, 0, mainCamera)
                 }
             );

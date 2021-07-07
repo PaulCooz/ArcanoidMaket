@@ -1,3 +1,5 @@
+using Logics.Balls;
+using Logics.Blocks;
 using Logics.Healths;
 using UnityEngine;
 
@@ -12,12 +14,12 @@ namespace Logics.Spawns
         [SerializeField]
         private PoolHeartManager poolHeartManager;
 
-        public Blocks.Block GetBlock() => poolBlockManager.GetFromPool();
-        public Balls.Ball GetBall() => poolBallManager.GetFromPool();
+        public Block GetBlock() => poolBlockManager.GetFromPool();
+        public Ball GetBall() => poolBallManager.GetFromPool();
         public Heart GetHeart() => poolHeartManager.GetFromPool();
 
-        public void Remove(Blocks.Block block) => poolBlockManager.SetToPool(block);
-        public void Remove(Balls.Ball ball) => poolBallManager.SetToPool(ball);
+        public void Remove(Block block) => poolBlockManager.SetToPool(block);
+        public void Remove(Ball ball) => poolBallManager.SetToPool(ball);
         public void Remove(Heart heart) => poolHeartManager.SetToPool(heart);
     }
 }

@@ -22,6 +22,8 @@ namespace Logics.Healths
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
+        [SerializeField] 
+        private PopupManager popupManager;
 
         private void Awake()
         {
@@ -64,7 +66,7 @@ namespace Logics.Healths
             
             if (_activeHearts <= 0)
             {
-                print(localeManager.GetText("gameOverMessage"));
+                popupManager.ShowGameOver();
             }
         }
     }
