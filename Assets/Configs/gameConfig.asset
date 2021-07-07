@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformWidth: 0.4
   platformHeight: 0.05
-  pushBallForce: 300
-  emptyCellName: Empty
+  pushBallForce: 200
