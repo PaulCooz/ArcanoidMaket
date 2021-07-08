@@ -6,10 +6,15 @@ namespace Libs
 {
     public class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IPoolable
     {
-        private readonly Queue<T> _pool = new Queue<T>();
+        private Queue<T> _pool;
         
         [SerializeField]
         private T poolObject;
+
+        private void Awake()
+        {
+            _pool = new Queue<T>();
+        }
 
         public T GetFromPool()
         {
@@ -28,6 +33,15 @@ namespace Libs
         {
             objectToReturn.Deactivate();
             _pool.Enqueue(objectToReturn);
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var v in _pool)
+            {
+                Destroy(v);
+            }
+            _pool.Clear();
         }
     }
 }

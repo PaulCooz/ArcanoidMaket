@@ -1,6 +1,8 @@
+using Libs;
 using Logics.Blocks;
 using Logics.Healths;
 using Logics.Loaders;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Logics
@@ -23,6 +25,8 @@ namespace Logics
         {
             blockManager.NewLevel(levelLoader.GetNextLevel());
             SetHearts();
+            
+            EventsAndStates.SetGameStart();
         }
 
         private void SetHearts()

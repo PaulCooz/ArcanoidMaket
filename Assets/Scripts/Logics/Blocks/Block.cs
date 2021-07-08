@@ -18,7 +18,7 @@ namespace Logics.Blocks
         
         public event Action OnDeactivate;
 
-        public void Init(float positionX, float positionY, float sizeX, float sizeY, 
+        public void Init(float positionX, float positionY, float sizeX, float sizeY,
                          SpawnManager spawnManager, Camera mainCamera)
         {
             _mainCamera = mainCamera;
@@ -28,14 +28,8 @@ namespace Logics.Blocks
             transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
         }
 
-        public void Remove(bool isQuiet = false)
+        public void Remove()
         {
-            if (id == 5 || id == 8)
-            {
-                print("del unbr");
-            }
-            if (isQuiet) OnDeactivate = null;
-            
             _spawnManager.Remove(this);
         }
 
@@ -52,8 +46,8 @@ namespace Logics.Blocks
 
         public void Deactivate()
         {
-            OnDeactivate?.Invoke();
             gameObject.SetActive(false);
+            OnDeactivate?.Invoke();
         }
     }
 }

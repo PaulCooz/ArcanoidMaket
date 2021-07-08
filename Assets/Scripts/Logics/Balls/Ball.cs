@@ -1,4 +1,5 @@
 using System;
+using Libs;
 using Libs.Interfaces;
 using Logics.Spawns;
 using ScriptObjects;
@@ -22,9 +23,11 @@ namespace Logics.Balls
             _config = config;
             _spawnManager = spawnManager;
 
-            ballRigidbody.position = new Vector3(0, -3, 0);
-
+            ballRigidbody.position = new Vector3(0, _config.startBallHeight, 0);
             Push(platformPosition);
+
+            EventsAndStates.OnGameOver += Remove;
+            EventsAndStates.OnGameWin += Remove;
         }
 
         private void Push(Vector2 toPosition)
@@ -43,6 +46,9 @@ namespace Logics.Balls
 
         public void Remove()
         {
+            EventsAndStates.OnGameOver -= Remove;
+            EventsAndStates.OnGameWin -= Remove;
+
             _spawnManager.Remove(this);
         }
 
@@ -50,14 +56,14 @@ namespace Logics.Balls
         {
             OnDeactivate = null;
             OnBallCollision = null;
-            ballRigidbody.velocity = Vector2.zero;
             gameObject.SetActive(true);
         }
 
         public void Deactivate()
         {
-            OnDeactivate?.Invoke();
             gameObject.SetActive(false);
+            
+            OnDeactivate?.Invoke();
         }
     }
 }

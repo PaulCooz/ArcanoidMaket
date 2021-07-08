@@ -1,3 +1,5 @@
+using System;
+using Libs;
 using Logics.Blocks;
 using Logics.Healths;
 using Logics.Spawns;
@@ -26,8 +28,8 @@ namespace Logics.Balls
         private void Start()
         {
             _timerForTest = 0;
-            
-            NewBall();
+
+            EventsAndStates.OnGameStart += NewBall;
         }
 
         private void Update()
@@ -35,7 +37,6 @@ namespace Logics.Balls
             if (Input.GetKey(KeyCode.Space) && _timerForTest > 1.0f)
             {
                 _timerForTest = 0;
-                
                 NewBall();
             }
 
@@ -52,6 +53,11 @@ namespace Logics.Balls
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;
             ball.OnDeactivate += healthManager.PopHeart;
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameStart -= NewBall;
         }
     }
 }

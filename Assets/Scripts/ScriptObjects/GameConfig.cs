@@ -14,5 +14,7 @@ namespace ScriptObjects
 
         [SerializeField]
         public float pushBallForce = 100f;
+        [SerializeField]
+        public float startBallHeight = -3;
     }
 }

@@ -2,6 +2,7 @@ using Libs;
 using Logics.Balls;
 using Logics.Loaders;
 using Logics.Spawns;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Logics.Blocks
@@ -20,8 +21,9 @@ namespace Logics.Blocks
         private int _width;
         private Block[,] _blocks;
         private BlockTypes[,] _blockTypes;
+        private int _allBlocks;
         private int _emptyBlocks;
-    
+        
         [SerializeField]
         private GridOfObjects gridOfObjects;
         [SerializeField] 
@@ -30,13 +32,18 @@ namespace Logics.Blocks
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
+        [SerializeField] 
+        private Progressbar progressbar;
 
         public void NewLevel(LevelData levelData)
         {
             _height = levelData.height;
             _width = levelData.width;
 
+            ClearAllBlocks();
             MakeNewGrid(levelData.data);
+            
+            progressbar.SetProgress(0);
         }
 
         public void SomeBlockTouched(Ball ball, Collision2D collision)
@@ -52,29 +59,23 @@ namespace Logics.Blocks
                     if (_blockTypes[i, j] == BlockTypes.Unbreakable || i * _width + j != collisionBlockId) continue;
                     
                     _blocks[i, j].Remove();
-                    break;
+                    return;
                 }
             }
         }
 
         private void MakeNewGrid(int[] data)
         {
-            ClearOldBlocks();
-            
             _blocks = new Block[_height, _width];
             _blockTypes = new BlockTypes[_height, _width];
             _emptyBlocks = 0;
-            
+            _allBlocks = _width * _height;
+
             var grid = gridOfObjects.NewGrid(_height, _width);
             for (var i = 0; i < _height; i++)
             {
                 for (var j = 0; j < _width; j++)
                 {
-                    if (i * _width + j == 5 || i * _width + j == 8)
-                    {
-                        print("spawn unb");
-                    }
-                    
                     _blocks[i, j] = spawnManager.GetBlock();
                     _blocks[i, j].Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, 
                                        spawnManager, mainCamera);
@@ -84,14 +85,17 @@ namespace Logics.Blocks
                     
                     _blockTypes[i, j] = (BlockTypes)data[i * _width + j];
 
-                    if (_blockTypes[i, j] == BlockTypes.Unbreakable) _emptyBlocks++;
+                    if (_blockTypes[i, j] == BlockTypes.Unbreakable || _blockTypes[i, j] == BlockTypes.Empty)
+                    {
+                        _allBlocks--;
+                    }
                     
                     MakeTypical(_blocks[i, j], _blockTypes[i, j]);
                 }
             }
         }
 
-        private void ClearOldBlocks()
+        private void ClearAllBlocks()
         {
             if (_blocks == null) return;
             
@@ -101,7 +105,7 @@ namespace Logics.Blocks
                 {
                     if (!_blocks[i, j].isActiveAndEnabled) continue;
 
-                    _blocks[i, j].Remove(true);
+                    _blocks[i, j].Remove();
                 }
             }
         }
@@ -127,10 +131,14 @@ namespace Logics.Blocks
 
         private void PopBlock()
         {
+            if (EventsAndStates.IsGameOver || EventsAndStates.IsWin) return;
+
             _emptyBlocks++;
-            if (_emptyBlocks == _width * _height)
+            progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
+            
+            if (_emptyBlocks == _allBlocks)
             {
-                levelManager.LoadNextLevel();
+                EventsAndStates.SetGameWin();
             }
         }
     }

@@ -1,7 +1,7 @@
 using Libs;
-using Logics.Loaders;
 using Logics.Spawns;
 using UnityEngine;
+using View;
 
 namespace Logics.Healths
 {
@@ -16,9 +16,7 @@ namespace Logics.Healths
         private int startHeartsCount;
         [SerializeField]
         private GridOfObjects gridOfObjects;
-        [SerializeField] 
-        private LocaleManager localeManager;
-        [SerializeField] 
+        [SerializeField]
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
@@ -59,14 +57,14 @@ namespace Logics.Healths
 
         public void PopHeart()
         {
-            if (_activeHearts <= 0) return;
+            if (_activeHearts <= 0 || EventsAndStates.IsWin) return;
             
             _activeHearts--;
             _hearts[_activeHearts].Pop();
             
             if (_activeHearts <= 0)
             {
-                popupManager.ShowGameOver();
+                EventsAndStates.SetGameOver();
             }
         }
     }
