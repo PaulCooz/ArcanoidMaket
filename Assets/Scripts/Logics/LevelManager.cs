@@ -1,14 +1,15 @@
 using Libs;
+using Loaders;
 using Logics.Blocks;
 using Logics.Healths;
-using Logics.Loaders;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Logics
 {
     public class LevelManager : MonoBehaviour
     {
+        private LevelData _levelData;
+        
         [SerializeField]
         private BlockManager blockManager;
         [SerializeField]
@@ -23,7 +24,17 @@ namespace Logics
 
         public void LoadNextLevel()
         {
-            blockManager.NewLevel(levelLoader.GetNextLevel());
+            _levelData = levelLoader.GetNextLevel();
+            
+            blockManager.NewLevel(_levelData);
+            SetHearts();
+            
+            EventsAndStates.SetGameStart();
+        }
+
+        public void RestartLevel()
+        {
+            blockManager.NewLevel(_levelData);
             SetHearts();
             
             EventsAndStates.SetGameStart();

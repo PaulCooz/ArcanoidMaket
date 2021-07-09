@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Libs;
 using ScriptObjects;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Logics
         [SerializeField] 
         private GameConfig config;
         [SerializeField] 
+        private Rigidbody2D platformRigidbody;
+        [SerializeField] 
         private float speed = 2.0f;
 
         private void Start()
@@ -25,10 +28,9 @@ namespace Logics
 
         public void MoveTo(float positionX)
         {
-            var position = transform.position;
+            var position = platformRigidbody.position;
             
-            position.x = Mathf.Lerp(position.x, Mathf.Clamp(positionX, -_max, _max), Time.deltaTime * speed);
-            transform.position = position;
+            platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), Time.deltaTime * speed);
         }
     }
 }

@@ -1,9 +1,9 @@
 using Libs;
+using Loaders;
 using Logics.Balls;
-using Logics.Loaders;
 using Logics.Spawns;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using View;
 
 namespace Logics.Blocks
 {
@@ -27,8 +27,6 @@ namespace Logics.Blocks
         [SerializeField]
         private GridOfObjects gridOfObjects;
         [SerializeField] 
-        private LevelManager levelManager;
-        [SerializeField] 
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
@@ -37,10 +35,10 @@ namespace Logics.Blocks
 
         public void NewLevel(LevelData levelData)
         {
+            ClearAllBlocks();
+            
             _height = levelData.height;
             _width = levelData.width;
-
-            ClearAllBlocks();
             MakeNewGrid(levelData.data);
             
             progressbar.SetProgress(0);

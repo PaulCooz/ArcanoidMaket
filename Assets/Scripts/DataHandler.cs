@@ -1,4 +1,4 @@
-using Logics.Loaders;
+using Loaders;
 using UnityEngine;
 
 public class DataHandler : MonoBehaviour

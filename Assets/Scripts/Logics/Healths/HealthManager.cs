@@ -1,7 +1,7 @@
 using Libs;
+using Logics.Balls;
 using Logics.Spawns;
 using UnityEngine;
-using View;
 
 namespace Logics.Healths
 {
@@ -21,7 +21,7 @@ namespace Logics.Healths
         [SerializeField] 
         private Camera mainCamera;
         [SerializeField] 
-        private PopupManager popupManager;
+        private BallManager ballManager;
 
         private void Awake()
         {
@@ -57,7 +57,7 @@ namespace Logics.Healths
 
         public void PopHeart()
         {
-            if (_activeHearts <= 0 || EventsAndStates.IsWin) return;
+            if (_activeHearts <= 0 || ballManager.countBalls > 0 || !EventsAndStates.IsGameRun) return;
             
             _activeHearts--;
             _hearts[_activeHearts].Pop();

@@ -1,4 +1,3 @@
-using System;
 using Libs;
 using UnityEngine;
 
@@ -10,6 +9,8 @@ namespace View
         private Popup gameOver;
         [SerializeField] 
         private Popup gameWin;
+        [SerializeField] 
+        private Popup pause;
 
         public void Awake()
         {
@@ -27,6 +28,12 @@ namespace View
         {
             gameWin.gameObject.SetActive(true);
             gameWin.Show();
+        }
+
+        public void ShowPause()
+        {
+            pause.gameObject.SetActive(true);
+            pause.Show();
         }
 
         public void OnDestroy()

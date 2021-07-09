@@ -1,13 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Progressbar : MonoBehaviour
+namespace View
 {
-    [SerializeField]
-    private Image bar;
-
-    public void SetProgress(float x)
+    public class Progressbar : MonoBehaviour
     {
-        bar.fillAmount = x;
+        [SerializeField]
+        private Image bar;
+
+        public void SetProgress(float x)
+        {
+            bar.fillAmount = x;
+        }
     }
 }

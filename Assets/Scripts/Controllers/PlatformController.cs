@@ -1,3 +1,4 @@
+using Libs;
 using Logics;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Controllers
         
         private void Update()
         {
-            if (!Input.GetMouseButton(0)) return;
+            if (!Input.GetMouseButton(0) || !EventsAndStates.IsGameRun) return;
             
             platform.MoveTo(mainCamera.ScreenToWorldPoint(Input.mousePosition).x);
         }

@@ -1,4 +1,4 @@
-using Logics.Loaders;
+using Loaders;
 
 public static class DataHolder
 {

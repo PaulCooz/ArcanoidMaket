@@ -11,7 +11,7 @@ namespace Logics.Balls
     {
         private GameConfig _config;
         private SpawnManager _spawnManager;
-        
+
         [SerializeField]
         private Rigidbody2D ballRigidbody;
         
@@ -23,25 +23,28 @@ namespace Logics.Balls
             _config = config;
             _spawnManager = spawnManager;
 
-            ballRigidbody.position = new Vector3(0, _config.startBallHeight, 0);
-            Push(platformPosition);
+            ballRigidbody.position = new Vector3(platformPosition.x, _config.startBallHeight, 0);
+            ballRigidbody.AddForce((platformPosition - ballRigidbody.position) * _config.ballForce);
 
             EventsAndStates.OnGameOver += Remove;
             EventsAndStates.OnGameWin += Remove;
         }
 
-        private void Push(Vector2 toPosition)
-        {
-            var position = ballRigidbody.position;
-            var impulse = toPosition - new Vector2(position.x, position.y);
-            
-            ballRigidbody.velocity = Vector2.zero;
-            ballRigidbody.AddForce(impulse * _config.pushBallForce);
-        }
-
         private void OnCollisionEnter2D(Collision2D other)
         {
             OnBallCollision?.Invoke(this, other);
+        }
+
+        private void Update()
+        {
+            if (EventsAndStates.IsGameRun)
+            {
+                ballRigidbody.WakeUp();
+            }
+            else
+            {
+                ballRigidbody.Sleep();
+            }
         }
 
         public void Remove()

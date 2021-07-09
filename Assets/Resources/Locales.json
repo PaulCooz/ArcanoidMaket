@@ -1,4 +1,11 @@
 {
-	"startMessage" : ["start", "поехали"],
-	"gameOverMessage" : ["game over", "игра проиграна"]
+	"mainTitle" : ["ARKANOID", "АРКАНОИД"],
+	"packName0" : ["elephant belly", "пузо слона"],
+	"packName1" : ["rainbow tip", "верхушка радуги"],
+	"packName2" : ["asphalt", "асфальт"],
+	"packName3" : ["dandelion", "одуванчик"],
+	"packName4" : ["anthill", "муравейник"],
+	"gameOverPopupTitle" : ["game over", "игра проиграна"],
+	"gameWinPopupTitle" : ["you win", "победа"],
+	"pauseTitle" : ["pause", "пауза"]
 }

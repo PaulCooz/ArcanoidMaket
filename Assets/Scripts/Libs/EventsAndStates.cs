@@ -4,8 +4,9 @@ namespace Libs
 {
     public static class EventsAndStates
     {
-        public static bool IsGameOver;
-        public static bool IsWin;
+        public static bool IsGameRun = false;
+        public static bool IsGameOver = true;
+        public static bool IsWin = false;
 
         public static event Action OnGameStart;
         public static event Action OnGameWin;
@@ -15,6 +16,7 @@ namespace Libs
         {
             IsWin = true;
             IsGameOver = false;
+            IsGameRun = false;
             OnGameWin?.Invoke();
         }
         
@@ -22,6 +24,7 @@ namespace Libs
         {
             IsWin = false;
             IsGameOver = false;
+            IsGameRun = true;
             OnGameStart?.Invoke();
         }
 
@@ -29,6 +32,7 @@ namespace Libs
         {
             IsGameOver = true;
             IsWin = false;
+            IsGameRun = false;
             OnGameOver?.Invoke();
         }
     }

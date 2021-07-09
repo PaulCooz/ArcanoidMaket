@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformWidth: 0.4
   platformHeight: 0.05
-  pushBallForce: 200
+  ballForce: 300
+  startBallHeight: -3

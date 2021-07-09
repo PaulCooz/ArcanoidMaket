@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Loaders;
+using TMPro;
 using UnityEngine;
 
-public class GameOverPopup : MonoBehaviour
+namespace View
 {
-    // Start is called before the first frame update
-    void Start()
+    public class GameOverPopup : MonoBehaviour
     {
-        
-    }
+        [SerializeField] 
+        private TextMeshProUGUI titleText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            titleText.text = LocaleManager.GetText("gameOverPopupTitle");
+        }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Libs;
 using Logics.Blocks;
 using Logics.Healths;
@@ -15,32 +14,31 @@ namespace Logics.Balls
         [SerializeField] 
         private SpawnManager spawnManager;
         [SerializeField] 
-        private Transform platformTransform;
+        private Rigidbody2D platformRigidbody;
         [SerializeField] 
         private HealthManager healthManager;
         [SerializeField] 
         private Bottom bottom;
-        [SerializeField] 
+        [SerializeField]
         private BlockManager blockManager;
 
-        private float _timerForTest;
+        public int countBalls;
 
         private void Start()
         {
-            _timerForTest = 0;
-
-            EventsAndStates.OnGameStart += NewBall;
+            countBalls = 0;
         }
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.Space) && _timerForTest > 1.0f)
-            {
-                _timerForTest = 0;
-                NewBall();
-            }
+            if (!EventsAndStates.IsGameRun || countBalls != 0) return;
+            
+            NewBall();
+        }
 
-            _timerForTest += Time.deltaTime;
+        private void RemoveBall()
+        {
+            countBalls--;
         }
 
         private void NewBall()
@@ -48,16 +46,14 @@ namespace Logics.Balls
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
-            ball.Init(platformTransform.position, config, spawnManager);
+            ball.Init(platformRigidbody.position, config, spawnManager);
             
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;
+            ball.OnDeactivate += RemoveBall;
             ball.OnDeactivate += healthManager.PopHeart;
-        }
 
-        private void OnDestroy()
-        {
-            EventsAndStates.OnGameStart -= NewBall;
+            countBalls++;
         }
     }
 }
