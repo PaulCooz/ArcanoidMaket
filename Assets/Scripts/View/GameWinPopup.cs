@@ -1,14 +1,26 @@
 using Loaders;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameWinPopup : MonoBehaviour
+namespace View
 {
-    [SerializeField] 
-    private TextMeshProUGUI titleText;
-
-    private void Start()
+    public class GameWinPopup : MonoBehaviour
     {
-        titleText.text = LocaleManager.GetText("gameWinPopupTitle");
+        [SerializeField] 
+        private TextMeshProUGUI titleText;
+        [SerializeField]
+        private Image progress;
+        [SerializeField] 
+        private LevelLoader levelLoader;
+
+        private void OnEnable()
+        {
+            titleText.text = LocaleManager.GetText("gameWinPopupTitle");
+
+            var info = levelLoader.GetLevelInfo();
+            progress.fillAmount = info.x / info.y;
+        }
     }
 }

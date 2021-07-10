@@ -17,6 +17,12 @@ namespace Logics
         [SerializeField]
         private LevelLoader levelLoader;
 
+        private void Awake()
+        {
+            EventsAndStates.OnGameWin += PlayerData.IncLastLevel;
+            EventsAndStates.OnPackDone += PlayerData.IncLastPack;
+        }
+
         private void Start()
         {   
             LoadNextLevel();
@@ -24,8 +30,11 @@ namespace Logics
 
         public void LoadNextLevel()
         {
-            _levelData = levelLoader.GetNextLevel();
+            var nextData = levelLoader.GetNextLevel();
+            if (nextData == null) return;
             
+            _levelData = (LevelData) nextData;
+
             blockManager.NewLevel(_levelData);
             SetHearts();
             
@@ -43,6 +52,12 @@ namespace Logics
         private void SetHearts()
         {
             healthManager.SetHearts();
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameWin -= PlayerData.IncLastLevel;
+            EventsAndStates.OnPackDone -= PlayerData.IncLastPack;
         }
     }
 }

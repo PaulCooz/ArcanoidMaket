@@ -1,15 +1,9 @@
-using Loaders;
 using UnityEngine;
 
 public class DataHandler : MonoBehaviour
 {
-    public void SetLevelPack(int packId)
+    public void SetLevelPack(TextAsset[] packLevels)
     {
-        DataHolder.LevelPack = packId;
-    }
-
-    public void SetLocale(Locale locale)
-    {
-        DataHolder.CurrentLocale = locale;
+        DataHolder.Levels = packLevels;
     }
 }

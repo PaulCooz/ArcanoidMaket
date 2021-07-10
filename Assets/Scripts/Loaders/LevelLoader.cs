@@ -1,3 +1,5 @@
+using System;
+using Libs;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -15,32 +17,20 @@ namespace Loaders
     {
         private int _currentLevel;
 
-        private void Start()
+        private void Awake()
         {
             _currentLevel = 0;
         }
 
-        public LevelData GetNextLevel()
+        public LevelData? GetNextLevel()
         {
-            var path = "Packs/Pack" + DataHolder.LevelPack + "/level" + _currentLevel;
-            var data = Resources.Load<TextAsset>(path)?.text;
-
-            if (data == null)
+            if (_currentLevel >= DataHolder.Levels.Length)
             {
-                DataHolder.LevelPack++;
-
-                if (_currentLevel == 0)
-                {
-                    print("done");
-                    return new LevelData();
-                }
-                else
-                {
-                    _currentLevel = 0;
-                    return GetNextLevel();
-                }
+                EventsAndStates.SetPackDone();
+                return null;
             }
-            
+
+            var data = DataHolder.Levels[_currentLevel++].text;
             var jsonFile = JToken.Parse(data);
 
             var currentLevelData = new LevelData
@@ -50,9 +40,12 @@ namespace Loaders
                 data = jsonFile["layers"]?.First?["data"]?.ToObject<int[]>()
             };
 
-            _currentLevel++;
-            
             return currentLevelData;
+        }
+
+        public Vector2 GetLevelInfo()
+        {
+            return new Vector2(_currentLevel, DataHolder.Levels.Length);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace View
         [SerializeField] 
         private TextMeshProUGUI titleText;
 
-        private void Start()
+        private void OnEnable()
         {
             titleText.text = LocaleManager.GetText("gameOverPopupTitle");
         }

@@ -11,6 +11,7 @@ namespace Libs
         public static event Action OnGameStart;
         public static event Action OnGameWin;
         public static event Action OnGameOver;
+        public static event Action OnPackDone;
 
         public static void SetGameWin()
         {
@@ -34,6 +35,14 @@ namespace Libs
             IsWin = false;
             IsGameRun = false;
             OnGameOver?.Invoke();
+        }
+
+        public static void SetPackDone()
+        {
+            IsGameRun = false;
+            IsGameOver = true;
+            IsWin = false;
+            OnPackDone?.Invoke();
         }
     }
 }

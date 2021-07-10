@@ -1,23 +1,68 @@
 using Loaders;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Pack : MonoBehaviour
+namespace View
 {
-    [SerializeField] 
-    private TextMeshProUGUI packTitle;
-    [SerializeField]
-    private int packId;
-    [SerializeField] 
-    private DataHandler dataHandler;
-
-    private void Start()
+    public class Pack : MonoBehaviour
     {
-        packTitle.text = LocaleManager.GetText("packName" + packId);
-    }
+        private string _packProgressText;
+        
+        [SerializeField] 
+        private SceneChanger sceneChanger;
+        [SerializeField] 
+        private DataHandler dataHandler;
+        [SerializeField]
+        private TextAsset[] packLevels;
+        [SerializeField] 
+        private TextMeshProUGUI packTitle;
+        [SerializeField] 
+        private float imageRatio;
+        [SerializeField]
+        private int packNumber;
+        [SerializeField] 
+        private Image image;
+        [SerializeField] 
+        private TextMeshProUGUI packProgress;
 
-    public void Pushed()
-    {
-        dataHandler.SetLevelPack(packId);
+        private void Start()
+        {
+            packTitle.text = LocaleManager.GetText("packName" + packNumber);
+            _packProgressText = packProgress.text;
+
+            SetProgress();
+        }
+
+        private void SetProgress()
+        {
+            var currentPack = PlayerData.GetLastPack();
+            int currentLevel;
+            
+            if (currentPack < packNumber)
+            {
+                image.color *= imageRatio;
+                currentLevel = 0;
+            }
+            else if (currentPack > packNumber)
+            {
+                currentLevel = packLevels.Length;
+            }
+            else
+            {
+                currentLevel = PlayerData.GetLastLevel();
+            }
+            
+            packProgress.text = string.Format(_packProgressText, currentLevel, packLevels.Length);
+        }
+
+        public void Pushed()
+        {
+            var currentPack = PlayerData.GetLastPack();
+            if (currentPack < packNumber) return;
+            
+            dataHandler.SetLevelPack(packLevels);
+            sceneChanger.LoadScene("game");
+        }
     }
 }

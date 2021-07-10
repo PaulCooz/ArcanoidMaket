@@ -1,26 +1,25 @@
-using System;
 using Libs;
 using Loaders;
 using TMPro;
 using UnityEngine;
 
-public class PausePopup : MonoBehaviour
+namespace View
 {
-    [SerializeField] 
-    private TextMeshProUGUI pauseTitle;
-
-    private void Start()
+    public class PausePopup : MonoBehaviour
     {
-        pauseTitle.text = LocaleManager.GetText("pauseTitle");
-    }
+        [SerializeField] 
+        private TextMeshProUGUI pauseTitle;
+        
+        private void OnEnable()
+        {
+            pauseTitle.text = LocaleManager.GetText("pauseTitle");
+            
+            EventsAndStates.IsGameRun = false;
+        }
 
-    private void OnEnable()
-    {
-        EventsAndStates.IsGameRun = false;
-    }
-
-    private void OnDisable()
-    {
-        EventsAndStates.IsGameRun = true;
+        private void OnDisable()
+        {
+            EventsAndStates.IsGameRun = true;
+        }
     }
 }
