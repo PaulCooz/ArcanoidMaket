@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Loaders
 {
-    [System.Serializable]
+    [Serializable]
     public struct LevelData
     {
         public int height;
@@ -20,6 +20,11 @@ namespace Loaders
         private void Awake()
         {
             _currentLevel = 0;
+        }
+
+        public void SetLevel(int level)
+        {
+            _currentLevel = level;
         }
 
         public LevelData? GetNextLevel()

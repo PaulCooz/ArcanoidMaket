@@ -124,13 +124,14 @@ namespace Logics.Blocks
             case BlockTypes.Bomb:
                 block.SetColor(Color.magenta);
                 break;
+            default:
+                Debug.LogWarning("unknown block type");
+                break;
             }
         }
 
         private void PopBlock()
         {
-            if (EventsAndStates.IsGameOver || EventsAndStates.IsWin) return;
-
             _emptyBlocks++;
             progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
             

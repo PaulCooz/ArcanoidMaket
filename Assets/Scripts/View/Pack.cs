@@ -1,3 +1,4 @@
+using Libs;
 using Loaders;
 using TMPro;
 using UnityEngine;
@@ -61,7 +62,7 @@ namespace View
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;
             
-            dataHandler.SetLevelPack(packLevels);
+            dataHandler.SetLevelPack(packLevels, packNumber);
             sceneChanger.LoadScene("game");
         }
     }

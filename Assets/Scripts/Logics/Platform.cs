@@ -28,8 +28,6 @@ namespace Logics
 
         public void MoveTo(float positionX)
         {
-            var position = platformRigidbody.position;
-            
             platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), Time.deltaTime * speed);
         }
     }

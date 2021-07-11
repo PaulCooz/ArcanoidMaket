@@ -25,9 +25,6 @@ namespace Logics.Balls
 
             ballRigidbody.position = new Vector3(platformPosition.x, _config.startBallHeight, 0);
             ballRigidbody.AddForce((platformPosition - ballRigidbody.position) * _config.ballForce);
-
-            EventsAndStates.OnGameOver += Remove;
-            EventsAndStates.OnGameWin += Remove;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -49,9 +46,6 @@ namespace Logics.Balls
 
         public void Remove()
         {
-            EventsAndStates.OnGameOver -= Remove;
-            EventsAndStates.OnGameWin -= Remove;
-
             _spawnManager.Remove(this);
         }
 
@@ -59,14 +53,15 @@ namespace Logics.Balls
         {
             OnDeactivate = null;
             OnBallCollision = null;
+            
             gameObject.SetActive(true);
         }
 
         public void Deactivate()
         {
             gameObject.SetActive(false);
-            
-            OnDeactivate?.Invoke();
+         
+            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke();
         }
     }
 }

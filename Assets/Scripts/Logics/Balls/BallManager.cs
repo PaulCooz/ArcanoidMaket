@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Libs;
 using Logics.Blocks;
 using Logics.Healths;
@@ -9,6 +10,8 @@ namespace Logics.Balls
 {
     public class BallManager : MonoBehaviour
     {
+        private List<Ball> _balls; 
+        
         [SerializeField]
         private GameConfig config;
         [SerializeField] 
@@ -22,23 +25,24 @@ namespace Logics.Balls
         [SerializeField]
         private BlockManager blockManager;
 
-        public int countBalls;
-
         private void Start()
         {
-            countBalls = 0;
+            _balls = new List<Ball>();
+
+            EventsAndStates.OnGameOver += ClearBalls;
+            EventsAndStates.OnGameWin += ClearBalls;
         }
 
         private void Update()
         {
-            if (!EventsAndStates.IsGameRun || countBalls != 0) return;
+            if (!EventsAndStates.IsGameRun || CountBalls() != 0) return;
             
             NewBall();
         }
 
         private void RemoveBall()
         {
-            countBalls--;
+            _balls.RemoveAt(_balls.Count - 1);
         }
 
         private void NewBall()
@@ -52,8 +56,30 @@ namespace Logics.Balls
             ball.OnBallCollision += blockManager.SomeBlockTouched;
             ball.OnDeactivate += RemoveBall;
             ball.OnDeactivate += healthManager.PopHeart;
+            
+            _balls.Add(ball);
+        }
 
-            countBalls++;
+        public int CountBalls()
+        {
+            return _balls.Count;
+        }
+
+        private void ClearBalls()
+        {
+            foreach (var ball in _balls)
+            {
+                ball.Remove();
+            }
+            _balls.Clear();
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameOver -= ClearBalls;
+            EventsAndStates.OnGameWin -= ClearBalls;
+            
+            ClearBalls();
         }
     }
 }

@@ -24,7 +24,12 @@ namespace Logics
         }
 
         private void Start()
-        {   
+        {
+            if (PlayerData.GetLastPack() == DataHolder.PackNumber)
+            {
+                levelLoader.SetLevel(PlayerData.GetLastLevel());
+            }
+            
             LoadNextLevel();
         }
 

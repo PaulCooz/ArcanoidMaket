@@ -57,7 +57,7 @@ namespace Logics.Healths
 
         public void PopHeart()
         {
-            if (_activeHearts <= 0 || ballManager.countBalls > 0 || !EventsAndStates.IsGameRun) return;
+            if (_activeHearts <= 0 || ballManager.CountBalls() > 0 || !EventsAndStates.IsGameRun) return;
             
             _activeHearts--;
             _hearts[_activeHearts].Pop();

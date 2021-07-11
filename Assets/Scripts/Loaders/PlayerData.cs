@@ -9,7 +9,6 @@ namespace Loaders
     {
         private static string GetFileData()
         {
-            
             return Resources.Load<TextAsset>("PlayerData").text;
         }
 
@@ -26,7 +25,8 @@ namespace Loaders
         public static void IncLastLevel()
         {
             var jsonFile = JToken.Parse(GetFileData());
-            
+            if ((int) jsonFile["lastPack"] != DataHolder.PackNumber) return;
+
             jsonFile["lastLevel"] = (int) jsonFile["lastLevel"] + 1;
             
             SaveData(jsonFile);
@@ -35,7 +35,8 @@ namespace Loaders
         public static void IncLastPack()
         {
             var jsonFile = JToken.Parse(GetFileData());
-            
+            if ((int) jsonFile["lastPack"] != DataHolder.PackNumber) return;
+
             jsonFile["lastPack"] = (int) jsonFile["lastPack"] + 1;
             jsonFile["lastLevel"] = 0;
             
@@ -44,9 +45,10 @@ namespace Loaders
 
         private static void SaveData(JToken jToken)
         {
-            var fs = new JsonTextWriter(File.CreateText("Assets/Resources/PlayerData.json"));
+            var fs = new JsonTextWriter(File.CreateText(Application.dataPath + "/Resources/PlayerData.json"));
             
             jToken.WriteTo(fs);
+            fs.Flush();
             fs.Close();
         }
     }

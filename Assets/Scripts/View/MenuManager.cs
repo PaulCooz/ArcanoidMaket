@@ -1,20 +1,22 @@
-using System;
 using Loaders;
 using TMPro;
 using UnityEngine;
 
-public class MenuManager : MonoBehaviour
+namespace View
 {
-    [SerializeField] 
-    private TextMeshProUGUI mainTitle;
-
-    public void ResetLanguage(int locale)
+    public class MenuManager : MonoBehaviour
     {
-        LocaleManager.SetLocale((Locale) locale);
-    }
+        [SerializeField] 
+        private TextMeshProUGUI mainTitle;
 
-    private void Start()
-    {
-        mainTitle.text = LocaleManager.GetText("mainTitle");
+        public void ResetLanguage(int locale)
+        {
+            LocaleManager.SetLocale((Locale) locale);
+        }
+
+        private void Start()
+        {
+            mainTitle.text = LocaleManager.GetText("mainTitle");
+        }
     }
 }

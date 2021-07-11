@@ -47,7 +47,8 @@ namespace Logics.Blocks
         public void Deactivate()
         {
             gameObject.SetActive(false);
-            OnDeactivate?.Invoke();
+            
+            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace View
 
         public void LoadScene(string sceneName)
         {
+            EventsAndStates.IsGameRun = false;
             SceneManager.LoadScene(sceneName);
         }
 
