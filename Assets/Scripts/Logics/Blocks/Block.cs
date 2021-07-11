@@ -16,7 +16,7 @@ namespace Logics.Blocks
 
         public int id;
         
-        public event Action OnDeactivate;
+        public event Action<int> OnDeactivate;
 
         public void Init(float positionX, float positionY, float sizeX, float sizeY,
                          SpawnManager spawnManager, Camera mainCamera)
@@ -48,7 +48,7 @@ namespace Logics.Blocks
         {
             gameObject.SetActive(false);
             
-            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke();
+            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke(id);
         }
     }
 }

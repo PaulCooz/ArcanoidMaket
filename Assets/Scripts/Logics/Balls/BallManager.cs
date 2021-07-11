@@ -78,8 +78,6 @@ namespace Logics.Balls
         {
             EventsAndStates.OnGameOver -= ClearBalls;
             EventsAndStates.OnGameWin -= ClearBalls;
-            
-            ClearBalls();
         }
     }
 }

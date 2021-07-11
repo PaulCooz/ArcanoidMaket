@@ -130,7 +130,7 @@ namespace Logics.Blocks
             }
         }
 
-        private void PopBlock()
+        private void PopBlock(int id)
         {
             _emptyBlocks++;
             progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
@@ -138,6 +138,20 @@ namespace Logics.Blocks
             if (_emptyBlocks == _allBlocks)
             {
                 EventsAndStates.SetGameWin();
+            }
+            else
+            {
+                int i = id / _width, j = id % _width;
+                
+                BonusCheck(_blockTypes[i, j], i, j);
+            }
+        }
+
+        private void BonusCheck(BlockTypes blockType, int i, int j)
+        {
+            if (blockType == BlockTypes.Bomb)
+            {
+                
             }
         }
     }

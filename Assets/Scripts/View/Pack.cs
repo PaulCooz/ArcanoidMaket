@@ -25,6 +25,8 @@ namespace View
         [SerializeField] 
         private Image image;
         [SerializeField] 
+        private Image packImage;
+        [SerializeField] 
         private TextMeshProUGUI packProgress;
 
         private void Start()
@@ -62,7 +64,7 @@ namespace View
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;
             
-            dataHandler.SetLevelPack(packLevels, packNumber);
+            dataHandler.SetLevelPack(packLevels, packNumber, packImage);
             sceneChanger.LoadScene("game");
         }
     }

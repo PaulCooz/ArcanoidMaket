@@ -1,9 +1,12 @@
-using Loaders;
 using UnityEngine;
+using UnityEngine.UI;
 
-public static class DataHolder
+namespace Libs
 {
-    public static Locale CurrentLocale;
-    public static TextAsset[] Levels;
-    public static int PackNumber;
+    public static class DataHolder
+    {
+        public static TextAsset[] Levels;
+        public static int PackNumber;
+        public static Image PackImage;
+    }
 }
