@@ -4,6 +4,7 @@ using Libs.Interfaces;
 using Logics.Spawns;
 using ScriptObjects;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Logics.Balls
 {
@@ -24,11 +25,25 @@ namespace Logics.Balls
             _spawnManager = spawnManager;
 
             ballRigidbody.position = new Vector3(platformPosition.x, _config.startBallHeight, 0);
-            ballRigidbody.AddForce((platformPosition - ballRigidbody.position) * _config.ballForce);
+            ballRigidbody.AddForce((platformPosition - ballRigidbody.position).normalized * _config.ballStartForce);
+        }
+
+        private static bool RandomBool(int chance)
+        {
+            return Random.Range(0, 100) < chance;
         }
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            var angleCoeff = Random.Range(_config.minAngleCoeff, _config.maxAngleCoeff);
+            var direction = RandomBool(50) ? -1f : 1f;
+            var velocity = ballRigidbody.velocity;
+
+            velocity = new Vector2(angleCoeff * velocity.x + direction * velocity.y, -direction * velocity.x + angleCoeff * velocity.y);
+            velocity = velocity.normalized * _config.ballVelocity;
+            
+            ballRigidbody.velocity = velocity;
+
             OnBallCollision?.Invoke(this, other);
         }
 
@@ -36,9 +51,13 @@ namespace Logics.Balls
         {
             if (EventsAndStates.IsGameRun)
             {
-                ballRigidbody.WakeUp();
+                if (ballRigidbody.IsSleeping())
+                {
+                    ballRigidbody.WakeUp();
+                    ballRigidbody.AddForce(Vector2.down * _config.ballStartForce);
+                }
             }
-            else
+            else if (!ballRigidbody.IsSleeping())
             {
                 ballRigidbody.Sleep();
             }

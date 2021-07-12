@@ -3,39 +3,38 @@ using Libs;
 using Libs.Interfaces;
 using Logics.Spawns;
 using UnityEngine;
+using View;
 
 namespace Logics.Blocks
 {
     public class Block : MonoBehaviour, IPoolable
     {
-        private Camera _mainCamera;
         private SpawnManager _spawnManager;
-
+        
         [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        private int hitPoint;
 
+        public BlockView blockView;
         public int id;
         
         public event Action<int> OnDeactivate;
 
-        public void Init(float positionX, float positionY, float sizeX, float sizeY,
-                         SpawnManager spawnManager, Camera mainCamera)
+        public void Init(SpawnManager spawnManager)
         {
-            _mainCamera = mainCamera;
             _spawnManager = spawnManager;
-            
-            transform.position = Transformer.Position(positionX, positionY, _mainCamera);
-            transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
+            hitPoint = 2;
+        }
+        
+        public void Touch()
+        {
+            hitPoint--;
+
+            if (hitPoint <= 0) Remove();
         }
 
         public void Remove()
         {
             _spawnManager.Remove(this);
-        }
-
-        public void SetColor(Color color)
-        {
-            spriteRenderer.color = color;
         }
 
         public void Activate()

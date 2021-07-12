@@ -17,8 +17,6 @@ namespace Logics
         private GameConfig config;
         [SerializeField] 
         private Rigidbody2D platformRigidbody;
-        [SerializeField] 
-        private float speed = 2.0f;
 
         private void Start()
         {
@@ -28,7 +26,7 @@ namespace Logics
 
         public void MoveTo(float positionX)
         {
-            platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), Time.deltaTime * speed);
+            platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), config.platformMoveTime);
         }
     }
 }

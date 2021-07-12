@@ -56,7 +56,8 @@ namespace Logics.Blocks
                 {
                     if (_blockTypes[i, j] == BlockTypes.Unbreakable || i * _width + j != collisionBlockId) continue;
                     
-                    _blocks[i, j].Remove();
+                    _blocks[i, j].Touch();
+                    _blocks[i, j].blockView.Touch();
                     return;
                 }
             }
@@ -75,8 +76,8 @@ namespace Logics.Blocks
                 for (var j = 0; j < _width; j++)
                 {
                     _blocks[i, j] = spawnManager.GetBlock();
-                    _blocks[i, j].Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, 
-                                       spawnManager, mainCamera);
+                    _blocks[i, j].Init(spawnManager);
+                    _blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, mainCamera);
                     _blocks[i, j].transform.SetParent(transform);
                     _blocks[i, j].id = i * _width + j;
                     _blocks[i, j].OnDeactivate += PopBlock;
@@ -116,13 +117,13 @@ namespace Logics.Blocks
                 block.Remove();
                 break;
             case BlockTypes.Common:
-                block.SetColor(Color.red);
+                block.blockView.SetColor(Color.red);
                 break;
             case BlockTypes.Unbreakable:
-                block.SetColor(Color.grey);
+                block.blockView.SetColor(Color.grey);
                 break;
             case BlockTypes.Bomb:
-                block.SetColor(Color.magenta);
+                block.blockView.SetColor(Color.magenta);
                 break;
             default:
                 Debug.LogWarning("unknown block type");

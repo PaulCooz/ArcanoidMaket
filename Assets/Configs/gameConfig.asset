@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformWidth: 0.4
   platformHeight: 0.05
-  ballForce: 300
+  platformMoveTime: 0.1
+  ballVelocity: 7
+  minAngleCoeff: 0
+  maxAngleCoeff: 20
+  ballStartForce: 300
   startBallHeight: -3
