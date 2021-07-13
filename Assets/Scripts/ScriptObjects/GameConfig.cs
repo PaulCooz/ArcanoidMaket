@@ -14,10 +14,8 @@ namespace ScriptObjects
 
         [SerializeField] 
         public float ballVelocity = 5;
-        [SerializeField] 
-        public float minAngleCoeff = 5;
-        [SerializeField] 
-        public float maxAngleCoeff = 10;
+        [SerializeField] [Range(0, 90)]
+        public float minAngle = 20;
         [SerializeField] 
         public float ballStartForce = 300;
         [SerializeField]

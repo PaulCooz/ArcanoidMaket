@@ -27,35 +27,74 @@ namespace Logics.Balls
             ballRigidbody.position = new Vector3(platformPosition.x, _config.startBallHeight, 0);
             ballRigidbody.AddForce((platformPosition - ballRigidbody.position).normalized * _config.ballStartForce);
         }
-
-        private static bool RandomBool(int chance)
-        {
-            return Random.Range(0, 100) < chance;
-        }
-
+        
         private void OnCollisionEnter2D(Collision2D other)
         {
-            var angleCoeff = Random.Range(_config.minAngleCoeff, _config.maxAngleCoeff);
-            var direction = RandomBool(50) ? -1f : 1f;
-            var velocity = ballRigidbody.velocity;
-
-            velocity = new Vector2(angleCoeff * velocity.x + direction * velocity.y, -direction * velocity.x + angleCoeff * velocity.y);
-            velocity = velocity.normalized * _config.ballVelocity;
+            ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _config.ballVelocity;
             
-            ballRigidbody.velocity = velocity;
-
             OnBallCollision?.Invoke(this, other);
+        }
+
+        private Vector2 AngleChecker(Vector2 vector)
+        {
+            float? angle = null;
+            
+            if (vector.x >= 0 && vector.y >= 0)
+            {
+                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle)
+                {
+                    angle = _config.minAngle;
+                }
+                if (Vector2.Angle(vector, Vector2.up) < _config.minAngle)
+                {
+                    angle = 90 - _config.minAngle;
+                }
+            }
+            else if (vector.x < 0 && vector.y >= 0)
+            {
+                if (Vector2.Angle(vector, Vector2.left) < _config.minAngle)
+                {
+                    angle = 180 - _config.minAngle;
+                }
+                if (Vector2.Angle(vector, Vector2.up) < _config.minAngle)
+                {
+                    angle = 90 + _config.minAngle;
+                }
+            }
+            else if (vector.x < 0 && vector.y < 0)
+            {
+                if (Vector2.Angle(vector, Vector2.left) < _config.minAngle)
+                {
+                    angle = 180 + _config.minAngle;
+                }
+                if (Vector2.Angle(vector, Vector2.down) < _config.minAngle)
+                {
+                    angle = 270 - _config.minAngle;
+                }
+            }
+            else if (vector.x >= 0 && vector.y < 0)
+            {
+                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle)
+                {
+                    angle = 360 - _config.minAngle;
+                }
+                if (Vector2.Angle(vector, Vector2.down) < _config.minAngle)
+                {
+                    angle = 270 + _config.minAngle;
+                }
+            }
+
+            return angle != null ? new Vector2(Mathf.Cos((float) (angle * Mathf.Deg2Rad)), Mathf.Sin((float) (angle * Mathf.Deg2Rad))) : vector;
         }
 
         private void Update()
         {
             if (EventsAndStates.IsGameRun)
             {
-                if (ballRigidbody.IsSleeping())
-                {
-                    ballRigidbody.WakeUp();
-                    ballRigidbody.AddForce(Vector2.down * _config.ballStartForce);
-                }
+                if (!ballRigidbody.IsSleeping()) return;
+                
+                ballRigidbody.WakeUp();
+                ballRigidbody.AddForce(Vector2.down * _config.ballStartForce);
             }
             else if (!ballRigidbody.IsSleeping())
             {

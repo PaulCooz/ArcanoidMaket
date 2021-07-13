@@ -15,8 +15,7 @@ MonoBehaviour:
   platformWidth: 0.4
   platformHeight: 0.05
   platformMoveTime: 0.1
-  ballVelocity: 7
-  minAngleCoeff: 0
-  maxAngleCoeff: 20
+  ballVelocity: 5
+  minAngle: 30
   ballStartForce: 300
   startBallHeight: -3
