@@ -1,3 +1,4 @@
+using System;
 using Libs;
 using Loaders;
 using TMPro;
@@ -11,8 +12,6 @@ namespace View
         
         [SerializeField] 
         private TextMeshProUGUI textMeshProUGUI;
-        [SerializeField]
-        private LevelLoader levelLoader;
 
         private void Start()
         {
@@ -21,11 +20,16 @@ namespace View
             EventsAndStates.OnGameStart += SetInfo;
         }
 
-        private void SetInfo()
+        private void SetInfo(LevelData levelData)
         {
-            var info = levelLoader.GetLevelInfo();
+            var info = LevelLoader.GetLevelInfo();
             
             textMeshProUGUI.text = string.Format(_startText, info.x, info.y);
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameStart -= SetInfo;
         }
     }
 }

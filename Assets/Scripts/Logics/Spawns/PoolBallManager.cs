@@ -1,6 +1,7 @@
 using Libs;
+using Logics.Balls;
 
 namespace Logics.Spawns
 {
-    public class PoolBallManager : PoolManager<Balls.Ball> { }
+    public class PoolBallManager : PoolManager<Ball> { }
 }

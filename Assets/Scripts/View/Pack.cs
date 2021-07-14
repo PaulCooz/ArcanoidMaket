@@ -65,7 +65,7 @@ namespace View
             if (currentPack < packNumber) return;
             
             dataHandler.SetLevelPack(packLevels, packNumber, packImage);
-            sceneChanger.LoadScene("game");
+            SceneChanger.LoadScene("game");
         }
     }
 }

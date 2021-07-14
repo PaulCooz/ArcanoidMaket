@@ -34,14 +34,5 @@ namespace Libs
             objectToReturn.Deactivate();
             _pool.Enqueue(objectToReturn);
         }
-
-        private void OnDestroy()
-        {
-            foreach (var v in _pool)
-            {
-                Destroy(v);
-            }
-            _pool.Clear();
-        }
     }
 }

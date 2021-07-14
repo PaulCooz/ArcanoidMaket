@@ -4,7 +4,6 @@ using Libs.Interfaces;
 using Logics.Spawns;
 using ScriptObjects;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Logics.Balls
 {
@@ -19,12 +18,12 @@ namespace Logics.Balls
         public event Action<Ball, Collision2D> OnBallCollision;
         public event Action OnDeactivate;
 
-        public void Init(Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
+        public void Init(Vector2 platformPosition, float spawnPositionX, GameConfig config, SpawnManager spawnManager)
         {
             _config = config;
             _spawnManager = spawnManager;
 
-            ballRigidbody.position = new Vector3(platformPosition.x, _config.startBallHeight, 0);
+            ballRigidbody.position = new Vector3(spawnPositionX, _config.startBallHeight, 0);
             ballRigidbody.AddForce((platformPosition - ballRigidbody.position).normalized * _config.ballStartForce);
         }
         
@@ -33,6 +32,11 @@ namespace Logics.Balls
             ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _config.ballVelocity;
             
             OnBallCollision?.Invoke(this, other);
+        }
+
+        private void Update()
+        {
+            ballRigidbody.simulated = EventsAndStates.IsGameRun;
         }
 
         private Vector2 AngleChecker(Vector2 vector)
@@ -85,21 +89,6 @@ namespace Logics.Balls
             }
 
             return angle != null ? new Vector2(Mathf.Cos((float) (angle * Mathf.Deg2Rad)), Mathf.Sin((float) (angle * Mathf.Deg2Rad))) : vector;
-        }
-
-        private void Update()
-        {
-            if (EventsAndStates.IsGameRun)
-            {
-                if (!ballRigidbody.IsSleeping()) return;
-                
-                ballRigidbody.WakeUp();
-                ballRigidbody.AddForce(Vector2.down * _config.ballStartForce);
-            }
-            else if (!ballRigidbody.IsSleeping())
-            {
-                ballRigidbody.Sleep();
-            }
         }
 
         public void Remove()

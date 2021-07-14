@@ -1,4 +1,5 @@
 using Libs;
+using Loaders;
 using Logics.Balls;
 using Logics.Spawns;
 using UnityEngine;
@@ -26,9 +27,11 @@ namespace Logics.Healths
         private void Awake()
         {
             _activeHearts = Null;
+            
+            EventsAndStates.OnGameStart += SetHearts;
         }
 
-        public void SetHearts()
+        private void SetHearts(LevelData levelData)
         {
             if (_activeHearts != Null)
             {
@@ -66,6 +69,11 @@ namespace Logics.Healths
             {
                 EventsAndStates.SetGameOver();
             }
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameStart -= SetHearts;
         }
     }
 }

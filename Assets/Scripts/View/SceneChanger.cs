@@ -12,12 +12,12 @@ namespace View
             EventsAndStates.OnPackDone += LoadLevels;
         }
 
-        private void LoadLevels()
+        private static void LoadLevels()
         {
             LoadScene("levels");
         }
 
-        public void LoadScene(string sceneName)
+        public static void LoadScene(string sceneName)
         {
             EventsAndStates.IsGameRun = false;
             SceneManager.LoadScene(sceneName);
@@ -25,8 +25,8 @@ namespace View
 
         private void OnDestroy()
         {
-            EventsAndStates.OnPackDone -= LoadLevels;
             DOTween.KillAll();
+            EventsAndStates.OnPackDone -= LoadLevels;
         }
     }
 }

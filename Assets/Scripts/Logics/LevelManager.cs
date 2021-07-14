@@ -1,21 +1,12 @@
 using Libs;
 using Loaders;
-using Logics.Blocks;
-using Logics.Healths;
 using UnityEngine;
 
 namespace Logics
 {
     public class LevelManager : MonoBehaviour
     {
-        private LevelData _levelData;
-        
-        [SerializeField]
-        private BlockManager blockManager;
-        [SerializeField]
-        private HealthManager healthManager;
-        [SerializeField]
-        private LevelLoader levelLoader;
+        private static LevelData _levelData;
 
         private void Awake()
         {
@@ -25,38 +16,24 @@ namespace Logics
 
         private void Start()
         {
-            if (PlayerData.GetLastPack() == DataHolder.PackNumber)
-            {
-                levelLoader.SetLevel(PlayerData.GetLastLevel());
-            }
-            
+            LevelLoader.SetLevel(PlayerData.GetLastPack() == DataHolder.PackNumber ? PlayerData.GetLastLevel() : 0);
+
             LoadNextLevel();
         }
 
-        public void LoadNextLevel()
+        public static void LoadNextLevel()
         {
-            var nextData = levelLoader.GetNextLevel();
+            var nextData = LevelLoader.GetNextLevel();
             if (nextData == null) return;
             
             _levelData = (LevelData) nextData;
 
-            blockManager.NewLevel(_levelData);
-            SetHearts();
-            
-            EventsAndStates.SetGameStart();
+            EventsAndStates.SetGameStart(_levelData);
         }
 
-        public void RestartLevel()
+        public static void RestartLevel()
         {
-            blockManager.NewLevel(_levelData);
-            SetHearts();
-            
-            EventsAndStates.SetGameStart();
-        }
-
-        private void SetHearts()
-        {
-            healthManager.SetHearts();
+            EventsAndStates.SetGameStart(_levelData);
         }
 
         private void OnDestroy()

@@ -1,3 +1,4 @@
+using System;
 using Libs;
 using Loaders;
 using Logics.Balls;
@@ -33,7 +34,12 @@ namespace Logics.Blocks
         [SerializeField] 
         private Progressbar progressbar;
 
-        public void NewLevel(LevelData levelData)
+        private void Awake()
+        {
+            EventsAndStates.OnGameStart += NewLevel;
+        }
+
+        private void NewLevel(LevelData levelData)
         {
             ClearAllBlocks();
             
@@ -75,20 +81,25 @@ namespace Logics.Blocks
             {
                 for (var j = 0; j < _width; j++)
                 {
+                    _blockTypes[i, j] = (BlockTypes)data[i * _width + j];
+
+                    if (_blockTypes[i, j] == BlockTypes.Empty)
+                    {
+                        _allBlocks--;
+                        continue;
+                    }
+                    if (_blockTypes[i, j] == BlockTypes.Unbreakable)
+                    {
+                        _allBlocks--;
+                    }
+
                     _blocks[i, j] = spawnManager.GetBlock();
                     _blocks[i, j].Init(spawnManager);
                     _blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, mainCamera);
                     _blocks[i, j].transform.SetParent(transform);
                     _blocks[i, j].id = i * _width + j;
                     _blocks[i, j].OnDeactivate += PopBlock;
-                    
-                    _blockTypes[i, j] = (BlockTypes)data[i * _width + j];
 
-                    if (_blockTypes[i, j] == BlockTypes.Unbreakable || _blockTypes[i, j] == BlockTypes.Empty)
-                    {
-                        _allBlocks--;
-                    }
-                    
                     MakeTypical(_blocks[i, j], _blockTypes[i, j]);
                 }
             }
@@ -102,7 +113,7 @@ namespace Logics.Blocks
             {
                 for (var j = 0; j < _width; j++)
                 {
-                    if (!_blocks[i, j].isActiveAndEnabled) continue;
+                    if (_blockTypes[i, j] == BlockTypes.Empty || !_blocks[i, j].isActiveAndEnabled) continue;
 
                     _blocks[i, j].Remove();
                 }
@@ -154,6 +165,11 @@ namespace Logics.Blocks
             {
                 
             }
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameStart -= NewLevel;
         }
     }
 }

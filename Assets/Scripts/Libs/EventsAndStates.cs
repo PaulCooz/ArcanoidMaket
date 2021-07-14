@@ -1,48 +1,39 @@
 using System;
+using Loaders;
 
 namespace Libs
 {
     public static class EventsAndStates
     {
         public static bool IsGameRun = false;
-        public static bool IsGameOver = true;
-        public static bool IsWin = false;
 
-        public static event Action OnGameStart;
+        public static event Action<LevelData> OnGameStart;
         public static event Action OnGameWin;
         public static event Action OnGameOver;
         public static event Action OnPackDone;
 
         public static void SetGameWin()
         {
-            IsWin = true;
-            IsGameOver = false;
-            IsGameRun = false;
             OnGameWin?.Invoke();
+            IsGameRun = false;
         }
         
-        public static void SetGameStart()
+        public static void SetGameStart(LevelData levelData)
         {
-            IsWin = false;
-            IsGameOver = false;
+            OnGameStart?.Invoke(levelData);
             IsGameRun = true;
-            OnGameStart?.Invoke();
         }
 
         public static void SetGameOver()
         {
-            IsGameOver = true;
-            IsWin = false;
-            IsGameRun = false;
             OnGameOver?.Invoke();
+            IsGameRun = false;
         }
 
         public static void SetPackDone()
         {
-            IsGameRun = false;
-            IsGameOver = true;
-            IsWin = false;
             OnPackDone?.Invoke();
+            IsGameRun = false;
         }
     }
 }

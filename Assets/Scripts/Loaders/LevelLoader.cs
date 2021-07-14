@@ -13,21 +13,16 @@ namespace Loaders
         public int[] data;
     }
 
-    public class LevelLoader : MonoBehaviour
+    public static class LevelLoader
     {
-        private int _currentLevel;
-
-        private void Awake()
-        {
-            _currentLevel = 0;
-        }
-
-        public void SetLevel(int level)
+        private static int _currentLevel;
+        
+        public static void SetLevel(int level)
         {
             _currentLevel = level;
         }
 
-        public LevelData? GetNextLevel()
+        public static LevelData? GetNextLevel()
         {
             if (_currentLevel >= DataHolder.Levels.Length)
             {
@@ -48,7 +43,7 @@ namespace Loaders
             return currentLevelData;
         }
 
-        public Vector2 GetLevelInfo()
+        public static Vector2 GetLevelInfo()
         {
             return new Vector2(_currentLevel, DataHolder.Levels.Length);
         }
