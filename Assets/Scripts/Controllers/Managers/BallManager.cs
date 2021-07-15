@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using Libs;
-using Logics.Blocks;
-using Logics.Healths;
+using Logics;
 using Logics.Spawns;
 using ScriptObjects;
 using UnityEngine;
 using View;
 
-namespace Logics.Balls
+namespace Controllers.Managers
 {
     public class BallManager : MonoBehaviour
     {
-        private List<Ball> _balls; 
-        
+        private List<Ball> _balls;
+
+        [SerializeField] 
+        private BallManagerController ballManagerController;
         [SerializeField]
         private GameConfig config;
         [SerializeField] 
@@ -25,8 +26,6 @@ namespace Logics.Balls
         private Bottom bottom;
         [SerializeField]
         private BlockManager blockManager;
-        [SerializeField] [Range(0, 1)]
-        private float spawnX = 0.5f;
         [SerializeField] 
         private BallSpirit ballSpirit;
 
@@ -34,8 +33,8 @@ namespace Logics.Balls
         {
             _balls = new List<Ball>();
 
-            EventsAndStates.OnGameOver += ClearBalls;
             EventsAndStates.OnGameWin += ClearBalls;
+            EventsAndStates.OnGameOver += ClearBalls;
         }
 
         private void Update()
@@ -43,16 +42,18 @@ namespace Logics.Balls
             if (!EventsAndStates.IsGameRun || CountBalls() != 0) return;
 
             ballSpirit.Show(new Vector3(0, config.startBallHeight, 0));
-            if (Input.GetMouseButtonUp(0))
+            if (ballManagerController.MouseButtonUp())
             {
                 NewBall();
                 ballSpirit.Hide();
             }
         }
 
-        private void RemoveBall()
+        public void RemoveBall(int id)
         {
-            _balls.RemoveAt(_balls.Count - 1);
+            _balls[id].Remove();
+            _balls.RemoveAt(id);
+            healthManager.PopHeart();
         }
 
         private void NewBall()
@@ -60,14 +61,18 @@ namespace Logics.Balls
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
-            ball.Init(platformRigidbody.position, spawnX, config, spawnManager);
+            ball.Init(platformRigidbody.position, config, spawnManager);
             
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;
-            ball.OnDeactivate += RemoveBall;
-            ball.OnDeactivate += healthManager.PopHeart;
-            
+            ball.id = _balls.Count;
+
             _balls.Add(ball);
+        }
+
+        private void ClearBalls()
+        {
+            _balls.Clear();
         }
 
         public int CountBalls()
@@ -75,20 +80,10 @@ namespace Logics.Balls
             return _balls.Count;
         }
 
-        private void ClearBalls()
-        {
-            foreach (var ball in _balls)
-            {
-                print(ball.isActiveAndEnabled);
-                ball.Remove();
-            }
-            _balls.Clear();
-        }
-
         private void OnDestroy()
         {
-            EventsAndStates.OnGameOver -= ClearBalls;
             EventsAndStates.OnGameWin -= ClearBalls;
+            EventsAndStates.OnGameOver -= ClearBalls;
         }
     }
 }

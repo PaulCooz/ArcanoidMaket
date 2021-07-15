@@ -1,12 +1,11 @@
-using System;
 using Libs;
 using Loaders;
-using Logics.Balls;
+using Logics;
 using Logics.Spawns;
 using UnityEngine;
 using View;
 
-namespace Logics.Blocks
+namespace Controllers.Managers
 {
     public enum BlockTypes
     {
@@ -64,6 +63,11 @@ namespace Logics.Blocks
                     
                     _blocks[i, j].Touch();
                     _blocks[i, j].blockView.Touch();
+                    if (!_blocks[i, j].isActiveAndEnabled)
+                    {
+                        PopBlock(_blocks[i, j].id);
+                    }
+                    
                     return;
                 }
             }
@@ -98,7 +102,6 @@ namespace Logics.Blocks
                     _blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, mainCamera);
                     _blocks[i, j].transform.SetParent(transform);
                     _blocks[i, j].id = i * _width + j;
-                    _blocks[i, j].OnDeactivate += PopBlock;
 
                     MakeTypical(_blocks[i, j], _blockTypes[i, j]);
                 }

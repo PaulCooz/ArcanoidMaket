@@ -5,7 +5,7 @@ using Logics.Spawns;
 using ScriptObjects;
 using UnityEngine;
 
-namespace Logics.Balls
+namespace Logics
 {
     public class Ball : MonoBehaviour, IPoolable
     {
@@ -16,15 +16,22 @@ namespace Logics.Balls
         private Rigidbody2D ballRigidbody;
         
         public event Action<Ball, Collision2D> OnBallCollision;
-        public event Action OnDeactivate;
-
-        public void Init(Vector2 platformPosition, float spawnPositionX, GameConfig config, SpawnManager spawnManager)
+        public int id;
+        
+        public void Init(Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
         {
             _config = config;
             _spawnManager = spawnManager;
 
-            ballRigidbody.position = new Vector3(spawnPositionX, _config.startBallHeight, 0);
-            ballRigidbody.AddForce((platformPosition - ballRigidbody.position).normalized * _config.ballStartForce);
+            var position = new Vector2(0, _config.startBallHeight);
+
+            ballRigidbody.position = position;
+            transform.position = position;
+            
+            ballRigidbody.AddForce((platformPosition - position).normalized * _config.ballStartForce);
+
+            EventsAndStates.OnGameWin += Remove;
+            EventsAndStates.OnGameOver += Remove;
         }
         
         private void OnCollisionEnter2D(Collision2D other)
@@ -93,12 +100,14 @@ namespace Logics.Balls
 
         public void Remove()
         {
+            EventsAndStates.OnGameWin -= Remove;
+            EventsAndStates.OnGameOver -= Remove;
+            
             _spawnManager.Remove(this);
         }
 
         public void Activate()
         {
-            OnDeactivate = null;
             OnBallCollision = null;
             
             gameObject.SetActive(true);
@@ -107,8 +116,6 @@ namespace Logics.Balls
         public void Deactivate()
         {
             gameObject.SetActive(false);
-         
-            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke();
         }
     }
 }

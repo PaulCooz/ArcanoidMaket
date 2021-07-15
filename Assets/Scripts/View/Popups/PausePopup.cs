@@ -40,8 +40,9 @@ namespace View.Popups
         public void OnExitPush()
         {
             Hide();
-            SceneChanger.LoadScene("Levels");
+            EventsAndStates.SetGameOver();
             Destroy(gameObject, 2 * animationDuration);
+            SceneChanger.LoadScene("Levels");
         }
 
         private void OnDisable()

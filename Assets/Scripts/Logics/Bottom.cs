@@ -1,14 +1,18 @@
+using Controllers.Managers;
 using UnityEngine;
 
 namespace Logics
 {
     public class Bottom : MonoBehaviour
     {
-        public void BallTouched(Balls.Ball ball, Collision2D collision)
+        [SerializeField] 
+        private BallManager ballManager;
+        
+        public void BallTouched(Ball ball, Collision2D collision)
         {
-            if (collision.gameObject.transform == gameObject.transform)
+            if (collision.gameObject.CompareTag(gameObject.tag))
             {
-                ball.Remove();
+                ballManager.RemoveBall(ball.id);
             }
         }
     }

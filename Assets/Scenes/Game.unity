@@ -947,6 +947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062824284}
   - component: {fileID: 1062824283}
+  - component: {fileID: 1062824285}
   m_Layer: 0
   m_Name: BallManager
   m_TagString: Untagged
@@ -966,13 +967,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b864f6e464cba2f4390288a9ca096dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballManagerController: {fileID: 1062824285}
   config: {fileID: 11400000, guid: 756cd583de1afee4b91b0484ead633a5, type: 2}
   spawnManager: {fileID: 285223244}
   platformRigidbody: {fileID: 1565236623}
   healthManager: {fileID: 1997631222}
   bottom: {fileID: 1789444227}
   blockManager: {fileID: 631023760}
-  spawnX: 0.5
   ballSpirit: {fileID: 1371306237}
 --- !u!4 &1062824284
 Transform:
@@ -988,6 +989,18 @@ Transform:
   m_Father: {fileID: 635634822}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1062824285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062824282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062d8cc7898f4b55bffa089778a3d019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1064319144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,6 +1557,7 @@ MonoBehaviour:
   - {fileID: 5774979154760257181, guid: ba06c7226bea00448b8074c88fe75b54, type: 3}
   - {fileID: 7069383461877793934, guid: 8d7c062412e489641995cb1c58e32fc9, type: 3}
   - {fileID: 7593012301090824966, guid: 0917d56964f3a074d9fcaca3dbdc11af, type: 3}
+  levelManager: {fileID: 0}
 --- !u!114 &1428960664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1777,6 +1791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785507b4b3254e14bac4b997271c69e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballManager: {fileID: 1062824283}
 --- !u!1 &1929223765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,8 +1835,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea106882551a2b49b8159ec797bf052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockManager: {fileID: 631023760}
-  healthManager: {fileID: 1997631222}
 --- !u!1 &1997631221
 GameObject:
   m_ObjectHideFlags: 0

@@ -26,7 +26,10 @@ namespace Logics
 
         public void MoveTo(float positionX)
         {
-            platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), config.platformMoveTime);
+            var position = platformRigidbody.position;
+            var x = Mathf.Lerp(Mathf.Clamp(positionX, -_max, _max), position.x, Time.deltaTime);
+
+            platformRigidbody.position = new Vector2(x, position.y);
         }
     }
 }

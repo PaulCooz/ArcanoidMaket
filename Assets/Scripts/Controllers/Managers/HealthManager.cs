@@ -1,10 +1,10 @@
 using Libs;
 using Loaders;
-using Logics.Balls;
+using Logics.Healths;
 using Logics.Spawns;
 using UnityEngine;
 
-namespace Logics.Healths
+namespace Controllers.Managers
 {
     public class HealthManager : MonoBehaviour
     {

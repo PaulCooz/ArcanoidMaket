@@ -1,11 +1,9 @@
-using System;
-using Libs;
 using Libs.Interfaces;
 using Logics.Spawns;
 using UnityEngine;
 using View;
 
-namespace Logics.Blocks
+namespace Logics
 {
     public class Block : MonoBehaviour, IPoolable
     {
@@ -16,8 +14,6 @@ namespace Logics.Blocks
 
         public BlockView blockView;
         public int id;
-        
-        public event Action<int> OnDeactivate;
 
         public void Init(SpawnManager spawnManager)
         {
@@ -39,15 +35,12 @@ namespace Logics.Blocks
 
         public void Activate()
         {
-            OnDeactivate = null;
             gameObject.SetActive(true);
         }
 
         public void Deactivate()
         {
             gameObject.SetActive(false);
-            
-            if (EventsAndStates.IsGameRun) OnDeactivate?.Invoke(id);
         }
     }
 }
