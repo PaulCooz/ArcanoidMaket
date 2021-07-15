@@ -1,5 +1,6 @@
 using Libs;
 using Loaders;
+using Logics.Loaders;
 using UnityEngine;
 
 namespace Logics

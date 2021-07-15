@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Loaders
+namespace Logics.Loaders
 {
     public static class PlayerData
     {
@@ -46,7 +46,8 @@ namespace Loaders
 
         private static void SaveData(JToken jToken)
         {
-            var fs = new JsonTextWriter(File.CreateText(Application.dataPath + "/Resources/PlayerData.json"));
+            var path = Path.Combine(Application.dataPath, "Resources", "PlayerData.json");
+            var fs = new JsonTextWriter(File.CreateText(path));
             
             jToken.WriteTo(fs);
             fs.Flush();
