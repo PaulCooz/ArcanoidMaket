@@ -1,7 +1,4 @@
-using Dataers;
-using Libs;
 using Loaders;
-using Logics.Loaders;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +9,6 @@ namespace View
     {
         private string _packProgressText;
         
-        [SerializeField] 
-        private SceneChanger sceneChanger;
-        [SerializeField] 
-        private DataHandler dataHandler;
         [SerializeField]
         private TextAsset[] packLevels;
         [SerializeField] 
@@ -66,7 +59,7 @@ namespace View
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;
             
-            dataHandler.SetLevelPack(packLevels, packNumber, packImage);
+            DataHolder.SetLevelPack(packLevels, packNumber, packImage);
             SceneChanger.LoadScene("game");
         }
     }

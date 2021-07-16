@@ -1,6 +1,5 @@
 using System;
-using Dataers;
-using Logics.Loaders;
+using Loaders;
 
 namespace Logics
 {

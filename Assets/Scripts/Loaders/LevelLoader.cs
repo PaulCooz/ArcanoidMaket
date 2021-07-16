@@ -1,10 +1,9 @@
 using System;
-using Libs;
 using Logics;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Dataers
+namespace Loaders
 {
     [Serializable]
     public struct LevelData

@@ -1,8 +1,6 @@
-﻿using Dataers;
-using Libs;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Logics.Loaders
+namespace Loaders
 {
     public static class PlayerData
     {

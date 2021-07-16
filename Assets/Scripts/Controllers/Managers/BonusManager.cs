@@ -68,7 +68,7 @@ namespace Controllers.Managers
                         var nj = j + y;
 
                         if (-1 >= ni || ni >= blockManager.height || -1 >= nj || nj >= blockManager.width) continue;
-                        if (!blockManager.Blocks[ni, nj].isActiveAndEnabled) continue;
+                        if (blockManager.Blocks[ni, nj] == null || !blockManager.Blocks[ni, nj].isActiveAndEnabled) continue;
 
                         var count = BlockQueue(new Vector2(ni, nj), false);
                         if (count <= maxCount) continue;
@@ -115,7 +115,7 @@ namespace Controllers.Managers
 
                     if (withDestruction)
                     {
-                        blockManager.TouchBlock(ni, nj, 1);
+                        blockManager.TouchBlock(ni, nj, 2);
                     }
                 }
             }
