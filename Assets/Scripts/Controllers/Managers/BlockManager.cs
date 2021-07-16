@@ -1,5 +1,5 @@
+using Dataers;
 using Libs;
-using Loaders;
 using Logics;
 using Logics.Spawns;
 using UnityEngine;
@@ -12,15 +12,16 @@ namespace Controllers.Managers
         Empty,
         Common,
         Unbreakable,
-        Bomb
+        Bomb,
+        ChainBomb
     }
     
     public class BlockManager : MonoBehaviour
     {
-        private int _height;
-        private int _width;
-        private Block[,] _blocks;
-        private BlockTypes[,] _blockTypes;
+        public int height;
+        public int width;
+        public Block[,] Blocks;
+        public BlockTypes[,] Types;
         private int _allBlocks;
         private int _emptyBlocks;
         
@@ -30,8 +31,10 @@ namespace Controllers.Managers
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
-        [SerializeField] 
+        [SerializeField]
         private Progressbar progressbar;
+        [SerializeField] 
+        private BonusManager bonusManager;
 
         private void Awake()
         {
@@ -42,8 +45,8 @@ namespace Controllers.Managers
         {
             ClearAllBlocks();
             
-            _height = levelData.height;
-            _width = levelData.width;
+            height = levelData.height;
+            width = levelData.width;
             MakeNewGrid(levelData.data);
             
             progressbar.SetProgress(0);
@@ -55,19 +58,13 @@ namespace Controllers.Managers
                 
             if (collisionBlockId == null) return;
 
-            for (var i = 0; i < _height; i++)
+            for (var i = 0; i < height; i++)
             {
-                for (var j = 0; j < _width; j++)
+                for (var j = 0; j < width; j++)
                 {
-                    if (_blockTypes[i, j] == BlockTypes.Unbreakable || i * _width + j != collisionBlockId) continue;
-                    
-                    _blocks[i, j].Touch();
-                    _blocks[i, j].blockView.Touch();
-                    if (!_blocks[i, j].isActiveAndEnabled)
-                    {
-                        PopBlock(_blocks[i, j].id);
-                    }
-                    
+                    if (i * width + j != collisionBlockId) continue;
+
+                    TouchBlock(i, j, 1);
                     return;
                 }
             }
@@ -75,98 +72,82 @@ namespace Controllers.Managers
 
         private void MakeNewGrid(int[] data)
         {
-            _blocks = new Block[_height, _width];
-            _blockTypes = new BlockTypes[_height, _width];
+            Blocks = new Block[height, width];
+            Types = new BlockTypes[height, width];
             _emptyBlocks = 0;
-            _allBlocks = _width * _height;
+            _allBlocks = width * height;
 
-            var grid = gridOfObjects.NewGrid(_height, _width);
-            for (var i = 0; i < _height; i++)
+            var grid = gridOfObjects.NewGrid(height, width);
+            var cellSize = gridOfObjects.GetCellSize();
+            
+            for (var i = 0; i < height; i++)
             {
-                for (var j = 0; j < _width; j++)
+                for (var j = 0; j < width; j++)
                 {
-                    _blockTypes[i, j] = (BlockTypes)data[i * _width + j];
+                    Types[i, j] = (BlockTypes)data[i * width + j];
 
-                    if (_blockTypes[i, j] == BlockTypes.Empty)
+                    if (Types[i, j] == BlockTypes.Empty)
                     {
                         _allBlocks--;
                         continue;
                     }
-                    if (_blockTypes[i, j] == BlockTypes.Unbreakable)
+                    if (Types[i, j] == BlockTypes.Unbreakable)
                     {
                         _allBlocks--;
                     }
 
-                    _blocks[i, j] = spawnManager.GetBlock();
-                    _blocks[i, j].Init(spawnManager);
-                    _blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, grid[i, j].z, grid[i, j].w, mainCamera);
-                    _blocks[i, j].transform.SetParent(transform);
-                    _blocks[i, j].id = i * _width + j;
-
-                    MakeTypical(_blocks[i, j], _blockTypes[i, j]);
+                    Blocks[i, j] = spawnManager.GetBlock();
+                    Blocks[i, j].Init(spawnManager);
+                    Blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, cellSize.x, cellSize.y, mainCamera);
+                    Blocks[i, j].transform.SetParent(transform);
+                    Blocks[i, j].id = i * width + j;
+                    
+                    bonusManager.MakeTypical(Blocks[i, j], Types[i, j]);
                 }
+            }
+        }
+
+        public void TouchBlock(int i, int j, int damage)
+        {
+            if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled || Types[i, j] == BlockTypes.Unbreakable) return;
+
+            Blocks[i, j].Touch(damage);
+            Blocks[i, j].blockView.Touch();
+            
+            if (!Blocks[i, j].isActiveAndEnabled)
+            {
+                PopBlock(Blocks[i, j].id);
             }
         }
 
         private void ClearAllBlocks()
         {
-            if (_blocks == null) return;
+            if (Blocks == null) return;
             
-            for (var i = 0; i < _height; i++)
+            for (var i = 0; i < height; i++)
             {
-                for (var j = 0; j < _width; j++)
+                for (var j = 0; j < width; j++)
                 {
-                    if (_blockTypes[i, j] == BlockTypes.Empty || !_blocks[i, j].isActiveAndEnabled) continue;
+                    if (Types[i, j] == BlockTypes.Empty || !Blocks[i, j].isActiveAndEnabled) continue;
 
-                    _blocks[i, j].Remove();
+                    Blocks[i, j].Remove();
                 }
-            }
-        }
-
-        private void MakeTypical(Block block, BlockTypes blockType)
-        {
-            switch (blockType)
-            {
-            case BlockTypes.Empty:
-                block.Remove();
-                break;
-            case BlockTypes.Common:
-                block.blockView.SetColor(Color.red);
-                break;
-            case BlockTypes.Unbreakable:
-                block.blockView.SetColor(Color.grey);
-                break;
-            case BlockTypes.Bomb:
-                block.blockView.SetColor(Color.magenta);
-                break;
-            default:
-                Debug.LogWarning("unknown block type");
-                break;
             }
         }
 
         private void PopBlock(int id)
         {
+            int i = id / width, j = id % width;
+
+            if (Types[i, j] == BlockTypes.Unbreakable) return;
+
             _emptyBlocks++;
             progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
+            bonusManager.BonusCheck(Types[i, j], i, j);
             
             if (_emptyBlocks == _allBlocks)
             {
                 EventsAndStates.SetGameWin();
-            }
-            else
-            {
-                int i = id / _width, j = id % _width;
-                
-                BonusCheck(_blockTypes[i, j], i, j);
-            }
-        }
-
-        private void BonusCheck(BlockTypes blockType, int i, int j)
-        {
-            if (blockType == BlockTypes.Bomb)
-            {
-                
             }
         }
 

@@ -1,7 +1,8 @@
 using System;
-using Loaders;
+using Dataers;
+using Logics.Loaders;
 
-namespace Libs
+namespace Logics
 {
     public static class EventsAndStates
     {

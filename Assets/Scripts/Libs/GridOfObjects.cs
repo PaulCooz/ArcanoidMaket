@@ -21,27 +21,25 @@ namespace Libs
         [SerializeField] [Range(0, 1)]
         private float spaceByWidth = 0.01f;
 
-        public Vector4[,] NewGrid(int gridHeight, int gridWidth)
+        public Vector2[,] NewGrid(int gridHeight, int gridWidth)
         {
             _height = gridHeight;
             _width = gridWidth;
             _cellSize = GetCellSize();
 
-            var grid = new Vector4[_height, _width];
+            var grid = new Vector2[_height, _width];
             for (var i = 0; i < _height; i++)
             {
                 for (var j = 0; j < _width; j++)
                 {
-                    var position = GetCellPosition(i, j);
-                    
-                    grid[i, j] = new Vector4(position.x, position.y, _cellSize.x, _cellSize.y);
+                    grid[i, j] = GetCellPosition(i, j);
                 }
             }
 
             return grid;
         }
 
-        private Vector2 GetCellSize()
+        public Vector2 GetCellSize()
         {
             return new Vector2
             {

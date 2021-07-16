@@ -1,9 +1,10 @@
 using System;
 using Libs;
+using Logics;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Loaders
+namespace Dataers
 {
     [Serializable]
     public struct LevelData
@@ -11,6 +12,13 @@ namespace Loaders
         public int height;
         public int width;
         public int[] data;
+
+        public LevelData(int height, int width, int[] data)
+        {
+            this.height = height;
+            this.width = width;
+            this.data = data;
+        }
     }
 
     public static class LevelLoader

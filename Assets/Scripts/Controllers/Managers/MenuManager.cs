@@ -2,7 +2,7 @@ using Loaders;
 using TMPro;
 using UnityEngine;
 
-namespace View
+namespace Controllers.Managers
 {
     public class MenuManager : MonoBehaviour
     {

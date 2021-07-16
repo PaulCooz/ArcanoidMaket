@@ -1,5 +1,6 @@
 using Libs;
 using Logics;
+using ScriptObjects;
 using UnityEngine;
 
 namespace Controllers
@@ -11,12 +12,12 @@ namespace Controllers
         [SerializeField] 
         private Platform platform;
         [SerializeField] 
-        private float maxHeightInput = 0.9f;
+        private GameConfig config;
         
         private void Update()
         {
             if (!Input.GetMouseButton(0) || 
-                Input.mousePosition.y >= maxHeightInput * Screen.height || 
+                Input.mousePosition.y >= config.uiZone * Screen.height || 
                 !EventsAndStates.IsGameRun)
             {
                 return;

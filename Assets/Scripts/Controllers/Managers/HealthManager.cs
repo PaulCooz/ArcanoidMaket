@@ -1,6 +1,9 @@
+using Dataers;
 using Libs;
 using Loaders;
+using Logics;
 using Logics.Healths;
+using Logics.Loaders;
 using Logics.Spawns;
 using UnityEngine;
 
@@ -50,10 +53,12 @@ namespace Controllers.Managers
             _activeHearts = startHeartsCount;
             
             var grid = gridOfObjects.NewGrid(1, startHeartsCount);
+            var cellSize = gridOfObjects.GetCellSize();
+            
             for (var j = 0; j < startHeartsCount; j++)
             {
                 _hearts[j] = spawnManager.GetHeart();
-                _hearts[j].Init(grid[0, j].x, grid[0, j].y, grid[0, j].z, grid[0, j].w, spawnManager, mainCamera);
+                _hearts[j].Init(grid[0, j].x, grid[0, j].y, cellSize.x, cellSize.y, spawnManager, mainCamera);
                 _hearts[j].transform.SetParent(transform);
             }
         }

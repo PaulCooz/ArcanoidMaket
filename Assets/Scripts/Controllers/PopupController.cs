@@ -1,8 +1,9 @@
 ﻿using Libs;
+using Logics;
 using UnityEngine;
 using View.Popups;
 
-namespace View
+namespace Controllers
 {
     public class PopupController : MonoBehaviour
     {

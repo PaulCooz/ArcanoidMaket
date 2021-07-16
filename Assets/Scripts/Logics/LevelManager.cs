@@ -1,3 +1,4 @@
+using Dataers;
 using Libs;
 using Loaders;
 using Logics.Loaders;
@@ -26,7 +27,7 @@ namespace Logics
         {
             var nextData = LevelLoader.GetNextLevel();
             if (nextData == null) return;
-            
+
             _levelData = (LevelData) nextData;
 
             EventsAndStates.SetGameStart(_levelData);

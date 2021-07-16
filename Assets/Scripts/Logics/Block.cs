@@ -21,9 +21,9 @@ namespace Logics
             hitPoint = 2;
         }
         
-        public void Touch()
+        public void Touch(int damage)
         {
-            hitPoint--;
+            hitPoint -= damage;
 
             if (hitPoint <= 0) Remove();
         }
