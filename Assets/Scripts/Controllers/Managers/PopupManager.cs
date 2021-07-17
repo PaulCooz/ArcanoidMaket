@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Libs;
 using Logics;
 using UnityEngine;
 
-namespace Libs
+namespace Controllers.Managers
 {
     public class PopupManager : MonoBehaviour
     {

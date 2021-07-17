@@ -1,4 +1,4 @@
-﻿namespace Libs.Interfaces
+﻿namespace Controllers.Pools
 {
     public interface IPoolable
     {

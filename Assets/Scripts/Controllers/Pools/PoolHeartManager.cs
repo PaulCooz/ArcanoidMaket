@@ -1,7 +1,6 @@
-using Libs;
-using Logics.Healths;
+using Logics;
 
-namespace Logics.Spawns
+namespace Controllers.Pools
 {
     public class PoolHeartManager : PoolManager<Heart> { }
 }

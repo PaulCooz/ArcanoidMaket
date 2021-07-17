@@ -3,7 +3,7 @@ using Logics;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Loaders
+namespace Dataers
 {
     [Serializable]
     public struct LevelData

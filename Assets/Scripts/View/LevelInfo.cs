@@ -1,6 +1,4 @@
-using System;
-using Libs;
-using Loaders;
+using Dataers;
 using Logics;
 using TMPro;
 using UnityEngine;

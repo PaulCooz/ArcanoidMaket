@@ -1,8 +1,8 @@
-using Logics.Healths;
+using Controllers.Pools;
+using Logics;
 using UnityEngine;
-using View.Popups;
 
-namespace Logics.Spawns
+namespace Controllers.Managers
 {
     public class SpawnManager : MonoBehaviour
     {

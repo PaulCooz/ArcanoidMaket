@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Loaders
+namespace Dataers
 {
     public static class PlayerData
     {

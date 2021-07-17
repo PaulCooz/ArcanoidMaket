@@ -27,8 +27,9 @@ namespace View
 
         public void Touch()
         {
-            var particles = Instantiate(touchParticles, transform.position, Quaternion.identity);
-            particles.startColor = spriteRenderer.color;
+            var particleMain = Instantiate(touchParticles, transform.position, Quaternion.identity).main;
+
+            particleMain.startColor = spriteRenderer.color;
         }
     }
 }

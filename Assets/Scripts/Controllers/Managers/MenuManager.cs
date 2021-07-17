@@ -1,4 +1,3 @@
-using Loaders;
 using TMPro;
 using UnityEngine;
 

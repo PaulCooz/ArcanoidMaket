@@ -1,8 +1,7 @@
-using System.Runtime.InteropServices;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Loaders
+namespace Controllers.Managers
 {
     public enum Locale
     {

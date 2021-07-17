@@ -1,6 +1,6 @@
-using Libs;
+using Logics;
 
-namespace Logics.Spawns
+namespace Controllers.Pools
 {
     public class PoolBallManager : PoolManager<Ball> { }
 }

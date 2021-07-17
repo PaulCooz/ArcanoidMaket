@@ -1,10 +1,9 @@
-using System;
+using Controllers.Managers;
+using Dataers;
 using DG.Tweening;
 using Libs;
-using Loaders;
 using Logics;
 using TMPro;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Loaders
+namespace Dataers
 {
     public class DataHolder : MonoBehaviour
     {

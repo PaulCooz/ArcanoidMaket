@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Libs;
 using ScriptObjects;
 using UnityEngine;

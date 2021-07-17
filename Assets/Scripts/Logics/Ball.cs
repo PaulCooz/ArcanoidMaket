@@ -1,7 +1,6 @@
 using System;
-using Libs;
-using Libs.Interfaces;
-using Logics.Spawns;
+using Controllers.Managers;
+using Controllers.Pools;
 using ScriptObjects;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
+using Controllers.Managers;
 using DG.Tweening;
 using Libs;
-using Loaders;
 using Logics;
 using TMPro;
 using UnityEngine;

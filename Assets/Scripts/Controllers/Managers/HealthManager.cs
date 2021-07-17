@@ -1,8 +1,6 @@
+using Dataers;
 using Libs;
-using Loaders;
 using Logics;
-using Logics.Healths;
-using Logics.Spawns;
 using UnityEngine;
 
 namespace Controllers.Managers
