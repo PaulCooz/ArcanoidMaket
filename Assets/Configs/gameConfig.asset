@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0ce006ca966ea45af2415322c5e2fa, type: 3}
   m_Name: gameConfig
   m_EditorClassIdentifier: 
+  uiZone: 0.9
   platformWidth: 0.4
   platformHeight: 0.05
-  platformMoveTime: 0.1
   ballVelocity: 5
   minAngle: 30
   ballStartForce: 300

@@ -10,6 +10,9 @@ namespace Logics
     {
         private GameConfig _config;
         private SpawnManager _spawnManager;
+        private float _speedUpTimer;
+        private float _speedDownTimer;
+        private float _speed;
 
         [SerializeField]
         private Rigidbody2D ballRigidbody;
@@ -21,9 +24,12 @@ namespace Logics
         {
             _config = config;
             _spawnManager = spawnManager;
-
+            _speed = 1;
+            _speedUpTimer = 0;
+            _speedDownTimer = 0;
+            
             var position = new Vector2(0, _config.startBallHeight);
-
+            
             ballRigidbody.position = position;
             transform.position = position;
             
@@ -31,11 +37,25 @@ namespace Logics
 
             EventsAndStates.OnGameWin += Remove;
             EventsAndStates.OnGameOver += Remove;
+            BonusManager.OnBulletBonus += BulletBonus;
+        }
+
+        private void BulletBonus(BlockTypes blockType)
+        {
+            switch (blockType)
+            {
+                case BlockTypes.BallSpeedUp:
+                    _speedUpTimer = 5;
+                    break;
+                case BlockTypes.BallSpeedDown:
+                    _speedDownTimer = 5;
+                    break;
+            }
         }
         
         private void OnCollisionEnter2D(Collision2D other)
         {
-            ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _config.ballVelocity;
+            ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
             
             OnBallCollision?.Invoke(this, other);
         }
@@ -43,6 +63,21 @@ namespace Logics
         private void Update()
         {
             ballRigidbody.simulated = EventsAndStates.IsGameRun;
+
+            if (_speedUpTimer > 0)
+            {
+                _speed = 1.5f;
+                _speedUpTimer -= Time.deltaTime;
+            }
+            else if (_speedDownTimer > 0)
+            {
+                _speed = 0.5f;
+                _speedDownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                _speed = 1;
+            }
         }
 
         private Vector2 AngleChecker(Vector2 vector)
@@ -101,6 +136,7 @@ namespace Logics
         {
             EventsAndStates.OnGameWin -= Remove;
             EventsAndStates.OnGameOver -= Remove;
+            BonusManager.OnBulletBonus -= BulletBonus;
             
             _spawnManager.Remove(this);
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Logics;
 using UnityEngine;
 
@@ -8,35 +9,20 @@ namespace Controllers.Managers
     {
         [SerializeField]
         private BlockManager blockManager;
-        
-        public void MakeTypical(Block block, BlockTypes blockType)
+
+        public static event Action<BlockTypes> OnBulletBonus;
+
+        private void Start()
         {
-            switch (blockType)
-            {
-                case BlockTypes.Empty:
-                    block.Remove();
-                    break;
-                case BlockTypes.Common:
-                    block.blockView.SetColor(Color.red);
-                    break;
-                case BlockTypes.Unbreakable:
-                    block.blockView.SetColor(Color.grey);
-                    break;
-                case BlockTypes.Bomb:
-                    block.blockView.SetColor(Color.magenta);
-                    break;
-                case BlockTypes.ChainBomb:
-                    block.blockView.SetColor(Color.yellow);
-                    break;
-                default:
-                    Debug.LogWarning("unknown block type");
-                    break;
-            }
+            OnBulletBonus = null;
+            BlockManager.OnBlockDestroy += BonusCheck;
         }
-        
-        
-        public void BonusCheck(BlockTypes blockType, int i, int j)
+
+        private void BonusCheck(Block block, BlockTypes blockType)
         {
+            var i = block.id / blockManager.width;
+            var j = block.id % blockManager.width;
+            
             switch (blockType)
             {
                 case BlockTypes.Bomb:
@@ -121,6 +107,16 @@ namespace Controllers.Managers
             }
             
             return result;
+        }
+
+        public void BulletBonus(BlockTypes blockType)
+        {
+            OnBulletBonus?.Invoke(blockType);
+        }
+
+        private void OnDestroy()
+        {
+            BlockManager.OnBlockDestroy -= BonusCheck;
         }
     }
 }

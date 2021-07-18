@@ -1,3 +1,4 @@
+using System;
 using Dataers;
 using Libs;
 using Logics;
@@ -12,15 +13,23 @@ namespace Controllers.Managers
         Common,
         Unbreakable,
         Bomb,
-        ChainBomb
+        ChainBomb,
+        BallSpeedUp,
+        BallSpeedDown,
+        PlatformDilator,
+        PlatformNarrower,
+        FuryBall,
+        BallsAdder,
+        VerticalBomb,
+        HorizontalBomb,
+        PlatformSpeedUp,
+        PlatformSpeedDown,
+        HeartAdder,
+        HeartRemover
     }
     
     public class BlockManager : MonoBehaviour
     {
-        public int height;
-        public int width;
-        public Block[,] Blocks;
-        public BlockTypes[,] Types;
         private int _allBlocks;
         private int _emptyBlocks;
         
@@ -34,6 +43,12 @@ namespace Controllers.Managers
         private Progressbar progressbar;
         [SerializeField] 
         private BonusManager bonusManager;
+
+        public int height;
+        public int width;
+        public Block[,] Blocks;
+        public BlockTypes[,] Types;
+        public static event Action<Block, BlockTypes> OnBlockDestroy;
 
         private void Awake()
         {
@@ -101,8 +116,39 @@ namespace Controllers.Managers
                     Blocks[i, j].transform.SetParent(transform);
                     Blocks[i, j].id = i * width + j;
                     
-                    bonusManager.MakeTypical(Blocks[i, j], Types[i, j]);
+                    MakeTypical(Blocks[i, j], Types[i, j]);
                 }
+            }
+        }
+        
+        public void MakeTypical(Block block, BlockTypes blockType)
+        {
+            switch (blockType)
+            {
+                case BlockTypes.Empty:
+                    block.Remove();
+                    break;
+                case BlockTypes.Common:
+                    block.blockView.SetColor(Color.red);
+                    break;
+                case BlockTypes.Unbreakable:
+                    block.blockView.SetColor(Color.grey);
+                    break;
+                case BlockTypes.Bomb:
+                    block.blockView.SetColor(Color.magenta);
+                    break;
+                case BlockTypes.ChainBomb:
+                    block.blockView.SetColor(Color.yellow);
+                    break;
+                case BlockTypes.BallSpeedUp:
+                    block.blockView.SetColor(Color.cyan);
+                    break;
+                case BlockTypes.BallSpeedDown:
+                    block.blockView.SetColor(Color.cyan);
+                    break;
+                default:
+                    Debug.LogWarning("unknown block type");
+                    break;
             }
         }
 
@@ -138,18 +184,41 @@ namespace Controllers.Managers
         {
             int i = id / width, j = id % width;
 
-            if (Types[i, j] == BlockTypes.Unbreakable) return;
+            switch (Types[i, j])
+            {
+                case BlockTypes.Unbreakable:
+                    return;
+                
+                case BlockTypes.BallSpeedUp:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.BallSpeedDown:
+                    MakeBonusBullet(i, j);
+                    break;
+            }
 
             _emptyBlocks++;
             progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
-            bonusManager.BonusCheck(Types[i, j], i, j);
             
+            OnBlockDestroy?.Invoke(Blocks[i, j], Types[i, j]);
+
             if (_emptyBlocks == _allBlocks)
             {
                 EventsAndStates.SetGameWin();
             }
         }
 
+        private void MakeBonusBullet(int i, int j)
+        {
+            var bullet = spawnManager.GetBullet();
+            
+            bullet.transform.SetParent(transform);
+            bullet.transform.position = Blocks[i, j].transform.position;
+            
+            bullet.Init(spawnManager, bonusManager, Types[i, j]);
+        }
+        
         private void OnDestroy()
         {
             EventsAndStates.OnGameStart -= NewLevel;

@@ -1,7 +1,9 @@
 using Dataers;
+using Logics;
 using UnityEngine;
+using View;
 
-namespace Logics
+namespace Controllers.Managers
 {
     public class LevelManager : MonoBehaviour
     {
@@ -11,6 +13,8 @@ namespace Logics
         {
             EventsAndStates.OnGameWin += PlayerData.IncLastLevel;
             EventsAndStates.OnPackDone += PlayerData.IncLastPack;
+            
+            EventsAndStates.OnPackDone += SceneChanger.LoadLevels;
         }
 
         private void Start()
@@ -39,6 +43,8 @@ namespace Logics
         {
             EventsAndStates.OnGameWin -= PlayerData.IncLastLevel;
             EventsAndStates.OnPackDone -= PlayerData.IncLastPack;
+            
+            EventsAndStates.OnPackDone -= SceneChanger.LoadLevels;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Libs;
-using Logics;
 using UnityEngine;
 
 namespace Controllers.Managers
@@ -11,9 +10,6 @@ namespace Controllers.Managers
         
         [SerializeField]
         private Popup[] popups;
-
-        [SerializeField] 
-        private LevelManager levelManager;
 
         private void Awake()
         {
