@@ -27,7 +27,7 @@ namespace Logics
 
             if (hitPoint <= 0) Remove();
         }
-
+        
         public void Remove()
         {
             _spawnManager.Remove(this);

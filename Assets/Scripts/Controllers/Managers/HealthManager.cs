@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Dataers;
 using Libs;
 using Logics;
@@ -7,36 +9,51 @@ namespace Controllers.Managers
 {
     public class HealthManager : MonoBehaviour
     {
-        private const int Null = -1;
-        
-        private Heart[] _hearts;
-        private int _activeHearts;
+        private List<Heart> _hearts;
+        private Vector2[] _positions;
+        private Vector2 _cellSize;
 
         [SerializeField]
         private int startHeartsCount;
+        [SerializeField] 
+        private int maxHeartsCount;
         [SerializeField]
         private GridOfObjects gridOfObjects;
         [SerializeField]
         private SpawnManager spawnManager;
         [SerializeField] 
         private Camera mainCamera;
-        [SerializeField] 
-        private BallManager ballManager;
 
-        private void Awake()
+        private void Start()
         {
-            _activeHearts = Null;
+            MakeNewHeartLine();
             
             EventsAndStates.OnGameStart += SetHearts;
+            BonusManager.OnBulletBonus += HeartCheck;
+        }
+
+        private void HeartCheck(BlockTypes blockType)
+        {
+            switch (blockType)
+            {
+                case BlockTypes.HeartAdder:
+                    AddHeart();
+                    break;
+                
+                case BlockTypes.HeartRemover:
+                    PopHeart();
+                    break;
+            }
         }
 
         private void SetHearts(LevelData levelData)
         {
-            if (_activeHearts != Null)
+            if (_hearts != null)
             {
-                while (_activeHearts > 0)
+                while (_hearts.Count > 0)
                 {
-                    _hearts[--_activeHearts].Pop();
+                    _hearts.Last().Pop();
+                    _hearts.RemoveAt(_hearts.Count - 1);
                 }
             }
 
@@ -45,28 +62,56 @@ namespace Controllers.Managers
 
         private void MakeNewHeartLine()
         {
-            _hearts = new Heart[startHeartsCount];
-            _activeHearts = startHeartsCount;
-            
-            var grid = gridOfObjects.NewGrid(1, startHeartsCount);
-            var cellSize = gridOfObjects.GetCellSize();
-            
+            var grid = gridOfObjects.NewGrid(1, maxHeartsCount);
+            _cellSize = gridOfObjects.GetCellSize();
+
+            _positions = new Vector2[maxHeartsCount];
+            for (var j = 0; j < maxHeartsCount; j++)
+            {
+                _positions[j] = grid[0, j];
+            }
+
+            _hearts = new List<Heart>();
             for (var j = 0; j < startHeartsCount; j++)
             {
-                _hearts[j] = spawnManager.GetHeart();
-                _hearts[j].Init(grid[0, j].x, grid[0, j].y, cellSize.x, cellSize.y, spawnManager, mainCamera);
-                _hearts[j].transform.SetParent(transform);
+                AddHeart();
             }
         }
 
-        public void PopHeart()
+        private void AddHeart()
         {
-            if (_activeHearts <= 0 || ballManager.CountBalls() > 0 || !EventsAndStates.IsGameRun) return;
+            if (_hearts.Count == maxHeartsCount) return;
+
+            var heart = spawnManager.GetHeart();
+            var position = _positions[_hearts.Count];
             
-            _activeHearts--;
-            _hearts[_activeHearts].Pop();
+            heart.transform.SetParent(transform);
+            heart.Init(position.x, position.y, _cellSize.x, _cellSize.y, spawnManager, mainCamera);
             
-            if (_activeHearts <= 0)
+            _hearts.Add(heart);
+        }
+
+        public void PopHeart(int countBalls)
+        {
+            if (_hearts.Count < 1 || countBalls > 0 || !EventsAndStates.IsGameRun) return;
+            
+            _hearts.Last().Pop();
+            _hearts.RemoveAt(_hearts.Count - 1);
+            
+            if (_hearts.Count <= 0)
+            {
+                EventsAndStates.SetGameOver();
+            }
+        }
+
+        private void PopHeart()
+        {
+            if (_hearts.Count < 1 || !EventsAndStates.IsGameRun) return;
+            
+            _hearts.Last().Pop();
+            _hearts.RemoveAt(_hearts.Count - 1);
+            
+            if (_hearts.Count <= 0)
             {
                 EventsAndStates.SetGameOver();
             }
@@ -75,6 +120,7 @@ namespace Controllers.Managers
         private void OnDestroy()
         {
             EventsAndStates.OnGameStart -= SetHearts;
+            BonusManager.OnBulletBonus -= HeartCheck;
         }
     }
 }

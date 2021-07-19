@@ -7,13 +7,11 @@ namespace Logics
     public class Bullet : MonoBehaviour, IPoolable
     {
         private SpawnManager _spawnManager;
-        private BonusManager _bonusManager;
         private BlockTypes _blockType;
 
-        public void Init(SpawnManager spawnManager, BonusManager bonusManager, BlockTypes blockType)
+        public void Init(SpawnManager spawnManager, BlockTypes blockType)
         {
             _spawnManager = spawnManager;
-            _bonusManager = bonusManager;
             _blockType = blockType;
         }
 
@@ -22,7 +20,7 @@ namespace Logics
             if (other.gameObject.CompareTag("ball")) return;
             if (other.gameObject.CompareTag("platform"))
             {
-                _bonusManager.BulletBonus(_blockType);
+                BonusManager.BulletBonus(_blockType);
             }
             
             _spawnManager.Remove(this);

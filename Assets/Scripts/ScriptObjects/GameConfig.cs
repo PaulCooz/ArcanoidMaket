@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace ScriptObjects
@@ -12,6 +13,8 @@ namespace ScriptObjects
         public float platformWidth;
         [SerializeField] [Range(0, 1)] 
         public float platformHeight;
+        [SerializeField] [Min(0)] 
+        public float platformSpeed;
 
         [SerializeField] 
         public float ballVelocity = 5;

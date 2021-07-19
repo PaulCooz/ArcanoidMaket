@@ -810,7 +810,7 @@ MonoBehaviour:
   spawnManager: {fileID: 285223244}
   mainCamera: {fileID: 519420031}
   progressbar: {fileID: 265154178}
-  bonusManager: {fileID: 631023762}
+  ballManager: {fileID: 1062824283}
   height: 0
   width: 0
 --- !u!114 &631023761
@@ -1892,10 +1892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHeartsCount: 3
+  maxHeartsCount: 4
   gridOfObjects: {fileID: 1997631224}
   spawnManager: {fileID: 285223244}
   mainCamera: {fileID: 519420031}
-  ballManager: {fileID: 1062824283}
 --- !u!4 &1997631223
 Transform:
   m_ObjectHideFlags: 0

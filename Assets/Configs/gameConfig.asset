@@ -15,6 +15,7 @@ MonoBehaviour:
   uiZone: 0.9
   platformWidth: 0.4
   platformHeight: 0.05
+  platformSpeed: 0.05
   ballVelocity: 5
   minAngle: 30
   ballStartForce: 300

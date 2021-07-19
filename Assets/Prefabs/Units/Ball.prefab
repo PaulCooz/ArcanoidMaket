@@ -135,3 +135,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRigidbody: {fileID: 5392869673767859030}
+  circleCollider: {fileID: 5392869673767859029}
+  id: 0

@@ -69,6 +69,20 @@ namespace Controllers.Managers
                     }
                     
                     break;
+                
+                case BlockTypes.VerticalBomb:
+                    for (var x = 0; x < blockManager.height; x++)
+                    {
+                        blockManager.TouchBlock(x, j);
+                    }
+                    break;
+                
+                case BlockTypes.HorizontalBomb:
+                    for (var y = 0; y < blockManager.width; y++)
+                    {
+                        blockManager.TouchBlock(i, y);
+                    }
+                    break;
             }
         }
 
@@ -101,7 +115,7 @@ namespace Controllers.Managers
 
                     if (withDestruction)
                     {
-                        blockManager.TouchBlock(ni, nj, 2);
+                        blockManager.TouchBlock(ni, nj);
                     }
                 }
             }
@@ -109,7 +123,7 @@ namespace Controllers.Managers
             return result;
         }
 
-        public void BulletBonus(BlockTypes blockType)
+        public static void BulletBonus(BlockTypes blockType)
         {
             OnBulletBonus?.Invoke(blockType);
         }

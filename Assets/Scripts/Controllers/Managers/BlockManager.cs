@@ -42,7 +42,7 @@ namespace Controllers.Managers
         [SerializeField]
         private Progressbar progressbar;
         [SerializeField] 
-        private BonusManager bonusManager;
+        private BallManager ballManager;
 
         public int height;
         public int width;
@@ -69,7 +69,6 @@ namespace Controllers.Managers
         public void SomeBlockTouched(Ball ball, Collision2D collision)
         {
             var collisionBlockId = collision.gameObject.GetComponent<Block>()?.id;
-                
             if (collisionBlockId == null) return;
 
             for (var i = 0; i < height; i++)
@@ -77,8 +76,8 @@ namespace Controllers.Managers
                 for (var j = 0; j < width; j++)
                 {
                     if (i * width + j != collisionBlockId) continue;
-
-                    TouchBlock(i, j, 1);
+                    
+                    TouchBlock(i, j, ball.damage);
                     return;
                 }
             }
@@ -120,8 +119,8 @@ namespace Controllers.Managers
                 }
             }
         }
-        
-        public void MakeTypical(Block block, BlockTypes blockType)
+
+        private void MakeTypical(Block block, BlockTypes blockType)
         {
             switch (blockType)
             {
@@ -138,13 +137,43 @@ namespace Controllers.Managers
                     block.blockView.SetColor(Color.magenta);
                     break;
                 case BlockTypes.ChainBomb:
-                    block.blockView.SetColor(Color.yellow);
+                    block.blockView.SetColor(Color.magenta);
                     break;
                 case BlockTypes.BallSpeedUp:
                     block.blockView.SetColor(Color.cyan);
                     break;
                 case BlockTypes.BallSpeedDown:
                     block.blockView.SetColor(Color.cyan);
+                    break;
+                case BlockTypes.PlatformDilator:
+                    block.blockView.SetColor(Color.yellow);
+                    break;
+                case BlockTypes.PlatformNarrower:
+                    block.blockView.SetColor(Color.yellow);
+                    break;
+                case BlockTypes.FuryBall:
+                    block.blockView.SetColor(Color.cyan);
+                    break;
+                case BlockTypes.BallsAdder:
+                    block.blockView.SetColor(Color.cyan);
+                    break;
+                case BlockTypes.VerticalBomb:
+                    block.blockView.SetColor(Color.magenta);
+                    break;
+                case BlockTypes.HorizontalBomb:
+                    block.blockView.SetColor(Color.magenta);
+                    break;
+                case BlockTypes.PlatformSpeedUp:
+                    block.blockView.SetColor(Color.yellow);
+                    break;
+                case BlockTypes.PlatformSpeedDown:
+                    block.blockView.SetColor(Color.yellow);
+                    break;
+                case BlockTypes.HeartAdder:
+                    block.blockView.SetColor(Color.red);
+                    break;
+                case BlockTypes.HeartRemover:
+                    block.blockView.SetColor(Color.red);
                     break;
                 default:
                     Debug.LogWarning("unknown block type");
@@ -163,6 +192,16 @@ namespace Controllers.Managers
             {
                 PopBlock(Blocks[i, j].id);
             }
+        }
+
+        public void TouchBlock(int i, int j)
+        {
+            if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled || Types[i, j] == BlockTypes.Unbreakable) return;
+
+            Blocks[i, j].Remove();
+            Blocks[i, j].blockView.Touch();
+            
+            PopBlock(Blocks[i, j].id);
         }
 
         private void ClearAllBlocks()
@@ -196,6 +235,38 @@ namespace Controllers.Managers
                 case BlockTypes.BallSpeedDown:
                     MakeBonusBullet(i, j);
                     break;
+                
+                case BlockTypes.PlatformDilator:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.PlatformNarrower:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.FuryBall:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.BallsAdder:
+                    MakeBall(i, j);
+                    break;
+                
+                case BlockTypes.PlatformSpeedUp:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.PlatformSpeedDown:
+                    MakeBonusBullet(i, j);
+                    break;
+                
+                case BlockTypes.HeartAdder:
+                    MakeBonusBullet(i, j);
+                    break;
+                    
+                case BlockTypes.HeartRemover:
+                    MakeBonusBullet(i, j);
+                    break;
             }
 
             _emptyBlocks++;
@@ -216,7 +287,12 @@ namespace Controllers.Managers
             bullet.transform.SetParent(transform);
             bullet.transform.position = Blocks[i, j].transform.position;
             
-            bullet.Init(spawnManager, bonusManager, Types[i, j]);
+            bullet.Init(spawnManager, Types[i, j]);
+        }
+        
+        private void MakeBall(int i, int j)
+        {
+            ballManager.NewBall(Blocks[i, j].transform.position);
         }
         
         private void OnDestroy()

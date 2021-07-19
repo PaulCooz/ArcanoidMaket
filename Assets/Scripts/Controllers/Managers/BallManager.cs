@@ -9,6 +9,7 @@ namespace Controllers.Managers
     public class BallManager : MonoBehaviour
     {
         private List<Ball> _balls;
+        private int _countBalls;
 
         [SerializeField] 
         private BallManagerController ballManagerController;
@@ -30,6 +31,7 @@ namespace Controllers.Managers
         private void Start()
         {
             _balls = new List<Ball>();
+            _countBalls = 0;
 
             EventsAndStates.OnGameWin += ClearBalls;
             EventsAndStates.OnGameOver += ClearBalls;
@@ -37,7 +39,7 @@ namespace Controllers.Managers
 
         private void Update()
         {
-            if (!EventsAndStates.IsGameRun || CountBalls() != 0) return;
+            if (!EventsAndStates.IsGameRun || _countBalls != 0) return;
 
             ballSpirit.Show(new Vector3(0, config.startBallHeight, 0));
             if (ballManagerController.MouseButtonUp())
@@ -50,8 +52,9 @@ namespace Controllers.Managers
         public void RemoveBall(int id)
         {
             _balls[id].Remove();
-            _balls.RemoveAt(id);
-            healthManager.PopHeart();
+            _countBalls--;
+            
+            healthManager.PopHeart(_countBalls);
         }
 
         private void NewBall()
@@ -59,23 +62,35 @@ namespace Controllers.Managers
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
-            ball.Init(platformRigidbody.position, config, spawnManager);
+            ball.Init(new Vector2(0, config.startBallHeight), platformRigidbody.position, config, spawnManager);
             
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;
             ball.id = _balls.Count;
 
             _balls.Add(ball);
+            _countBalls++;
+        }
+        
+        public void NewBall(Vector2 position)
+        {
+            var ball = spawnManager.GetBall();
+            
+            ball.transform.SetParent(transform);
+            ball.Init(position, platformRigidbody.position, config, spawnManager);
+            
+            ball.OnBallCollision += bottom.BallTouched;
+            ball.OnBallCollision += blockManager.SomeBlockTouched;
+            ball.id = _balls.Count;
+
+            _balls.Add(ball);
+            _countBalls++;
         }
 
         private void ClearBalls()
         {
             _balls.Clear();
-        }
-
-        public int CountBalls()
-        {
-            return _balls.Count;
+            _countBalls = 0;
         }
 
         private void OnDestroy()

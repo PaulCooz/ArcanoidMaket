@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Controllers.Managers;
 using Controllers.Pools;
 using ScriptObjects;
@@ -10,30 +11,26 @@ namespace Logics
     {
         private GameConfig _config;
         private SpawnManager _spawnManager;
-        private float _speedUpTimer;
-        private float _speedDownTimer;
         private float _speed;
 
         [SerializeField]
         private Rigidbody2D ballRigidbody;
-        
+
         public event Action<Ball, Collision2D> OnBallCollision;
         public int id;
+        public int damage;
         
-        public void Init(Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
+        public void Init(Vector2 ballPosition, Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
         {
             _config = config;
             _spawnManager = spawnManager;
             _speed = 1;
-            _speedUpTimer = 0;
-            _speedDownTimer = 0;
+            damage = 1;
+
+            ballRigidbody.position = ballPosition;
+            transform.position = ballPosition;
             
-            var position = new Vector2(0, _config.startBallHeight);
-            
-            ballRigidbody.position = position;
-            transform.position = position;
-            
-            ballRigidbody.AddForce((platformPosition - position).normalized * _config.ballStartForce);
+            ballRigidbody.AddForce((platformPosition - ballPosition).normalized * _config.ballStartForce);
 
             EventsAndStates.OnGameWin += Remove;
             EventsAndStates.OnGameOver += Remove;
@@ -45,39 +42,48 @@ namespace Logics
             switch (blockType)
             {
                 case BlockTypes.BallSpeedUp:
-                    _speedUpTimer = 5;
+                    StartCoroutine(SpeedUp());
                     break;
                 case BlockTypes.BallSpeedDown:
-                    _speedDownTimer = 5;
+                    StartCoroutine(SpeedDown());
+                    break;
+                case BlockTypes.FuryBall:
+                    StartCoroutine(FuryBall());
                     break;
             }
+        }
+
+        private IEnumerator SpeedUp()
+        {
+            _speed = 1.5f;
+            yield return new WaitForSeconds(5);
+            _speed = 1;
+        }
+        
+        private IEnumerator SpeedDown()
+        {
+            _speed = 0.5f;
+            yield return new WaitForSeconds(5);
+            _speed = 1;
+        }
+        
+        private IEnumerator FuryBall()
+        {
+            damage *= 3;
+            yield return new WaitForSeconds(5);
+            damage = 1;
         }
         
         private void OnCollisionEnter2D(Collision2D other)
         {
             ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
-            
+
             OnBallCollision?.Invoke(this, other);
         }
-
+        
         private void Update()
         {
             ballRigidbody.simulated = EventsAndStates.IsGameRun;
-
-            if (_speedUpTimer > 0)
-            {
-                _speed = 1.5f;
-                _speedUpTimer -= Time.deltaTime;
-            }
-            else if (_speedDownTimer > 0)
-            {
-                _speed = 0.5f;
-                _speedDownTimer -= Time.deltaTime;
-            }
-            else
-            {
-                _speed = 1;
-            }
         }
 
         private Vector2 AngleChecker(Vector2 vector)
