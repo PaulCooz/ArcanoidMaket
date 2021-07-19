@@ -13,8 +13,12 @@ namespace Controllers.Managers
         {
             EventsAndStates.OnGameWin += PlayerData.IncLastLevel;
             EventsAndStates.OnPackDone += PlayerData.IncLastPack;
-            
-            EventsAndStates.OnPackDone += SceneChanger.LoadLevels;
+            EventsAndStates.OnPackDone += SwapScene;
+        }
+
+        private void SwapScene()
+        {
+            StartCoroutine(SceneChanger.LoadLevels());
         }
 
         private void Start()
@@ -43,8 +47,7 @@ namespace Controllers.Managers
         {
             EventsAndStates.OnGameWin -= PlayerData.IncLastLevel;
             EventsAndStates.OnPackDone -= PlayerData.IncLastPack;
-            
-            EventsAndStates.OnPackDone -= SceneChanger.LoadLevels;
+            EventsAndStates.OnPackDone -= SwapScene;
         }
     }
 }

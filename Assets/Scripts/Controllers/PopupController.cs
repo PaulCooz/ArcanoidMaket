@@ -18,16 +18,22 @@ namespace Controllers
 
         public void ShowGameWin()
         {
+            if (!EventsAndStates.IsGameRun) return;
+            
             popupManager.ShowPopup<GameWinPopup>();
         }
         
         public void ShowGameOver()
         {
+            if (!EventsAndStates.IsGameRun) return;
+            
             popupManager.ShowPopup<GameOverPopup>();
         }
         
         public void ShowGamePause()
         {
+            if (!EventsAndStates.IsGameRun) return;
+            
             popupManager.ShowPopup<PausePopup>();
         }
 

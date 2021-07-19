@@ -2,7 +2,6 @@ using Controllers.Managers;
 using Dataers;
 using DG.Tweening;
 using Libs;
-using Logics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +39,9 @@ namespace View.Popups
 
         public void OnNextPush()
         {
+            if (PlayerEnergy.Energy < 1) return;
+            PlayerEnergy.DecEnergy();
+
             LevelManager.LoadNextLevel();
             Hide();
         }
@@ -47,8 +49,7 @@ namespace View.Popups
         public void OnExitPush()
         {
             Hide();
-            SceneChanger.LoadScene("Levels");
-            Destroy(gameObject, 2 * animationDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
     }
 }

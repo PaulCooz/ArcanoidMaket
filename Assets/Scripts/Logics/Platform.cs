@@ -1,5 +1,6 @@
 using System.Collections;
 using Controllers.Managers;
+using Dataers;
 using DG.Tweening;
 using Libs;
 using ScriptObjects;

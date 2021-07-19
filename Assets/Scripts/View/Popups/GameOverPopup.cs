@@ -1,7 +1,7 @@
 using Controllers.Managers;
+using Dataers;
 using DG.Tweening;
 using Libs;
-using Logics;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +26,9 @@ namespace View.Popups
 
         public void PushRestart()
         {
+            if (PlayerEnergy.Energy < 1) return;
+            PlayerEnergy.DecEnergy();
+
             Hide();
             LevelManager.RestartLevel();
             Destroy(gameObject, 2 * animationDuration);
@@ -34,8 +37,7 @@ namespace View.Popups
         public void PushExit()
         {
             Hide();
-            SceneChanger.LoadScene("Levels");
-            Destroy(gameObject, 2 * animationDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
 
         public override void Show()

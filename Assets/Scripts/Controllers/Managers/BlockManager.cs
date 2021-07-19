@@ -97,7 +97,7 @@ namespace Controllers.Managers
             {
                 for (var j = 0; j < width; j++)
                 {
-                    Types[i, j] = (BlockTypes)data[i * width + j];
+                    Types[i, j] = (BlockTypes)data[i * width + width - 1 - j];
 
                     if (Types[i, j] == BlockTypes.Empty)
                     {

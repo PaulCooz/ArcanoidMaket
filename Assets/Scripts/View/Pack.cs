@@ -57,11 +57,13 @@ namespace View
 
         public void Pushed()
         {
+            if (PlayerEnergy.Energy < 1) return;
+            PlayerEnergy.DecEnergy();
+            
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;
-            
+
             DataHolder.SetLevelPack(packLevels, packNumber, packImage);
-            SceneChanger.LoadScene("game");
         }
     }
 }

@@ -17,7 +17,6 @@ namespace View.Popups
         private void Start()
         {
             pauseTitle.text = LocaleManager.GetText("pauseTitle");
-            
             EventsAndStates.IsGameRun = false;
         }
 
@@ -42,8 +41,7 @@ namespace View.Popups
         {
             Hide();
             EventsAndStates.SetGameOver();
-            Destroy(gameObject, 2 * animationDuration);
-            SceneChanger.LoadScene("Levels");
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
 
         private void OnDisable()
