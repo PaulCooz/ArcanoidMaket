@@ -13,10 +13,10 @@ namespace Dataers
         //         [{
         //             ""data"":
         //             [
-        //                  1,  1,  1,  1,
-        //                  1,  1, 12, 11,
-        //                  1, 12, 11,  1,
-        //                 16, 16, 16, 16
+        //                 0, 0, 0, 0,
+        //                 2, 0, 0, 0,
+        //                 1, 2, 0, 0,
+        //                 2, 0, 0, 0
         //             ],
         //             ""height"":3,
         //             ""id"":1,
@@ -28,7 +28,14 @@ namespace Dataers
         public static int PackNumber;
         // = 0;
         public static Image PackImage;
-    
+
+        // for debug {
+        private void Awake()
+        {
+            PlayerPrefs.SetInt("lastPack", 100);
+        }
+        //}
+
         public static void SetLevelPack(TextAsset[] packLevels, int packNumber, Image image)
         {
             Levels = packLevels;

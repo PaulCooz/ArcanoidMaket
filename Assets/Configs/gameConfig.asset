@@ -22,3 +22,24 @@ MonoBehaviour:
   minAngle: 30
   ballStartForce: 300
   startBallHeight: -3
+  packs:
+  - levels:
+    - {fileID: 4900000, guid: 232acac1c73ce7848bfa93b67a105290, type: 3}
+  - levels:
+    - {fileID: 4900000, guid: 1eaa937a92ecdfe4a9ad52d0c2e8b01f, type: 3}
+    - {fileID: 4900000, guid: a648e47fa267bd24e99ef20841b6eb39, type: 3}
+  - levels:
+    - {fileID: 4900000, guid: 817ffc41300bc4a43ac238f1c93ea279, type: 3}
+    - {fileID: 4900000, guid: 9c4f6b849c9d1c34bb798682a8e2d440, type: 3}
+    - {fileID: 4900000, guid: 0420c98fac6a0fa47a93de15d718e3ca, type: 3}
+  - levels:
+    - {fileID: 4900000, guid: 734d5790411fa2c4b9fb6195dad8e35d, type: 3}
+    - {fileID: 4900000, guid: 34c0b6744da868a448e585e72b9a560b, type: 3}
+    - {fileID: 4900000, guid: a2272637ecfb2ca44b75def599ae6624, type: 3}
+    - {fileID: 4900000, guid: fb73dff430269e840a5972e97c43ec46, type: 3}
+  - levels:
+    - {fileID: 4900000, guid: 232acac1c73ce7848bfa93b67a105290, type: 3}
+    - {fileID: 4900000, guid: cc998cf26a9435345be46cf1f10512c3, type: 3}
+    - {fileID: 4900000, guid: b3a337c76dd2f5e439865153909fe370, type: 3}
+    - {fileID: 4900000, guid: fb4e29b7c4240b84b999f4317d9771cd, type: 3}
+    - {fileID: 4900000, guid: 09ea724a27d3fc748866218383c11f45, type: 3}

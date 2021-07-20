@@ -27,7 +27,7 @@ namespace Models.Managers
                 
                 if (-1 < ni && ni < blockManager.height && -1 < nj && nj < blockManager.width)
                 {
-                    blockManager.TouchBlock(ni, nj, 1);
+                    blockManager.TouchBlock(ni, nj);
                 }
             }
         }

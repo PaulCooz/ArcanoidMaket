@@ -1,9 +1,15 @@
-using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ScriptObjects
 {
+    [Serializable]
+    public struct LevelSet
+    {
+        public TextAsset[] levels;
+    }
+    
     [CreateAssetMenu(fileName = "gameConfig", menuName = "new game config")]
     public class GameConfig : ScriptableObject
     {
@@ -34,5 +40,9 @@ namespace ScriptObjects
         public float ballStartForce = 300;
         [SerializeField]
         public float startBallHeight = -3;
+
+        [Header("\tPACKS")] [Space]
+        [SerializeField]
+        public LevelSet[] packs;
     }
 }

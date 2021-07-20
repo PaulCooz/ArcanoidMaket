@@ -1,5 +1,6 @@
 using Dataers;
 using Models.Managers;
+using ScriptObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,9 +10,9 @@ namespace View
     public class Pack : MonoBehaviour
     {
         private string _packProgressText;
-        
-        [SerializeField]
-        private TextAsset[] packLevels;
+
+        [SerializeField] 
+        private GameConfig config;
         [SerializeField] 
         private TextMeshProUGUI packTitle;
         [SerializeField] 
@@ -49,14 +50,14 @@ namespace View
             }
             else if (currentPack > packNumber)
             {
-                currentLevel = packLevels.Length;
+                currentLevel = config.packs[packNumber].levels.Length;
             }
             else
             {
                 currentLevel = PlayerData.GetLastLevel();
             }
             
-            packProgress.text = string.Format(_packProgressText, currentLevel, packLevels.Length);
+            packProgress.text = string.Format(_packProgressText, currentLevel, config.packs[packNumber].levels.Length);
         }
 
         public void Pushed()
@@ -66,7 +67,7 @@ namespace View
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;
 
-            DataHolder.SetLevelPack(packLevels, packNumber, packImage);
+            DataHolder.SetLevelPack(config.packs[packNumber].levels, packNumber, packImage);
             
             foreground.Show(sceneSwapDuration);
             StartCoroutine(SceneChanger.WaitAndChange("Game", sceneSwapDuration));

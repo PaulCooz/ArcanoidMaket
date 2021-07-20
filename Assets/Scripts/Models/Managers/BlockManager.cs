@@ -101,7 +101,7 @@ namespace Models.Managers
             }
         }
 
-        public void TouchBlock(int i, int j, int damage)
+        private void TouchBlock(int i, int j, int damage)
         {
             if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled) return;
 
@@ -125,7 +125,7 @@ namespace Models.Managers
             {
                 for (var j = 0; j < width; j++)
                 {
-                    if (!Blocks[i, j].isActiveAndEnabled) continue;
+                    if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled) continue;
 
                     Blocks[i, j].Remove();
                 }
