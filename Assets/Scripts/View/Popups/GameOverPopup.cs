@@ -27,8 +27,7 @@ namespace View.Popups
         public void PushRestart()
         {
             if (PlayerEnergy.Energy < 1) return;
-            PlayerEnergy.DecEnergy();
-
+            
             Hide();
             LevelManager.RestartLevel();
             Destroy(gameObject, 2 * animationDuration);

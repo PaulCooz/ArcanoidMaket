@@ -1,4 +1,5 @@
 using Unity.Collections.LowLevel.Unsafe;
+using UnityEditor;
 using UnityEngine;
 
 namespace ScriptObjects
@@ -6,9 +7,17 @@ namespace ScriptObjects
     [CreateAssetMenu(fileName = "gameConfig", menuName = "new game config")]
     public class GameConfig : ScriptableObject
     {
-        [SerializeField] 
+        [Header("\tUI")] [Space]
+        [SerializeField]
         public float uiZone = 0.9f;
         
+        [Header("\tENERGY")] [Space]
+        [SerializeField] 
+        public int maxEnergy;
+        [SerializeField] 
+        public double energyPerSecond;
+        
+        [Header("\tPLATFORM")] [Space]
         [SerializeField] [Range(0, 1)] 
         public float platformWidth;
         [SerializeField] [Range(0, 1)] 
@@ -16,6 +25,7 @@ namespace ScriptObjects
         [SerializeField] [Min(0)] 
         public float platformSpeed;
 
+        [Header("\tBALL")] [Space]
         [SerializeField] 
         public float ballVelocity = 5;
         [SerializeField] [Range(0, 90)]

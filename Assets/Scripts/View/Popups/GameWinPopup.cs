@@ -43,7 +43,6 @@ namespace View.Popups
         public void OnNextPush()
         {
             if (PlayerEnergy.Energy < 1) return;
-            PlayerEnergy.DecEnergy();
 
             LevelManager.LoadNextLevel();
             Hide();

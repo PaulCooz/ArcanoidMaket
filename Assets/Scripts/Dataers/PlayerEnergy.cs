@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Models;
+using ScriptObjects;
 using UnityEngine;
 
 namespace Dataers
@@ -9,24 +11,25 @@ namespace Dataers
         private const string LastEnergy = "lastEnergy";
         private const string LastDate = "lastData";
 
-        [SerializeField] 
-        public int maxEnergy;
-        [SerializeField] 
-        public double energyPerSecond;
+        [SerializeField]
+        private GameConfig config;
 
         public static int Energy;
 
         private void Awake()
         {
             Energy = GetEnergy();
+
+            EventsAndStates.OnGameStart += DecEnergy;
+            EventsAndStates.OnGameWin += IncEnergy;
         }
 
         private int GetEnergy()
         {
-            var lastEnergy = PlayerPrefs.GetInt(LastEnergy, maxEnergy);
+            var lastEnergy = PlayerPrefs.GetInt(LastEnergy, config.maxEnergy);
             var lastDate = Convert.ToDateTime(PlayerPrefs.GetString(LastDate, DateTime.Now.ToString(CultureInfo.CurrentCulture)));
 
-            return Mathf.Min(Convert.ToInt32(lastEnergy + (DateTime.Now - lastDate).TotalSeconds * energyPerSecond), maxEnergy);
+            return Mathf.Min(Convert.ToInt32(lastEnergy + (DateTime.Now - lastDate).TotalSeconds * config.energyPerSecond), config.maxEnergy);
         }
 
         private static void SaveEnergyData()
@@ -35,7 +38,14 @@ namespace Dataers
             PlayerPrefs.SetString(LastDate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
         }
 
-        public static void DecEnergy()
+        private static void IncEnergy()
+        {
+            Energy++;
+
+            SaveEnergyData();
+        }
+
+        private static void DecEnergy(LevelData levelData)
         {
             if (Energy < 1) return;
             Energy--;
