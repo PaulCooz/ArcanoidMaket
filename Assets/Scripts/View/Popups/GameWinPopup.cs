@@ -10,9 +10,12 @@ namespace View.Popups
 {
     public class GameWinPopup : Popup
     {
-        [SerializeField] private TextMeshProUGUI titleText;
-        [SerializeField] private Image progress;
-        [SerializeField] private float animationDuration = 1.0f;
+        [SerializeField] 
+        private TextMeshProUGUI titleText;
+        [SerializeField] 
+        private Image progress;
+        [SerializeField] 
+        private float animationDuration = 1.0f;
 
         private void Awake()
         {
@@ -49,7 +52,7 @@ namespace View.Popups
         public void OnExitPush()
         {
             Hide();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
         }
     }
 }

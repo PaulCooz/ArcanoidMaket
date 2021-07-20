@@ -34,8 +34,8 @@ namespace Logics
             (
                 new List<Vector2>
                 {
-                    Transformer.Position(-bottomAddLength, -0.1f, mainCamera),
-                    Transformer.Position(1 + bottomAddLength, -0.1f, mainCamera)
+                    Transformer.Position(-bottomAddLength, 0, mainCamera),
+                    Transformer.Position(1 + bottomAddLength, 0, mainCamera)
                 }
             );
         }

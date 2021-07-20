@@ -18,7 +18,7 @@ namespace Controllers.Managers
 
         private void SwapScene()
         {
-            StartCoroutine(SceneChanger.LoadLevels());
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
         }
 
         private void Start()

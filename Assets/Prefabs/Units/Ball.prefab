@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5392869673767859029}
   - component: {fileID: 5392869673767859030}
   - component: {fileID: 5392869673767859034}
+  - component: {fileID: -7275736796867020257}
   m_Layer: 0
   m_Name: Ball
   m_TagString: ball
@@ -135,5 +136,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRigidbody: {fileID: 5392869673767859030}
-  circleCollider: {fileID: 5392869673767859029}
+  ballView: {fileID: -7275736796867020257}
   id: 0
+  damage: 0
+--- !u!114 &-7275736796867020257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392869673767859031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f674172858435643b0e16ef78aaf345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles: {fileID: 5922156830249056875, guid: 1d1b07aacf3ec124eaae897414a3ed0e, type: 3}
+  ball: {fileID: 5392869673767859034}

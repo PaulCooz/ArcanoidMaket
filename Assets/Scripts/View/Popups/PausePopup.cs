@@ -41,7 +41,7 @@ namespace View.Popups
         {
             Hide();
             EventsAndStates.SetGameOver();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
         }
 
         private void OnDisable()

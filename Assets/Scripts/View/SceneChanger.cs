@@ -7,43 +7,26 @@ namespace View
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const float ChangeTime = 1;
-
-        public static IEnumerator WaitAndChange(string sceneName, float time)
+        public static IEnumerator WaitAndChange(string sceneName, float duration)
         {
             EventsAndStates.IsGameRun = false;
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(duration);
             SceneManager.LoadScene(sceneName);
         }
 
-        public static IEnumerator LoadMenu()
+        public void SetMenuScene(float duration)
         {
-            return WaitAndChange("Menu", ChangeTime);
+            StartCoroutine(WaitAndChange("Menu", duration));
         }
 
-        public static IEnumerator LoadLevels()
+        public void SetLevels(float duration)
         {
-            return WaitAndChange("Levels", ChangeTime);
-        }
-
-        public static IEnumerator LoadGame()
-        {
-            return WaitAndChange("Game", ChangeTime);
-        }
-
-        public void SetMenuScene()
-        {
-            StartCoroutine(LoadMenu());
-        }
-
-        public void SetLevels()
-        {
-            StartCoroutine(LoadLevels());
+            StartCoroutine(WaitAndChange("Levels", duration));
         }
         
-        public void SetGameScene()
+        public void SetGameScene(float duration)
         {
-            StartCoroutine(LoadGame());
+            StartCoroutine(WaitAndChange("Game", duration));
         }
     }
 }

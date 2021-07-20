@@ -24,6 +24,10 @@ namespace View
         private Image packImage;
         [SerializeField] 
         private TextMeshProUGUI packProgress;
+        [SerializeField] 
+        private Foreground foreground;
+        [SerializeField] 
+        private float sceneSwapDuration = 1;
 
         private void Start()
         {
@@ -64,6 +68,9 @@ namespace View
             if (currentPack < packNumber) return;
 
             DataHolder.SetLevelPack(packLevels, packNumber, packImage);
+            
+            foreground.Show(sceneSwapDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Game", sceneSwapDuration));
         }
     }
 }

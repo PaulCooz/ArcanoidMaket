@@ -37,7 +37,7 @@ namespace View.Popups
         public void PushExit()
         {
             Hide();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
         }
 
         public override void Show()

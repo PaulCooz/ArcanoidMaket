@@ -4,6 +4,7 @@ using Controllers.Managers;
 using Controllers.Pools;
 using ScriptObjects;
 using UnityEngine;
+using View;
 
 namespace Logics
 {
@@ -15,6 +16,8 @@ namespace Logics
 
         [SerializeField]
         private Rigidbody2D ballRigidbody;
+        [SerializeField] 
+        private BallView ballView;
 
         public event Action<Ball, Collision2D> OnBallCollision;
         public int id;
@@ -144,6 +147,7 @@ namespace Logics
             EventsAndStates.OnGameOver -= Remove;
             BonusManager.OnBulletBonus -= BulletBonus;
             
+            ballView.Removing();
             _spawnManager.Remove(this);
         }
 
