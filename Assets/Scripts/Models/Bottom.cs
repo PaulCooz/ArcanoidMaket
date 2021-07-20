@@ -1,7 +1,7 @@
-using Controllers.Managers;
+using Models.Managers;
 using UnityEngine;
 
-namespace Logics
+namespace Models
 {
     public class Bottom : MonoBehaviour
     {

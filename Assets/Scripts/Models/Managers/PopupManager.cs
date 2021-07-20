@@ -2,7 +2,7 @@
 using Libs;
 using UnityEngine;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class PopupManager : MonoBehaviour
     {

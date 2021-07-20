@@ -1,7 +1,7 @@
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public enum Locale
     {

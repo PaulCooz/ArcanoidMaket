@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using Controllers.Managers;
-using Controllers.Pools;
+using Models.Managers;
+using Models.Pools;
 using ScriptObjects;
 using UnityEngine;
 using View;
 
-namespace Logics
+namespace Models
 {
     public class Ball : MonoBehaviour, IPoolable
     {
@@ -37,44 +37,31 @@ namespace Logics
 
             EventsAndStates.OnGameWin += Remove;
             EventsAndStates.OnGameOver += Remove;
-            BonusManager.OnBulletBonus += BulletBonus;
         }
 
-        private void BulletBonus(BlockTypes blockType)
+        public void ChangeSpeed(float coefficient, float forTime)
         {
-            switch (blockType)
-            {
-                case BlockTypes.BallSpeedUp:
-                    StartCoroutine(SpeedUp());
-                    break;
-                case BlockTypes.BallSpeedDown:
-                    StartCoroutine(SpeedDown());
-                    break;
-                case BlockTypes.FuryBall:
-                    StartCoroutine(FuryBall());
-                    break;
-            }
+            print(coefficient + " " + forTime);
+            StartCoroutine(SetSpeed(coefficient, forTime));
         }
 
-        private IEnumerator SpeedUp()
+        public void ChangeDamage(int coefficient, float forTime)
         {
-            _speed = 1.5f;
-            yield return new WaitForSeconds(5);
-            _speed = 1;
+            StartCoroutine(SetDamage(coefficient, forTime));
         }
-        
-        private IEnumerator SpeedDown()
+
+        private IEnumerator SetSpeed(float coefficient, float forTime)
         {
-            _speed = 0.5f;
-            yield return new WaitForSeconds(5);
-            _speed = 1;
+            _speed *= coefficient;
+            yield return new WaitForSeconds(forTime);
+            _speed /= coefficient;
         }
-        
-        private IEnumerator FuryBall()
+
+        private IEnumerator SetDamage(int coefficient, float forTime)
         {
-            damage *= 3;
-            yield return new WaitForSeconds(5);
-            damage = 1;
+            damage *= coefficient;
+            yield return new WaitForSeconds(forTime);
+            damage /= coefficient;
         }
         
         private void OnCollisionEnter2D(Collision2D other)
@@ -145,7 +132,6 @@ namespace Logics
         {
             EventsAndStates.OnGameWin -= Remove;
             EventsAndStates.OnGameOver -= Remove;
-            BonusManager.OnBulletBonus -= BulletBonus;
             
             ballView.Removing();
             _spawnManager.Remove(this);

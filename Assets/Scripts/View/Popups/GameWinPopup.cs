@@ -1,7 +1,7 @@
-using Controllers.Managers;
 using Dataers;
 using DG.Tweening;
 using Libs;
+using Models.Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

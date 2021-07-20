@@ -1,7 +1,7 @@
 using System;
 using Dataers;
 
-namespace Logics
+namespace Models
 {
     public static class EventsAndStates
     {

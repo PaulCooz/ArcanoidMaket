@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Controllers.Pools
+namespace Models.Pools
 {
     public class PoolManager<T> : MonoBehaviour where T : MonoBehaviour, IPoolable
     {

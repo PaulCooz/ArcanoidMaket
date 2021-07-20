@@ -1,5 +1,5 @@
 using Dataers;
-using Logics;
+using Models;
 using TMPro;
 using UnityEngine;
 

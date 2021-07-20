@@ -1,36 +1,39 @@
-using Controllers.Managers;
-using Controllers.Pools;
+using Models.Managers;
+using Models.Pools;
 using UnityEngine;
+using UnityEngine.Events;
 using View;
 
-namespace Logics
+namespace Models
 {
     public class Block : MonoBehaviour, IPoolable
     {
         private SpawnManager _spawnManager;
-        
-        [SerializeField]
-        private int hitPoint;
+        private UnityEvent<Block> _endAction;
+        private int _hitPoint;
 
         public BlockView blockView;
+        public BlockType type;
         public int id;
 
-        public void Init(SpawnManager spawnManager)
+        public void Init(SpawnManager spawnManager, int hitPoint, UnityEvent<Block> endAction)
         {
             _spawnManager = spawnManager;
-            hitPoint = 2;
+            _hitPoint = hitPoint;
+            _endAction = endAction;
         }
         
         public void Touch(int damage)
         {
-            hitPoint -= damage;
+            _hitPoint -= damage;
 
-            if (hitPoint <= 0) Remove();
+            if (_hitPoint <= 0) Remove();
         }
         
         public void Remove()
         {
             _spawnManager.Remove(this);
+            _endAction?.Invoke(this);
         }
 
         public void Activate()

@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Dataers;
 using Libs;
-using Logics;
 using UnityEngine;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class HealthManager : MonoBehaviour
     {
@@ -29,21 +28,6 @@ namespace Controllers.Managers
             MakeNewHeartLine();
             
             EventsAndStates.OnGameStart += SetHearts;
-            BonusManager.OnBulletBonus += HeartCheck;
-        }
-
-        private void HeartCheck(BlockTypes blockType)
-        {
-            switch (blockType)
-            {
-                case BlockTypes.HeartAdder:
-                    AddHeart();
-                    break;
-                
-                case BlockTypes.HeartRemover:
-                    PopHeart();
-                    break;
-            }
         }
 
         private void SetHearts(LevelData levelData)
@@ -78,7 +62,7 @@ namespace Controllers.Managers
             }
         }
 
-        private void AddHeart()
+        public void AddHeart()
         {
             if (_hearts.Count == maxHeartsCount) return;
 
@@ -104,7 +88,7 @@ namespace Controllers.Managers
             }
         }
 
-        private void PopHeart()
+        public void PopHeart()
         {
             if (_hearts.Count < 1 || !EventsAndStates.IsGameRun) return;
             
@@ -120,7 +104,6 @@ namespace Controllers.Managers
         private void OnDestroy()
         {
             EventsAndStates.OnGameStart -= SetHearts;
-            BonusManager.OnBulletBonus -= HeartCheck;
         }
     }
 }

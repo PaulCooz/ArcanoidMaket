@@ -1,4 +1,4 @@
-using Logics;
+using Models;
 using UnityEngine;
 
 namespace View

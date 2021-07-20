@@ -1,9 +1,9 @@
-using Controllers.Managers;
-using Controllers.Pools;
 using Libs;
+using Models.Managers;
+using Models.Pools;
 using UnityEngine;
 
-namespace Logics
+namespace Models
 {
     public class Heart : MonoBehaviour, IPoolable
     {

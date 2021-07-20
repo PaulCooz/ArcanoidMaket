@@ -1,8 +1,7 @@
-using Controllers.Pools;
-using Logics;
+using Models.Pools;
 using UnityEngine;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class SpawnManager : MonoBehaviour
     {

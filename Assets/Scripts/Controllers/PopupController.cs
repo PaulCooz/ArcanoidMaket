@@ -1,5 +1,5 @@
-﻿using Controllers.Managers;
-using Logics;
+﻿using Models;
+using Models.Managers;
 using UnityEngine;
 using View.Popups;
 

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Logics;
+using Controllers;
 using ScriptObjects;
 using UnityEngine;
 using View;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class BallManager : MonoBehaviour
     {
@@ -72,12 +72,12 @@ namespace Controllers.Managers
             _countBalls++;
         }
         
-        public void NewBall(Vector2 position)
+        public void NewBall(Block block)
         {
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
-            ball.Init(position, platformRigidbody.position, config, spawnManager);
+            ball.Init(block.transform.position, platformRigidbody.position, config, spawnManager);
             
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;
@@ -85,6 +85,22 @@ namespace Controllers.Managers
 
             _balls.Add(ball);
             _countBalls++;
+        }
+
+        public void ChangeSpeed(float coefficient)
+        {
+            foreach (var ball in _balls)
+            {
+                ball.ChangeSpeed(coefficient, 5);
+            }
+        }
+        
+        public void ChangeDamage(int coefficient)
+        {
+            foreach (var ball in _balls)
+            {
+                ball.ChangeDamage(coefficient, 5);
+            }
         }
 
         private void ClearBalls()

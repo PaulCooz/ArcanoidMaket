@@ -1,18 +1,21 @@
-using Controllers.Managers;
-using Controllers.Pools;
+using Models.Managers;
+using Models.Pools;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace Logics
+namespace Models
 {
     public class Bullet : MonoBehaviour, IPoolable
     {
         private SpawnManager _spawnManager;
-        private BlockTypes _blockType;
+        private BlockType _blockType;
+        private UnityEvent<BlockType> _endAction;
 
-        public void Init(SpawnManager spawnManager, BlockTypes blockType)
+        public void Init(SpawnManager spawnManager, BlockType blockType, UnityEvent<BlockType> endAction)
         {
             _spawnManager = spawnManager;
             _blockType = blockType;
+            _endAction = endAction;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -20,7 +23,7 @@ namespace Logics
             if (other.gameObject.CompareTag("ball")) return;
             if (other.gameObject.CompareTag("platform"))
             {
-                BonusManager.BulletBonus(_blockType);
+                _endAction?.Invoke(_blockType);
             }
             
             _spawnManager.Remove(this);

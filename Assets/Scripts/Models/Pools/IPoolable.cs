@@ -1,4 +1,4 @@
-﻿namespace Controllers.Pools
+﻿namespace Models.Pools
 {
     public interface IPoolable
     {

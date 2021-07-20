@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class MenuManager : MonoBehaviour
     {

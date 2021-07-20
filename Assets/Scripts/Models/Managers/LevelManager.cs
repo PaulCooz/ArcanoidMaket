@@ -1,9 +1,8 @@
 using Dataers;
-using Logics;
 using UnityEngine;
 using View;
 
-namespace Controllers.Managers
+namespace Models.Managers
 {
     public class LevelManager : MonoBehaviour
     {

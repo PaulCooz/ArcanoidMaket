@@ -774,6 +774,7 @@ GameObject:
   - component: {fileID: 631023759}
   - component: {fileID: 631023760}
   - component: {fileID: 631023762}
+  - component: {fileID: 631023763}
   - component: {fileID: 631023761}
   m_Layer: 0
   m_Name: BlockManager
@@ -812,7 +813,7 @@ MonoBehaviour:
   spawnManager: {fileID: 285223244}
   mainCamera: {fileID: 519420031}
   progressbar: {fileID: 265154178}
-  ballManager: {fileID: 1062824283}
+  blockTypeManager: {fileID: 631023763}
   height: 0
   width: 0
 --- !u!114 &631023761
@@ -846,6 +847,613 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockManager: {fileID: 631023760}
+  blockTypeManager: {fileID: 631023763}
+  spawnManager: {fileID: 285223244}
+--- !u!114 &631023763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631023758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f5fc31994a4fcaaa5168cc0c3d0eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockData:
+  - hitPoint: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    endAction:
+      m_PersistentCalls:
+        m_Calls: []
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.9528302, g: 0.0934852, b: 0.0934852, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 100000
+    color: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls: []
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 1, g: 0, b: 1, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: Bomb
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.8241024, g: 0, b: 1, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: ChainBomb
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.12746526, g: 0.8773585, b: 0.8773585, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1062824283}
+          m_TargetAssemblyTypeName: Models.Managers.BallManager, Assembly-CSharp
+          m_MethodName: ChangeSpeed
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.11035952, g: 0.87083966, b: 0.9433962, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1062824283}
+          m_TargetAssemblyTypeName: Models.Managers.BallManager, Assembly-CSharp
+          m_MethodName: ChangeSpeed
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.8387125, g: 0.9339623, b: 0.09163401, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1565236624}
+          m_TargetAssemblyTypeName: Models.Platform, Assembly-CSharp
+          m_MethodName: ChangeWidth
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.8962264, g: 0.89404505, b: 0.13020645, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1565236624}
+          m_TargetAssemblyTypeName: Models.Platform, Assembly-CSharp
+          m_MethodName: ChangeWidth
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.12883584, g: 0.8867924, b: 0.859594, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1062824283}
+          m_TargetAssemblyTypeName: Models.Managers.BallManager, Assembly-CSharp
+          m_MethodName: ChangeDamage
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.07864004, g: 0.6964892, b: 0.8867924, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1062824283}
+          m_TargetAssemblyTypeName: Models.Managers.BallManager, Assembly-CSharp
+          m_MethodName: NewBall
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.8867924, g: 0.11210393, b: 0.4327282, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: VerticalBomb
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.9245283, g: 0.3361579, b: 0.099430345, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: HorizontalBomb
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - hitPoint: 1
+    color: {r: 0.9339623, g: 0.7241677, b: 0.109255925, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1565236624}
+          m_TargetAssemblyTypeName: Models.Platform, Assembly-CSharp
+          m_MethodName: ChangeSpeed
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 0.9150943, g: 0.69901556, b: 0.10704873, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1565236624}
+          m_TargetAssemblyTypeName: Models.Platform, Assembly-CSharp
+          m_MethodName: ChangeSpeed
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.5
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 1, g: 0, b: 0, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1997631222}
+          m_TargetAssemblyTypeName: Models.Managers.HealthManager, Assembly-CSharp
+          m_MethodName: AddHeart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - hitPoint: 1
+    color: {r: 1, g: 0.19301024, b: 0, a: 1}
+    endAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 631023760}
+          m_TargetAssemblyTypeName: Models.Managers.BlockManager, Assembly-CSharp
+          m_MethodName: PopBlock
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 631023762}
+          m_TargetAssemblyTypeName: Models.Managers.BonusManager, Assembly-CSharp
+          m_MethodName: MakeBonusBullet
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    bulletAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1997631222}
+          m_TargetAssemblyTypeName: Models.Managers.HealthManager, Assembly-CSharp
+          m_MethodName: PopHeart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &635634821
 GameObject:
   m_ObjectHideFlags: 0

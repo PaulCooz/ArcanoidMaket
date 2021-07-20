@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Libs;
 using UnityEngine;
 
-namespace Logics
+namespace Models
 {
     public class Borders : MonoBehaviour
     {

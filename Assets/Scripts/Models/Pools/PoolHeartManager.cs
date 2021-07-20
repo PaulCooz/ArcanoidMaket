@@ -1,6 +1,4 @@
-using Logics;
-
-namespace Controllers.Pools
+namespace Models.Pools
 {
     public class PoolHeartManager : PoolManager<Heart> { }
 }
