@@ -1,5 +1,7 @@
 using System;
+using System.Runtime.InteropServices;
 using Dataers;
+using UnityEngine;
 
 namespace Models
 {
@@ -20,6 +22,7 @@ namespace Models
         
         public static void SetGameStart(LevelData levelData)
         {
+            Debug.Log("qwe" + levelData.data.Length);
             OnGameStart?.Invoke(levelData);
             IsGameRun = true;
         }

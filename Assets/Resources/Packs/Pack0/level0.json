@@ -17,15 +17,15 @@
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
- "renderorder":"left-down",
+ "renderorder":"right-down",
  "tiledversion":"1.7.0",
  "tileheight":64,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/..\/..\/..\/Users\/steam\/Downloads\/titles.tsx"
+         "source":"..\/titles.json"
         }],
- "tilewidth":128,
+ "tilewidth":64,
  "type":"map",
  "version":"1.6",
  "width":3

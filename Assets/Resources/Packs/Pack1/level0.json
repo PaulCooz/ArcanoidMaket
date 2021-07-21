@@ -1,106 +1,32 @@
 { "compressionlevel":-1,
- "height":3,
+ "height":5,
  "infinite":false,
  "layers":[
         {
-         "data":[1, 1, 1, 2, 3, 3, 0, 0, 0],
-         "height":3,
+         "data":[0, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":5,
          "id":1,
          "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":3,
+         "width":5,
          "x":0,
          "y":0
         }],
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
- "renderorder":"left-down",
+ "renderorder":"right-down",
  "tiledversion":"1.7.0",
  "tileheight":64,
  "tilesets":[
         {
-         "columns":4,
          "firstgid":1,
-         "image":"..\/titles.png",
-         "imageheight":256,
-         "imagewidth":256,
-         "margin":0,
-         "name":"titles",
-         "spacing":0,
-         "tilecount":16,
-         "tileheight":64,
-         "tiles":[
-                {
-                 "id":0,
-                 "type":"common"
-                }, 
-                {
-                 "id":1,
-                 "type":"unbreakable"
-                }, 
-                {
-                 "id":2,
-                 "type":"bomb"
-                }, 
-                {
-                 "id":3,
-                 "type":"chainBomb"
-                }, 
-                {
-                 "id":4,
-                 "type":"ballSpeedUp"
-                }, 
-                {
-                 "id":5,
-                 "type":"ballSpeedDown"
-                }, 
-                {
-                 "id":6,
-                 "type":"platformDilator"
-                }, 
-                {
-                 "id":7,
-                 "type":"platformNarrower"
-                }, 
-                {
-                 "id":8,
-                 "type":"furyBall"
-                }, 
-                {
-                 "id":9,
-                 "type":"ballsAdder"
-                }, 
-                {
-                 "id":10,
-                 "type":"verticalBomb"
-                }, 
-                {
-                 "id":11,
-                 "type":"horizontalBomb"
-                }, 
-                {
-                 "id":12,
-                 "type":"platformSpeedUp"
-                }, 
-                {
-                 "id":13,
-                 "type":"platformSpeedDown"
-                }, 
-                {
-                 "id":14,
-                 "type":"heartAdder"
-                }, 
-                {
-                 "id":15,
-                 "type":"heartRemover"
-                }],
-         "tilewidth":64
+         "source":"..\/titles.json"
         }],
  "tilewidth":64,
  "type":"map",
  "version":"1.6",
- "width":3
+ "width":5
 }

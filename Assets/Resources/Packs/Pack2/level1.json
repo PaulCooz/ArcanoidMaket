@@ -1,32 +1,32 @@
 { "compressionlevel":-1,
- "height":3,
+ "height":6,
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 1, 0, 0, 0, 0, 2, 2],
-         "height":3,
+         "data":[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+         "height":6,
          "id":1,
          "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
-         "width":3,
+         "width":6,
          "x":0,
          "y":0
         }],
  "nextlayerid":2,
  "nextobjectid":1,
  "orientation":"orthogonal",
- "renderorder":"left-down",
+ "renderorder":"right-down",
  "tiledversion":"1.7.0",
  "tileheight":64,
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/..\/..\/..\/..\/..\/Users\/steam\/Downloads\/titles.tsx"
+         "source":"..\/titles.json"
         }],
- "tilewidth":128,
+ "tilewidth":64,
  "type":"map",
  "version":"1.6",
- "width":3
+ "width":6
 }

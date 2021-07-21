@@ -14,14 +14,17 @@ namespace Dataers
         [SerializeField]
         private GameConfig config;
 
-        public static int Energy;
+        public static int Energy = -1;
 
         private void Awake()
         {
+            if (Energy == -1)
+            {
+                EventsAndStates.OnGameStart += DecEnergy;
+                EventsAndStates.OnGameWin += IncEnergy;
+            }
+            
             Energy = GetEnergy();
-
-            EventsAndStates.OnGameStart += DecEnergy;
-            EventsAndStates.OnGameWin += IncEnergy;
         }
 
         private int GetEnergy()

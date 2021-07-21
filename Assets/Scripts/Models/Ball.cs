@@ -41,7 +41,6 @@ namespace Models
 
         public void ChangeSpeed(float coefficient, float forTime)
         {
-            print(coefficient + " " + forTime);
             StartCoroutine(SetSpeed(coefficient, forTime));
         }
 
@@ -82,47 +81,23 @@ namespace Models
             
             if (vector.x >= 0 && vector.y >= 0)
             {
-                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle)
-                {
-                    angle = _config.minAngle;
-                }
-                if (Vector2.Angle(vector, Vector2.up) < _config.minAngle)
-                {
-                    angle = 90 - _config.minAngle;
-                }
+                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle) angle = _config.minAngle;
+                if (Vector2.Angle(vector, Vector2.up)    < _config.minAngle) angle = 90 - _config.minAngle;
             }
             else if (vector.x < 0 && vector.y >= 0)
             {
-                if (Vector2.Angle(vector, Vector2.left) < _config.minAngle)
-                {
-                    angle = 180 - _config.minAngle;
-                }
-                if (Vector2.Angle(vector, Vector2.up) < _config.minAngle)
-                {
-                    angle = 90 + _config.minAngle;
-                }
+                if (Vector2.Angle(vector, Vector2.left)  < _config.minAngle) angle = 180 - _config.minAngle;
+                if (Vector2.Angle(vector, Vector2.up)    < _config.minAngle) angle = 90 + _config.minAngle;
             }
             else if (vector.x < 0 && vector.y < 0)
             {
-                if (Vector2.Angle(vector, Vector2.left) < _config.minAngle)
-                {
-                    angle = 180 + _config.minAngle;
-                }
-                if (Vector2.Angle(vector, Vector2.down) < _config.minAngle)
-                {
-                    angle = 270 - _config.minAngle;
-                }
+                if (Vector2.Angle(vector, Vector2.left)  < _config.minAngle) angle = 180 + _config.minAngle;
+                if (Vector2.Angle(vector, Vector2.down)  < _config.minAngle) angle = 270 - _config.minAngle;
             }
             else if (vector.x >= 0 && vector.y < 0)
             {
-                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle)
-                {
-                    angle = 360 - _config.minAngle;
-                }
-                if (Vector2.Angle(vector, Vector2.down) < _config.minAngle)
-                {
-                    angle = 270 + _config.minAngle;
-                }
+                if (Vector2.Angle(vector, Vector2.right) < _config.minAngle) angle = 360 - _config.minAngle;
+                if (Vector2.Angle(vector, Vector2.down)  < _config.minAngle) angle = 270 + _config.minAngle;
             }
 
             return angle != null ? new Vector2(Mathf.Cos((float) (angle * Mathf.Deg2Rad)), Mathf.Sin((float) (angle * Mathf.Deg2Rad))) : vector;
