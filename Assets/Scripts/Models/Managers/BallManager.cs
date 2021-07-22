@@ -59,6 +59,8 @@ namespace Models.Managers
 
         private void NewBall()
         {
+            if (!EventsAndStates.IsGameRun) return;
+            
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
@@ -74,6 +76,8 @@ namespace Models.Managers
         
         public void NewBall(Block block)
         {
+            if (!EventsAndStates.IsGameRun) return;
+
             var ball = spawnManager.GetBall();
             
             ball.transform.SetParent(transform);
