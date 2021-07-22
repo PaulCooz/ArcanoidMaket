@@ -19,12 +19,16 @@ namespace View
 
         public void Show(float duration)
         {
-            image.DOFade(1, duration);
+            image.raycastTarget = true;
+            var tweener = image.DOFade(1, duration);
+            tweener.onComplete += () => image.raycastTarget = false;
         }
 
         public void Hide(float duration)
         {
-            image.DOFade(0, duration);
+            image.raycastTarget = true;
+            var tweener = image.DOFade(0, duration);
+            tweener.onComplete += () => image.raycastTarget = false;
         }
     }
 }
