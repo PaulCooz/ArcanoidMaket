@@ -20,13 +20,15 @@ namespace Models
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.CompareTag("ball")) return;
             if (other.gameObject.CompareTag("platform"))
             {
                 _endAction?.Invoke(_blockType);
+                _spawnManager.Remove(this);
             }
-            
-            _spawnManager.Remove(this);
+            else if (other.gameObject.CompareTag("bottom"))
+            {
+                _spawnManager.Remove(this);
+            }
         }
 
         public void Activate()

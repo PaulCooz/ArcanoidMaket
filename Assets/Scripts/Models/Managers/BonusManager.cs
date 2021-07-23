@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ScriptObjects;
 using UnityEngine;
 
 namespace Models.Managers
@@ -11,11 +12,14 @@ namespace Models.Managers
         private BlockTypeManager blockTypeManager;
         [SerializeField]
         private SpawnManager spawnManager;
+        [SerializeField] 
+        private GameConfig config;
         
         public void Bomb(Block block)
         {
             var i = block.id / blockManager.width;
             var j = block.id % blockManager.width;
+            var count = 0;
             
             for (var x = -1; x <= 1; x++)
             for (var y = -1; y <= 1; y++)
@@ -27,7 +31,7 @@ namespace Models.Managers
                 
                 if (-1 < ni && ni < blockManager.height && -1 < nj && nj < blockManager.width)
                 {
-                    blockManager.TouchBlock(ni, nj);
+                    blockManager.RemoveBlock(ni, nj, ++count * config.boomTime);
                 }
             }
         }
@@ -68,10 +72,22 @@ namespace Models.Managers
         {
             var i = block.id / blockManager.width;
             var j = block.id % blockManager.width;
+            var up = 1;
+            var down = 1;
+            var count = 0;
             
-            for (var x = 0; x < blockManager.height; x++)
+            while (-1 < i - down || i + up < blockManager.height)
             {
-                blockManager.TouchBlock(x, j);
+                if (-1 < i - down)
+                {
+                    blockManager.RemoveBlock(i - down, j, ++count * config.boomTime);
+                    down++;
+                }
+                if (i + up < blockManager.height)
+                {
+                    blockManager.RemoveBlock(i + up, j, ++count * config.boomTime);
+                    up++;
+                }
             }
         }
 
@@ -79,10 +95,23 @@ namespace Models.Managers
         {
             var i = block.id / blockManager.width;
             var j = block.id % blockManager.width;
+            var left = 1;
+            var right = 1;
+            var count = 0;
             
-            for (var y = 0; y < blockManager.width; y++)
+            while (-1 < j - left || j + right < blockManager.width)
             {
-                blockManager.TouchBlock(i, y);
+                if (-1 < j - left)
+                {
+                    blockManager.RemoveBlock(i, j - left, ++count * config.boomTime);
+                    left++;
+                }
+
+                if (j + right < blockManager.width)
+                {
+                    blockManager.RemoveBlock(i, j + right, ++count * config.boomTime);
+                    right++;
+                }
             }
         }
 
@@ -106,8 +135,12 @@ namespace Models.Managers
                     var ni = (int) current.x + x;
                     var nj = (int) current.y + y;
 
-                    if (-1 >= ni || ni >= blockManager.height || -1 >= nj || nj >= blockManager.width || used[ni, nj]) continue;
-                    if (blockManager.Blocks[ni, nj] == null || blockManager.Types[ni, nj] != blockTypes) continue;
+                    if (-1 >= ni || ni >= blockManager.height || -1 >= nj || nj >= blockManager.width ||
+                        used[ni, nj] || blockManager.Blocks[ni, nj] == null ||
+                        !blockManager.Blocks[ni, nj].isActiveAndEnabled || blockManager.Types[ni, nj] != blockTypes)
+                    {
+                        continue;
+                    }
                     
                     result++;
                     used[ni, nj] = true;
@@ -115,7 +148,7 @@ namespace Models.Managers
 
                     if (withDestruction)
                     {
-                        blockManager.TouchBlock(ni, nj);
+                        blockManager.RemoveBlock(ni, nj, result * config.boomTime);
                     }
                 }
             }

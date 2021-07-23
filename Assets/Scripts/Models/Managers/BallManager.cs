@@ -95,7 +95,7 @@ namespace Models.Managers
         {
             foreach (var ball in _balls)
             {
-                ball.ChangeSpeed(coefficient, 5);
+                ball.ChangeSpeed(coefficient, config.ballSpeedTime);
             }
         }
         
@@ -103,7 +103,7 @@ namespace Models.Managers
         {
             foreach (var ball in _balls)
             {
-                ball.ChangeDamage(coefficient, 5);
+                ball.ChangeDamage(coefficient, config.ballDamageTime);
             }
         }
 

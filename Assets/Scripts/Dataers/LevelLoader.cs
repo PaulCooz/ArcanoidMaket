@@ -23,7 +23,7 @@ namespace Dataers
     public static class LevelLoader
     {
         private static int _currentLevel;
-        
+
         public static void SetLevel(int level)
         {
             _currentLevel = level;

@@ -51,3 +51,11 @@ MonoBehaviour:
     - {fileID: 4900000, guid: b3a337c76dd2f5e439865153909fe370, type: 3}
     - {fileID: 4900000, guid: fb4e29b7c4240b84b999f4317d9771cd, type: 3}
     - {fileID: 4900000, guid: 09ea724a27d3fc748866218383c11f45, type: 3}
+  ballSpeedTime: 5
+  ballDamageTime: 5
+  platformWidthTime: 5
+  platformSpeedTime: 5
+  boomTime: 0.1
+  sprites:
+  - {fileID: 21300000, guid: 47cb9517581a41940bb343f64dce3674, type: 3}
+  - {fileID: 0}

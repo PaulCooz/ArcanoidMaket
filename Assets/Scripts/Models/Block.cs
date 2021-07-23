@@ -15,6 +15,7 @@ namespace Models
         public BlockView blockView;
         public BlockType type;
         public int id;
+        public bool isHittable;
 
         public void Init(SpawnManager spawnManager, int hitPoint, UnityEvent<Block> endAction)
         {
@@ -25,13 +26,18 @@ namespace Models
         
         public void Touch(int damage)
         {
+            if (!isHittable) return;
+
             _hitPoint -= damage;
+            blockView.Touch();
 
             if (_hitPoint <= 0) Remove();
         }
         
         public void Remove()
         {
+            blockView.Pop();
+            
             _spawnManager.Remove(this);
             _endAction?.Invoke(this);
         }

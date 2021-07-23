@@ -32,7 +32,10 @@ namespace Models.Managers
         [Serializable]
         public struct BlockData
         {
+            public bool isCount;
+            public bool isHittable;
             public int hitPoint;
+            public Sprite sprite;
             public Color color;
             public UnityEvent<Block> endAction;
             public UnityEvent<BlockType> bulletAction;

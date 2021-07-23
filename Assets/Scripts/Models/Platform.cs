@@ -1,7 +1,7 @@
 using System.Collections;
+using Dataers;
 using DG.Tweening;
 using Libs;
-using Models.Managers;
 using ScriptObjects;
 using UnityEngine;
 
@@ -21,21 +21,34 @@ namespace Models
         [SerializeField] 
         private Rigidbody2D platformRigidbody;
 
-        private void Start()
+        private void Awake()
         {
-            _moveTimeCoefficient = 1;
+            EventsAndStates.OnGameStart += Refresh;
+
+            Refresh();
+        }
+
+        private void Refresh(LevelData levelData)
+        {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            StopAllCoroutines();
             
+            _moveTimeCoefficient = 1;
             SetSize(1, 1);
         }
 
         public void ChangeWidth(float coefficient)
         {
-            StartCoroutine(SetPlatformWidth(coefficient, 5));
+            StartCoroutine(SetPlatformWidth(coefficient, config.platformWidthTime));
         }
         
         public void ChangeSpeed(float coefficient)
         {
-            StartCoroutine(SetPlatformSpeed(coefficient, 5));
+            StartCoroutine(SetPlatformSpeed(coefficient, config.platformSpeedTime));
         }
 
         private IEnumerator SetPlatformWidth(float coefficient, float forTime)
@@ -65,6 +78,11 @@ namespace Models
         {
             platformRigidbody.DOKill();
             platformRigidbody.DOMoveX(Mathf.Clamp(positionX, -_max, _max), _moveTimeCoefficient * Time.deltaTime / config.platformSpeed);
+        }
+
+        private void OnDestroy()
+        {
+            EventsAndStates.OnGameStart -= Refresh;
         }
     }
 }

@@ -6,32 +6,24 @@ namespace Dataers
     public class DataHolder : MonoBehaviour
     {
         public static TextAsset[] Levels;
-        //     = { new TextAsset(
-        //     @"{
-        //         ""height"":4,
-        //         ""layers"":
-        //         [{
-        //             ""data"":
-        //             [
-        //                 0, 0, 0, 0,
-        //                 2, 0, 0, 0,
-        //                 1, 2, 0, 0,
-        //                 2, 0, 0, 0
-        //             ],
-        //             ""height"":3,
-        //             ""id"":1,
-        //             ""width"":3
-        //         }],
-        //         ""width"":4
-        //     }"
-        // )};
         public static int PackNumber;
-        // = 0;
         public static Image PackImage;
 
         // for debug {
+        [SerializeField]
+        public TextAsset[] testLevels;
+        [SerializeField]
+        public int testPackNumber;
+        [SerializeField]
+        public Image testPackImage;
+
         private void Awake()
         {
+            Levels = testLevels;
+            PackNumber = testPackNumber;
+            PackImage = testPackImage;
+            
+            PlayerEnergy.Energy = 100;
             PlayerPrefs.SetInt("lastPack", 100);
         }
         //}

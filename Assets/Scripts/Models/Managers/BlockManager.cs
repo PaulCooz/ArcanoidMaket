@@ -1,3 +1,4 @@
+using System.Collections;
 using Dataers;
 using Libs;
 using UnityEngine;
@@ -75,25 +76,19 @@ namespace Models.Managers
                 for (var j = 0; j < width; j++)
                 {
                     Types[i, j] = (BlockType)data[i * width + width - 1 - j];
-
-                    switch (Types[i, j])
-                    {
-                        case BlockType.Empty:
-                            _allBlocks--;
-                            continue;
-                        case BlockType.Unbreakable:
-                            _allBlocks--;
-                            break;
-                    }
-
+                    
                     var typeData = blockTypeManager.GetData(Types[i, j]);
+
+                    if (!typeData.isCount) _allBlocks--;
+                    if (Types[i, j] == BlockType.Empty) continue;
 
                     Blocks[i, j] = spawnManager.GetBlock();
                     Blocks[i, j].Init(spawnManager, typeData.hitPoint, typeData.endAction);
                     Blocks[i, j].id = i * width + j;
                     Blocks[i, j].type = Types[i, j];
+                    Blocks[i, j].isHittable = typeData.isHittable;
                     
-                    Blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, cellSize.x, cellSize.y, mainCamera);
+                    Blocks[i, j].blockView.Init(grid[i, j].x, grid[i, j].y, cellSize.x, cellSize.y, typeData.sprite, mainCamera);
                     Blocks[i, j].blockView.SetColor(typeData.color);
                     
                     Blocks[i, j].transform.SetParent(transform);
@@ -106,15 +101,21 @@ namespace Models.Managers
             if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled) return;
 
             Blocks[i, j].Touch(damage);
-            Blocks[i, j].blockView.Touch();
         }
 
-        public void TouchBlock(int i, int j)
+        public void RemoveBlock(int i, int j, float waitForSec)
         {
-            if (Blocks[i, j] == null || !Blocks[i, j].isActiveAndEnabled) return;
+            StartCoroutine(WaitAndRemove(i, j, waitForSec));
+        }
 
-            Blocks[i, j].Remove();
-            Blocks[i, j].blockView.Touch();
+        private IEnumerator WaitAndRemove(int i, int j, float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            if (Blocks[i, j] != null && Blocks[i, j].isActiveAndEnabled)
+            {
+                Blocks[i, j].Remove();
+            }
         }
 
         private void ClearAllBlocks()

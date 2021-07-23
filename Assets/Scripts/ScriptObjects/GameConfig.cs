@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace ScriptObjects
@@ -44,5 +45,20 @@ namespace ScriptObjects
         [Header("\tPACKS")] [Space]
         [SerializeField]
         public LevelSet[] packs;
+
+
+        [Header("\tBONUSES")] [Space] 
+        [SerializeField]
+        public float ballSpeedTime = 5;
+        [SerializeField]
+        public float ballDamageTime = 5;
+        [SerializeField] 
+        public float platformWidthTime = 5;
+        [SerializeField] 
+        public float platformSpeedTime = 5;
+        [SerializeField] 
+        public float boomTime = 0.1f;
+
+        public Sprite[] sprites;
     }
 }
