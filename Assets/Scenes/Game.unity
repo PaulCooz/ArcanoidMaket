@@ -680,8 +680,8 @@ RectTransform:
   m_Children:
   - {fileID: 1091026921}
   - {fileID: 1428960662}
-  - {fileID: 2065208550}
   - {fileID: 1822835557}
+  - {fileID: 2065208550}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -815,6 +815,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   progressbar: {fileID: 265154178}
   blockTypeManager: {fileID: 631023763}
+  config: {fileID: 11400000, guid: 756cd583de1afee4b91b0484ead633a5, type: 2}
   height: 0
   width: 0
 --- !u!114 &631023761
@@ -1204,8 +1205,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1062824283}
           m_TargetAssemblyTypeName: Models.Managers.BallManager, Assembly-CSharp
-          m_MethodName: ChangeDamage
-          m_Mode: 3
+          m_MethodName: SetFuryBalls
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1572,7 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testLevels:
-  - {fileID: 4900000, guid: 8ba4fbb8acf4688468d50e6831d9a958, type: 3}
+  - {fileID: 4900000, guid: 0039161c39179c94f90c0953420b4399, type: 3}
   - {fileID: 4900000, guid: fb4e29b7c4240b84b999f4317d9771cd, type: 3}
   - {fileID: 4900000, guid: b3a337c76dd2f5e439865153909fe370, type: 3}
   testPackNumber: 0
@@ -2056,7 +2057,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 63.2
+  m_fontSize: 63.3
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2430,6 +2431,7 @@ MonoBehaviour:
   - {fileID: 3446679325031011530, guid: ba06c7226bea00448b8074c88fe75b54, type: 3}
   - {fileID: 3587208121700331995, guid: 8d7c062412e489641995cb1c58e32fc9, type: 3}
   - {fileID: 7593012301090824966, guid: 0917d56964f3a074d9fcaca3dbdc11af, type: 3}
+  foreground: {fileID: 2065208551}
 --- !u!114 &1428960664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2673,7 +2675,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1032392832573886724, guid: a71379d988f5e5544a14c64dad455b2c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5899626178307416341, guid: a71379d988f5e5544a14c64dad455b2c, type: 3}
       propertyPath: m_Pivot.x
@@ -2901,7 +2903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861070544795604572, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1861070544795604572, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2975,6 +2977,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1861070544795604573, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861070544795604573, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1861070544795604575, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
       propertyPath: m_Name
       value: Foreground
@@ -2990,3 +3000,32 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1861070544795604572, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
   m_PrefabInstance: {fileID: 2065208549}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065208551 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1861070544795604571, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
+  m_PrefabInstance: {fileID: 2065208549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065208552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e5b7297c165c1f4b82e37f5d5c83fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2065208552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1861070544795604575, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
+  m_PrefabInstance: {fileID: 2065208549}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2065208553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065208552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad33f581a11a4e968d7dc5b4d3353ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foreground: {fileID: 2065208551}

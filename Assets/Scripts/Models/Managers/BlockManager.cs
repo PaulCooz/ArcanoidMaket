@@ -1,6 +1,7 @@
 using System.Collections;
 using Dataers;
 using Libs;
+using ScriptObjects;
 using UnityEngine;
 using View;
 
@@ -21,6 +22,8 @@ namespace Models.Managers
         private Progressbar progressbar;
         [SerializeField]
         private BlockTypeManager blockTypeManager;
+        [SerializeField] 
+        private GameConfig config;
         
 
         public int height;
@@ -54,8 +57,15 @@ namespace Models.Managers
                 for (var j = 0; j < width; j++)
                 {
                     if (i * width + j != collisionBlockId) continue;
-                    
-                    TouchBlock(i, j, ball.damage);
+
+                    if (ball.isFury)
+                    {
+                        Blocks[i, j].Remove();
+                    }
+                    else
+                    {
+                        TouchBlock(i, j, config.ballDamage);
+                    }
                     return;
                 }
             }

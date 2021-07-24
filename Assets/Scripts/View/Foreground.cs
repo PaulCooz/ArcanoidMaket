@@ -9,14 +9,21 @@ namespace View
         [SerializeField] 
         private Image image;
         [SerializeField] 
-        private float startHideDuration = 1;
+        private float hideDuration = 1;
         
         private void Awake()
         {
             image.color = Color.black;
-            Hide(startHideDuration);
+            Hide(hideDuration);
         }
 
+        public void Show()
+        {
+            image.raycastTarget = true;
+            var tweener = image.DOFade(1, hideDuration);
+            tweener.onComplete += () => image.raycastTarget = false;
+        }
+        
         public void Show(float duration)
         {
             image.raycastTarget = true;

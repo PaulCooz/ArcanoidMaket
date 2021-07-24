@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballRigidbody: {fileID: 5392869673767859030}
+  ballCollider: {fileID: 5392869673767859029}
   ballView: {fileID: -7275736796867020257}
   id: 0
   damage: 0

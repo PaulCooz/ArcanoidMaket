@@ -9,6 +9,8 @@ namespace View.Popups
 {
     public class GameOverPopup : Popup
     {
+        private Foreground _foreground;
+        
         [SerializeField] 
         private TextMeshProUGUI titleText;
         [SerializeField] 
@@ -24,19 +26,26 @@ namespace View.Popups
             titleText.text = LocaleManager.GetText("gameOverPopupTitle");
         }
 
+        public override void Init(Foreground foreground)
+        {
+            _foreground = foreground;
+        }
+
         public void PushRestart()
         {
             if (PlayerEnergy.Energy < 1) return;
             
             Hide();
             LevelManager.RestartLevel();
-            Destroy(gameObject, 2 * animationDuration);
+            Destroy(gameObject, animationDuration);
         }
 
         public void PushExit()
         {
             Hide();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
+            
+            _foreground.Show(animationDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
 
         public override void Show()

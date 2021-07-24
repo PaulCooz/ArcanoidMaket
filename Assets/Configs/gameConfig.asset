@@ -18,10 +18,11 @@ MonoBehaviour:
   platformWidth: 0.4
   platformHeight: 0.05
   platformSpeed: 0.05
-  ballVelocity: 5
+  ballVelocity: 7
   minAngle: 30
   ballStartForce: 300
   startBallHeight: -3
+  ballDamage: 1
   packs:
   - levels:
     - {fileID: 4900000, guid: 0039161c39179c94f90c0953420b4399, type: 3}
@@ -52,7 +53,7 @@ MonoBehaviour:
     - {fileID: 4900000, guid: fb4e29b7c4240b84b999f4317d9771cd, type: 3}
     - {fileID: 4900000, guid: 09ea724a27d3fc748866218383c11f45, type: 3}
   ballSpeedTime: 5
-  ballDamageTime: 5
+  ballFuryTime: 5
   platformWidthTime: 5
   platformSpeedTime: 5
   boomTime: 0.1

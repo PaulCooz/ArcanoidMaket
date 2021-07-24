@@ -41,6 +41,8 @@ namespace ScriptObjects
         public float ballStartForce = 300;
         [SerializeField]
         public float startBallHeight = -3;
+        [SerializeField] 
+        public int ballDamage;
 
         [Header("\tPACKS")] [Space]
         [SerializeField]
@@ -51,7 +53,7 @@ namespace ScriptObjects
         [SerializeField]
         public float ballSpeedTime = 5;
         [SerializeField]
-        public float ballDamageTime = 5;
+        public float ballFuryTime = 5;
         [SerializeField] 
         public float platformWidthTime = 5;
         [SerializeField] 

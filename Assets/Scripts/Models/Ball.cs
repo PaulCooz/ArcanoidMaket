@@ -3,6 +3,7 @@ using System.Collections;
 using Models.Managers;
 using Models.Pools;
 using ScriptObjects;
+using UnityEditor;
 using UnityEngine;
 using View;
 
@@ -17,18 +18,19 @@ namespace Models
         [SerializeField]
         private Rigidbody2D ballRigidbody;
         [SerializeField] 
+        private Collider2D ballCollider;
+        [SerializeField]
         private BallView ballView;
 
         public event Action<Ball, Collision2D> OnBallCollision;
         public int id;
-        public int damage;
-        
+        public bool isFury;
+
         public void Init(Vector2 ballPosition, Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
         {
             _config = config;
             _spawnManager = spawnManager;
             _speed = 1;
-            damage = 1;
 
             ballRigidbody.position = ballPosition;
             transform.position = ballPosition;
@@ -44,28 +46,37 @@ namespace Models
             StartCoroutine(SetSpeed(coefficient, forTime));
         }
 
-        public void ChangeDamage(int coefficient, float forTime)
-        {
-            StartCoroutine(SetDamage(coefficient, forTime));
-        }
-
         private IEnumerator SetSpeed(float coefficient, float forTime)
         {
             _speed *= coefficient;
             yield return new WaitForSeconds(forTime);
             _speed /= coefficient;
         }
-
-        private IEnumerator SetDamage(int coefficient, float forTime)
-        {
-            damage *= coefficient;
-            yield return new WaitForSeconds(forTime);
-            damage /= coefficient;
-        }
         
+        public void SetFuryBall(float forTime)
+        {
+            if (isFury) return;
+            
+            StartCoroutine(SetFury(forTime));
+        }
+
+        private IEnumerator SetFury(float forTime)
+        {
+            isFury = true;
+            yield return new WaitForSeconds(forTime);
+            isFury = false;
+        }
+
         private void OnCollisionEnter2D(Collision2D other)
         {
-            ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
+            if (isFury && other.gameObject.CompareTag("block"))
+            {
+                ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
+            }
+            else
+            {
+                ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
+            }
 
             OnBallCollision?.Invoke(this, other);
         }

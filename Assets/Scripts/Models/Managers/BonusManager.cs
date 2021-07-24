@@ -130,7 +130,7 @@ namespace Models.Managers
                 for (var x = -1; x <= 1; x++)
                 for (var y = -1; y <= 1; y++)
                 {
-                    if (Mathf.Abs(x) + Mathf.Abs(y) > 1 || Mathf.Abs(x) + Mathf.Abs(y) == 0) continue;
+                    if (Mathf.Abs(x) + Mathf.Abs(y) > 1) continue;
 
                     var ni = (int) current.x + x;
                     var nj = (int) current.y + y;
@@ -155,7 +155,7 @@ namespace Models.Managers
             
             return result;
         }
-        
+
         public void MakeBonusBullet(Block block)
         {
             var bullet = spawnManager.GetBullet();

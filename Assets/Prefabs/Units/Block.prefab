@@ -15,13 +15,13 @@ GameObject:
   - component: {fileID: 3271080988124496580}
   - component: {fileID: 4246279581859326429}
   - component: {fileID: 2805531257951270937}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Block
   m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &513515483593906262
 Transform:
   m_ObjectHideFlags: 0
@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dcade44e563b6149ab4dc8fc184ed5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockCollider: {fileID: 0}
   blockView: {fileID: 3271080988124496580}
   type: 0
   id: 0

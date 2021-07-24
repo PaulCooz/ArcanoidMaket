@@ -12,6 +12,9 @@ namespace Models
         private UnityEvent<Block> _endAction;
         private int _hitPoint;
 
+        [SerializeField] 
+        private Collider2D blockCollider;
+        
         public BlockView blockView;
         public BlockType type;
         public int id;
@@ -23,7 +26,7 @@ namespace Models
             _hitPoint = hitPoint;
             _endAction = endAction;
         }
-        
+
         public void Touch(int damage)
         {
             if (!isHittable) return;
@@ -39,7 +42,11 @@ namespace Models
             blockView.Pop();
             
             _spawnManager.Remove(this);
-            _endAction?.Invoke(this);
+
+            if (EventsAndStates.IsGameRun)
+            {
+                _endAction?.Invoke(this);
+            }
         }
 
         public void Activate()

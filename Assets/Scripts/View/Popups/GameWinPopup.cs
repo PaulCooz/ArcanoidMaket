@@ -10,6 +10,8 @@ namespace View.Popups
 {
     public class GameWinPopup : Popup
     {
+        private Foreground _foreground;
+        
         [SerializeField] 
         private TextMeshProUGUI titleText;
         [SerializeField] 
@@ -28,6 +30,11 @@ namespace View.Popups
 
             var info = LevelLoader.GetLevelInfo();
             progress.fillAmount = info.x / info.y;
+        }
+
+        public override void Init(Foreground foreground)
+        {
+            _foreground = foreground;
         }
 
         public override void Show()
@@ -51,7 +58,8 @@ namespace View.Popups
         public void OnExitPush()
         {
             Hide();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
+            _foreground.Show(animationDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
     }
 }

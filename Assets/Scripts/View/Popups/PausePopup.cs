@@ -9,6 +9,8 @@ namespace View.Popups
 {
     public class PausePopup : Popup
     {
+        private Foreground _foreground;
+        
         [SerializeField] 
         private TextMeshProUGUI pauseTitle;
         [SerializeField]
@@ -18,6 +20,11 @@ namespace View.Popups
         {
             pauseTitle.text = LocaleManager.GetText("pauseTitle");
             EventsAndStates.IsGameRun = false;
+        }
+
+        public override void Init(Foreground foreground)
+        {
+            _foreground = foreground;
         }
 
         public override void Show()
@@ -34,14 +41,16 @@ namespace View.Popups
         public void OnResumePush()
         {
             Hide();
-            Destroy(gameObject, 2 * animationDuration);
+            Destroy(gameObject, animationDuration);
         }
 
         public void OnExitPush()
         {
             Hide();
             EventsAndStates.SetGameOver();
-            StartCoroutine(SceneChanger.WaitAndChange("Levels", 1));
+            
+            _foreground.Show(animationDuration);
+            StartCoroutine(SceneChanger.WaitAndChange("Levels", animationDuration));
         }
 
         private void OnDisable()

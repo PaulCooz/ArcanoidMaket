@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Libs;
 using UnityEngine;
+using View;
 
 namespace Models.Managers
 {
@@ -10,6 +11,8 @@ namespace Models.Managers
         
         [SerializeField]
         private Popup[] popups;
+        [SerializeField] 
+        private Foreground foreground;
 
         private void Awake()
         {
@@ -25,6 +28,7 @@ namespace Models.Managers
                 var popup = Instantiate(pool, transform);
 
                 popup.Show();
+                popup.Init(foreground);
                 _currentPopups.Push(popup);
 
                 return;

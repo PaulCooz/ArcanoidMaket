@@ -98,15 +98,15 @@ namespace Models.Managers
                 ball.ChangeSpeed(coefficient, config.ballSpeedTime);
             }
         }
-        
-        public void ChangeDamage(int coefficient)
+
+        public void SetFuryBalls()
         {
             foreach (var ball in _balls)
             {
-                ball.ChangeDamage(coefficient, config.ballDamageTime);
+                ball.SetFuryBall(config.ballFuryTime);
             }
         }
-
+        
         private void ClearBalls()
         {
             _balls.Clear();
