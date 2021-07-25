@@ -1573,8 +1573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testLevels:
-  - {fileID: 4900000, guid: 0039161c39179c94f90c0953420b4399, type: 3}
-  - {fileID: 4900000, guid: fb4e29b7c4240b84b999f4317d9771cd, type: 3}
+  - {fileID: 4900000, guid: 1eaa937a92ecdfe4a9ad52d0c2e8b01f, type: 3}
+  - {fileID: 4900000, guid: a648e47fa267bd24e99ef20841b6eb39, type: 3}
   - {fileID: 4900000, guid: b3a337c76dd2f5e439865153909fe370, type: 3}
   testPackNumber: 0
   testPackImage: {fileID: 158815260}
@@ -2057,7 +2057,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 63.3
+  m_fontSize: 63.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

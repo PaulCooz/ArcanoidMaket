@@ -11,11 +11,15 @@ namespace Models
         private BlockType _blockType;
         private UnityEvent<BlockType> _endAction;
 
-        public void Init(SpawnManager spawnManager, BlockType blockType, UnityEvent<BlockType> endAction)
+        [SerializeField] 
+        private SpriteRenderer bulletRenderer;
+
+        public void Init(SpawnManager spawnManager, BlockType blockType, UnityEvent<BlockType> endAction, Color color)
         {
             _spawnManager = spawnManager;
             _blockType = blockType;
             _endAction = endAction;
+            bulletRenderer.color = color;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

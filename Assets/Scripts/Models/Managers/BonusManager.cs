@@ -163,7 +163,7 @@ namespace Models.Managers
             bullet.transform.SetParent(transform);
             bullet.transform.position = block.transform.position;
             
-            bullet.Init(spawnManager, block.type, blockTypeManager.GetData(block.type).bulletAction);
+            bullet.Init(spawnManager, block.type, blockTypeManager.GetData(block.type).bulletAction, block.blockView.GetColor());
         }
     }
 }

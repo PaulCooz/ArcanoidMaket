@@ -22,6 +22,11 @@ namespace View
             transform.position = Transformer.Position(positionX, positionY, _mainCamera);
             transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
         }
+
+        public Color GetColor()
+        {
+            return spriteRenderer.color;
+        }
         
         public void SetColor(Color color)
         {
