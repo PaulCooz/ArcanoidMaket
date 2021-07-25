@@ -20,6 +20,9 @@ namespace Models
             _blockType = blockType;
             _endAction = endAction;
             bulletRenderer.color = color;
+            
+            EventsAndStates.OnGameWin += Remove;
+            EventsAndStates.OnGameOver += Remove;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -27,12 +30,20 @@ namespace Models
             if (other.gameObject.CompareTag("platform"))
             {
                 _endAction?.Invoke(_blockType);
-                _spawnManager.Remove(this);
+                Remove();
             }
             else if (other.gameObject.CompareTag("bottom"))
             {
-                _spawnManager.Remove(this);
+                Remove();
             }
+        }
+        
+        private void Remove()
+        {
+            EventsAndStates.OnGameWin -= Remove;
+            EventsAndStates.OnGameOver -= Remove;
+            
+            _spawnManager.Remove(this);
         }
 
         public void Activate()

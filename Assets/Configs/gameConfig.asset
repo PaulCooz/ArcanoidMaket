@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: gameConfig
   m_EditorClassIdentifier: 
   uiZone: 0.9
-  maxEnergy: 100
-  energyPerSecond: 0.1
+  maxEnergy: 20
+  energyPerSecond: 0.01
   platformWidth: 0.4
   platformHeight: 0.05
   platformSpeed: 0.05
