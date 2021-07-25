@@ -14,11 +14,10 @@ namespace Models
         private GameConfig _config;
         private SpawnManager _spawnManager;
         private float _speed;
+        private Vector2 _previousVelocity;
 
         [SerializeField]
         private Rigidbody2D ballRigidbody;
-        [SerializeField] 
-        private Collider2D ballCollider;
         [SerializeField]
         private BallView ballView;
 
@@ -31,6 +30,7 @@ namespace Models
             _config = config;
             _spawnManager = spawnManager;
             _speed = 1;
+            isFury = false;
 
             ballRigidbody.position = ballPosition;
             transform.position = ballPosition;
@@ -69,14 +69,20 @@ namespace Models
 
         private void OnCollisionEnter2D(Collision2D other)
         {
+            var velocity = ballRigidbody.velocity;
+            
             if (isFury && other.gameObject.CompareTag("block"))
             {
-                ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
+                velocity = _previousVelocity;
             }
             else
             {
-                ballRigidbody.velocity = AngleChecker(ballRigidbody.velocity).normalized * _speed * _config.ballVelocity;
+                velocity = AngleChecker(velocity);
             }
+            velocity = velocity.normalized * _speed * _config.ballVelocity;
+            
+            ballRigidbody.velocity = velocity;
+            _previousVelocity = velocity;
 
             OnBallCollision?.Invoke(this, other);
         }
@@ -118,7 +124,7 @@ namespace Models
         {
             EventsAndStates.OnGameWin -= Remove;
             EventsAndStates.OnGameOver -= Remove;
-            
+
             ballView.Removing();
             _spawnManager.Remove(this);
         }

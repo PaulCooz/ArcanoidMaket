@@ -95,6 +95,8 @@ namespace Models.Managers
         {
             foreach (var ball in _balls)
             {
+                if (!ball.isActiveAndEnabled) continue;
+                
                 ball.ChangeSpeed(coefficient, config.ballSpeedTime);
             }
         }
@@ -103,6 +105,8 @@ namespace Models.Managers
         {
             foreach (var ball in _balls)
             {
+                if (!ball.isActiveAndEnabled) continue;
+                
                 ball.SetFuryBall(config.ballFuryTime);
             }
         }
