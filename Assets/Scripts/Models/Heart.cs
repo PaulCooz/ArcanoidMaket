@@ -1,3 +1,5 @@
+using System;
+using DG.Tweening;
 using Libs;
 using Models.Managers;
 using Models.Pools;
@@ -12,6 +14,8 @@ namespace Models
 
         [SerializeField]
         private SpriteRenderer spriteRenderer;
+        [SerializeField] 
+        private float animationsTime;
 
         public void Init(float positionX, float positionY, float sizeX, float sizeY, SpawnManager spawnManager, Camera mainCamera)
         {
@@ -19,16 +23,18 @@ namespace Models
             _spawnManager = spawnManager;
             
             transform.position = Transformer.Position(positionX, positionY, _mainCamera);
-            transform.localScale = Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer);
+            transform.DOScale(Transformer.Scale(sizeX, sizeY, _mainCamera, spriteRenderer), animationsTime);
         }
 
         public void Pop()
         {
-            _spawnManager.Remove(this);
+            transform.DOScale(Vector3.zero, animationsTime).onComplete += () => _spawnManager.Remove(this);
         }
 
         public void Activate()
         {
+            transform.localScale = Vector3.zero;
+            
             gameObject.SetActive(true);
         }
 

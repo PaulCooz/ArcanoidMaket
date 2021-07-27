@@ -28,20 +28,25 @@ namespace Models.Managers
             MakeNewHeartLine();
             
             EventsAndStates.OnGameStart += SetHearts;
+            EventsAndStates.OnGameWin += Clear;
+            EventsAndStates.OnGameOver += Clear;
         }
 
         private void SetHearts(LevelData levelData)
         {
-            if (_hearts != null)
-            {
-                while (_hearts.Count > 0)
-                {
-                    _hearts.Last().Pop();
-                    _hearts.RemoveAt(_hearts.Count - 1);
-                }
-            }
-
+            Clear();
             MakeNewHeartLine();
+        }
+
+        private void Clear()
+        {
+            if (_hearts == null) return;
+            
+            while (_hearts.Count > 0)
+            {
+                _hearts.Last().Pop();
+                _hearts.RemoveAt(_hearts.Count - 1);
+            }
         }
 
         private void MakeNewHeartLine()
@@ -77,33 +82,40 @@ namespace Models.Managers
 
         public void PopHeart(int countBalls)
         {
-            if (_hearts.Count < 1 || countBalls > 0 || !EventsAndStates.IsGameRun) return;
-            
-            _hearts.Last().Pop();
-            _hearts.RemoveAt(_hearts.Count - 1);
-            
+            if (countBalls > 0 || !EventsAndStates.IsGameRun) return;
             if (_hearts.Count <= 0)
             {
                 EventsAndStates.SetGameOver();
+                return;
             }
+
+            _hearts.Last().Pop();
+            _hearts.RemoveAt(_hearts.Count - 1);
         }
 
         public void PopHeart()
         {
-            if (_hearts.Count < 1 || !EventsAndStates.IsGameRun) return;
-            
-            _hearts.Last().Pop();
-            _hearts.RemoveAt(_hearts.Count - 1);
-            
+            if (!EventsAndStates.IsGameRun) return;
             if (_hearts.Count <= 0)
             {
                 EventsAndStates.SetGameOver();
+                return;
             }
+            
+            _hearts.Last().Pop();
+            _hearts.RemoveAt(_hearts.Count - 1);
+        }
+
+        public int CountHearts()
+        {
+            return _hearts.Count;
         }
 
         private void OnDestroy()
         {
             EventsAndStates.OnGameStart -= SetHearts;
+            EventsAndStates.OnGameWin -= Clear;
+            EventsAndStates.OnGameOver -= Clear;
         }
     }
 }

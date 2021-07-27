@@ -3,7 +3,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 15, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 16, 15, 16, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0],
          "height":5,
          "id":1,
          "name":"\u0421\u043b\u043e\u0439 \u0442\u0430\u0439\u043b\u043e\u0432 1",
@@ -23,7 +23,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/titles.json"
+         "source":"..\/..\/..\/..\/..\/Users\/steam\/Downloads\/titles.json"
         }],
  "tilewidth":64,
  "type":"map",

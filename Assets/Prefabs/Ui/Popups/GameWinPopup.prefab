@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 7758012272016530072}
   progress: {fileID: 4660090330341332876}
-  animationDuration: 1
+  animationsDuration: 1
 --- !u!1 &4808692733528523590
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

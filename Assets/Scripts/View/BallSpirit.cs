@@ -1,3 +1,5 @@
+using Libs;
+using ScriptObjects;
 using UnityEngine;
 
 namespace View
@@ -5,24 +7,20 @@ namespace View
     public class BallSpirit : MonoBehaviour
     {
         [SerializeField] 
-        private LineRenderer lineRenderer;
+        private GameConfig config;
+        [SerializeField] 
+        private Camera mainCamera;
         [SerializeField] 
         private Rigidbody2D platform;
 
-        public void Show(Vector3 position)
+        public void Show()
         {
             gameObject.SetActive(true);
+
+            var position = platform.position;
+            position.y = config.startBallHeight;
             
             transform.position = position;
-        
-            lineRenderer.SetPositions
-            (
-                new Vector3[]
-                {
-                    position,
-                    platform.position
-                }
-            );
         }
 
         public void Hide()

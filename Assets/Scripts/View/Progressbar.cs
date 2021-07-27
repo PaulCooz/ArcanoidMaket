@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +8,12 @@ namespace View
     {
         [SerializeField]
         private Image bar;
+        [SerializeField]
+        private float duration = 1;
 
         public void SetProgress(float x)
         {
-            bar.fillAmount = x;
+            bar.DOFillAmount(x, duration);
         }
     }
 }

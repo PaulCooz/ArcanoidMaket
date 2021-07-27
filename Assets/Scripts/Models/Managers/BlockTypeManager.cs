@@ -22,7 +22,9 @@ namespace Models.Managers
         PlatformSpeedUp,
         PlatformSpeedDown,
         HeartAdder,
-        HeartRemover
+        HeartRemover,
+        CommonGreen,
+        CommonBlue
     }
     
     public class BlockTypeManager : MonoBehaviour

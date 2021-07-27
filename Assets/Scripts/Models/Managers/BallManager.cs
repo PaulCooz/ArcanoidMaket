@@ -41,7 +41,7 @@ namespace Models.Managers
         {
             if (!EventsAndStates.IsGameRun || _countBalls != 0) return;
 
-            ballSpirit.Show(new Vector3(0, config.startBallHeight, 0));
+            ballSpirit.Show();
             if (ballManagerController.MouseButtonUp())
             {
                 NewBall();
@@ -62,9 +62,10 @@ namespace Models.Managers
             if (!EventsAndStates.IsGameRun) return;
             
             var ball = spawnManager.GetBall();
+            var position = platformRigidbody.position;
             
             ball.transform.SetParent(transform);
-            ball.Init(new Vector2(0, config.startBallHeight), platformRigidbody.position, config, spawnManager);
+            ball.Init(new Vector2(position.x, config.startBallHeight), position, config, spawnManager);
             
             ball.OnBallCollision += bottom.BallTouched;
             ball.OnBallCollision += blockManager.SomeBlockTouched;

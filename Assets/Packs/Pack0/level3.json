@@ -23,7 +23,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"..\/titles.json"
+         "source":"..\/..\/..\/..\/..\/Users\/steam\/Downloads\/titles.json"
         }],
  "tilewidth":64,
  "type":"map",
