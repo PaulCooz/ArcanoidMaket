@@ -35,6 +35,10 @@ namespace ScriptObjects
         [Header("\tBALL")] [Space]
         [SerializeField] 
         public float ballVelocity = 5;
+        [SerializeField] 
+        public float maxVelocity;
+        [SerializeField] 
+        public float velocityInc;
         [SerializeField] [Range(0, 90)]
         public float minAngle = 20;
         [SerializeField] 
@@ -60,7 +64,5 @@ namespace ScriptObjects
         public float platformSpeedTime = 5;
         [SerializeField] 
         public float boomTime = 0.1f;
-
-        public Sprite[] sprites;
     }
 }

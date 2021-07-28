@@ -3,7 +3,6 @@ using System.Collections;
 using Models.Managers;
 using Models.Pools;
 using ScriptObjects;
-using UnityEditor;
 using UnityEngine;
 using View;
 
@@ -24,12 +23,14 @@ namespace Models
         public event Action<Ball, Collision2D> OnBallCollision;
         public int id;
         public bool isFury;
+        public float velocityRatio;
 
-        public void Init(Vector2 ballPosition, Vector2 platformPosition, GameConfig config, SpawnManager spawnManager)
+        public void Init(Vector2 ballPosition, Vector2 platformPosition, GameConfig config, SpawnManager spawnManager, float velocity)
         {
             _config = config;
             _spawnManager = spawnManager;
             _speed = 1;
+            velocityRatio = velocity;
             isFury = false;
 
             ballRigidbody.position = ballPosition;
@@ -79,7 +80,7 @@ namespace Models
             {
                 velocity = AngleChecker(velocity);
             }
-            velocity = velocity.normalized * _speed * _config.ballVelocity;
+            velocity = velocity.normalized * _speed * velocityRatio;
             
             ballRigidbody.velocity = velocity;
             _previousVelocity = velocity;

@@ -20,6 +20,8 @@ namespace Models
         private GameConfig config;
         [SerializeField] 
         private Rigidbody2D platformRigidbody;
+        [SerializeField] 
+        private float animationTime = 0.5f;
 
         private void Awake()
         {
@@ -70,7 +72,7 @@ namespace Models
             var width = coefficientWidth * config.platformWidth;
             var height = coefficientHeight * config.platformHeight;
             
-            transform.localScale = Transformer.Scale(width, height, mainCamera, spriteRenderer); 
+            transform.DOScale(Transformer.Scale(width, height, mainCamera, spriteRenderer), animationTime);
             _max = Mathf.Abs(Transformer.Position(width / 2.0f, 0, mainCamera).x);
         }
 

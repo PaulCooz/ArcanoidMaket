@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: gameConfig
   m_EditorClassIdentifier: 
   uiZone: 0.9
-  maxEnergy: 20
+  maxEnergy: 100
   energyPerSecond: 0.01
   platformWidth: 0.4
   platformHeight: 0.05
   platformSpeed: 0.05
   ballVelocity: 7
+  maxVelocity: 10
+  velocityInc: 0.5
   minAngle: 30
   ballStartForce: 300
   startBallHeight: -3
@@ -57,6 +59,3 @@ MonoBehaviour:
   platformWidthTime: 5
   platformSpeedTime: 5
   boomTime: 0.1
-  sprites:
-  - {fileID: 21300000, guid: 47cb9517581a41940bb343f64dce3674, type: 3}
-  - {fileID: 0}
