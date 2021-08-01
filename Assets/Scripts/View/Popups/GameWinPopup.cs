@@ -10,6 +10,7 @@ namespace View.Popups
 {
     public class GameWinPopup : Popup
     {
+        private PopupManager _popupManager;
         private Foreground _foreground;
         private bool _isHide;
 
@@ -34,8 +35,9 @@ namespace View.Popups
             progress.DOFillAmount(info.x / info.y, animationsDuration);
         }
 
-        public override void Init(Foreground foreground)
+        public override void Init(PopupManager popupManager, Foreground foreground)
         {
+            _popupManager = popupManager;
             _foreground = foreground;
         }
 
@@ -51,10 +53,14 @@ namespace View.Popups
 
         public void OnNextPush()
         {
+            if (PlayerEnergy.Energy < 1)
+            {
+                _popupManager.ShowPopup<EnergyPopup>();
+                return;
+            }
+
             if (_isHide) return;
             _isHide = true;
-            
-            if (PlayerEnergy.Energy < 1) return;
 
             LevelManager.LoadNextLevel();
             Hide();

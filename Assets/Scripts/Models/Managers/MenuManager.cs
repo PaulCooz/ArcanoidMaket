@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,12 +9,18 @@ namespace Models.Managers
         [SerializeField] 
         private TextMeshProUGUI mainTitle;
 
+        public void Start()
+        {
+            SetMainText();
+        }
+
         public void ResetLanguage(int locale)
         {
+            EventsAndStates.OnChangeLocale += SetMainText;
             LocaleManager.SetLocale((Locale) locale);
         }
 
-        private void Start()
+        private void SetMainText()
         {
             mainTitle.text = LocaleManager.GetText("mainTitle");
         }

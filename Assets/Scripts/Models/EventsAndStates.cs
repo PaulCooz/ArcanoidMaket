@@ -1,7 +1,5 @@
 using System;
-using System.Runtime.InteropServices;
 using Dataers;
-using UnityEngine;
 
 namespace Models
 {
@@ -13,13 +11,14 @@ namespace Models
         public static event Action OnGameWin;
         public static event Action OnGameOver;
         public static event Action OnPackDone;
+        public static event Action OnChangeLocale;
 
         public static void SetGameWin()
         {
             OnGameWin?.Invoke();
             IsGameRun = false;
         }
-        
+
         public static void SetGameStart(LevelData levelData)
         {
             OnGameStart?.Invoke(levelData);
@@ -36,6 +35,11 @@ namespace Models
         {
             OnPackDone?.Invoke();
             IsGameRun = false;
+        }
+
+        public static void ChangeLocale()
+        {
+            OnChangeLocale?.Invoke();
         }
     }
 }

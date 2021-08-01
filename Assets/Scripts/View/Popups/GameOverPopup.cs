@@ -9,6 +9,7 @@ namespace View.Popups
 {
     public class GameOverPopup : Popup
     {
+        private PopupManager _popupManager;
         private Foreground _foreground;
         private bool _isHide;
         
@@ -28,17 +29,22 @@ namespace View.Popups
             titleText.text = LocaleManager.GetText("gameOverPopupTitle");
         }
 
-        public override void Init(Foreground foreground)
+        public override void Init(PopupManager popupManager, Foreground foreground)
         {
+            _popupManager = popupManager;
             _foreground = foreground;
         }
 
         public void PushRestart()
         {
+            if (PlayerEnergy.Energy < 1)
+            {
+                _popupManager.ShowPopup<EnergyPopup>();
+                return;
+            }
+
             if (_isHide) return;
             _isHide = true;
-            
-            if (PlayerEnergy.Energy < 1) return;
             
             Hide();
             LevelManager.RestartLevel();

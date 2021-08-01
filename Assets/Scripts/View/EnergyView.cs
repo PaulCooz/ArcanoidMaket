@@ -9,7 +9,7 @@ namespace View
         [SerializeField] 
         private TextMeshProUGUI textMesh;
         
-        private void Start()
+        private void Update()
         {
             textMesh.text = PlayerEnergy.Energy.ToString();
         }

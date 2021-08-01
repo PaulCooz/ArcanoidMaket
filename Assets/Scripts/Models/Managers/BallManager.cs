@@ -10,7 +10,7 @@ namespace Models.Managers
     {
         private List<Ball> _balls;
         private int _countBalls;
-        private int _velocityIncCount;
+        private bool _firstTime;
 
         [SerializeField] 
         private BallManagerController ballManagerController;
@@ -33,7 +33,7 @@ namespace Models.Managers
         {
             _balls = new List<Ball>();
             _countBalls = 0;
-            _velocityIncCount = 0;
+            _firstTime = true;
 
             EventsAndStates.OnGameWin += ClearBalls;
             EventsAndStates.OnGameOver += ClearBalls;
@@ -41,14 +41,24 @@ namespace Models.Managers
 
         private void Update()
         {
+            SpeedUpdate();
+            
             if (!EventsAndStates.IsGameRun || _countBalls != 0) return;
+            if (healthManager.CountHearts() <= 0)
+            {
+                EventsAndStates.SetGameOver();
+                return;
+            }
 
             ballSpirit.Show();
-            if (ballManagerController.MouseButtonUp())
+            if (!ballManagerController.MouseButtonUp() || _firstTime)
             {
-                NewBall();
-                ballSpirit.Hide();
+                _firstTime = false;
+                return;
             }
+
+            NewBall();
+            ballSpirit.Hide();
         }
 
         public void RemoveBall(int id)
@@ -65,7 +75,7 @@ namespace Models.Managers
             
             var ball = spawnManager.GetBall();
             var position = platformRigidbody.position;
-            var speed = Mathf.Clamp(config.ballVelocity + config.velocityInc * _velocityIncCount, config.ballVelocity, config.maxVelocity) ;
+            var speed = Mathf.Lerp(config.ballVelocity, config.maxVelocity, blockManager.GetProgress());
             
             ball.transform.SetParent(transform);
             ball.Init(new Vector2(position.x, config.startBallHeight), position, config, spawnManager, speed);
@@ -83,8 +93,8 @@ namespace Models.Managers
             if (!EventsAndStates.IsGameRun) return;
 
             var ball = spawnManager.GetBall();
-            var speed = Mathf.Clamp(config.ballVelocity + config.velocityInc * _velocityIncCount, config.ballVelocity, config.maxVelocity) ;
-            
+            var speed = Mathf.Lerp(config.ballVelocity, config.maxVelocity, blockManager.GetProgress());
+
             ball.transform.SetParent(transform);
             ball.Init(block.transform.position, platformRigidbody.position, config, spawnManager, speed);
             
@@ -115,30 +125,23 @@ namespace Models.Managers
                 ball.SetFuryBall(config.ballFuryTime);
             }
         }
-        
+
         private void SpeedUpdate()
         {
             foreach (var ball in _balls)
             {
                 if (!ball.isActiveAndEnabled) continue;
-                var speed = Mathf.Clamp(config.ballVelocity + config.velocityInc * _velocityIncCount, config.ballVelocity, config.maxVelocity) ;
+                var speed = Mathf.Lerp(config.ballVelocity, config.maxVelocity, blockManager.GetProgress());
                 
                 ball.velocityRatio = speed;
             }
         }
 
-        public void VelocityInc()
-        {
-            _velocityIncCount++;
-            
-            SpeedUpdate();
-        }
-        
         private void ClearBalls()
         {
             _balls.Clear();
             _countBalls = 0;
-            _velocityIncCount = 0;
+            _firstTime = true;
         }
 
         private void OnDestroy()

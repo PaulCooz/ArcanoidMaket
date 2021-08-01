@@ -28,7 +28,7 @@ namespace Models.Managers
                 var popup = Instantiate(pool, transform);
 
                 popup.Show();
-                popup.Init(foreground);
+                popup.Init(this, foreground);
                 _currentPopups.Push(popup);
 
                 return;

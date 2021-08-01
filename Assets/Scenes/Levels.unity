@@ -1067,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1861070544795604572, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1861070544795604572, guid: 3ee41cd8ca9014b4ebe3e95a994ac0e5, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1320,6 +1320,7 @@ MonoBehaviour:
   packProgress: {fileID: 862814562}
   foreground: {fileID: 779266188}
   sceneSwapDuration: 1
+  popupManager: {fileID: 1493194620}
 --- !u!1 &806367225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1550,7 @@ RectTransform:
   - {fileID: 1770295599}
   - {fileID: 1639305460}
   - {fileID: 1458660216}
+  - {fileID: 1493194619}
   - {fileID: 779266187}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1915,6 +1917,7 @@ MonoBehaviour:
   packProgress: {fileID: 1241042572}
   foreground: {fileID: 779266188}
   sceneSwapDuration: 1
+  popupManager: {fileID: 1493194620}
 --- !u!1 &1120150072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2075,7 @@ MonoBehaviour:
   packProgress: {fileID: 343453528}
   foreground: {fileID: 779266188}
   sceneSwapDuration: 1
+  popupManager: {fileID: 1493194620}
 --- !u!1 &1197333912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2553,6 +2557,7 @@ MonoBehaviour:
   packProgress: {fileID: 227386289}
   foreground: {fileID: 779266188}
   sceneSwapDuration: 1
+  popupManager: {fileID: 1493194620}
 --- !u!1 &1425679469
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,6 +2939,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8faa73c53798d4cb07e4c9e555effc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1493194618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493194619}
+  - component: {fileID: 1493194620}
+  m_Layer: 5
+  m_Name: PopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1493194619
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493194618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 810574605}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1493194620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493194618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642188557d404606b8eb11f145b9bae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popups:
+  - {fileID: 5090682285485843403, guid: 55f0b75740fe5cf4c8b0b1f10ea3ba12, type: 3}
+  foreground: {fileID: 779266188}
 --- !u!224 &1639305460 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1782372152629288218, guid: 8f0072eff15f22143afce85bfdd58900, type: 3}
@@ -3315,6 +3371,7 @@ MonoBehaviour:
   packProgress: {fileID: 1425679471}
   foreground: {fileID: 779266188}
   sceneSwapDuration: 1
+  popupManager: {fileID: 1493194620}
 --- !u!1 &2101787135
 GameObject:
   m_ObjectHideFlags: 0

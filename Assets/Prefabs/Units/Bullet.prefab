@@ -135,3 +135,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRenderer: {fileID: 3246728813567335306}
+  bulletRigidbody: {fileID: 3246728813567335304}

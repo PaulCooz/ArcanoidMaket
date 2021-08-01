@@ -10,21 +10,21 @@ namespace Dataers
         public static Image PackImage;
 
         // for debug {
-        [SerializeField]
-        public TextAsset[] testLevels;
-        [SerializeField]
-        public int testPackNumber;
-        [SerializeField]
-        public Image testPackImage;
-        
-        private void Awake()
-        {
-            Levels = testLevels;
-            PackNumber = testPackNumber;
-            PackImage = testPackImage;
-            
-            // PlayerPrefs.SetInt("lastPack", 100);
-        }
+        // [SerializeField]
+        // public TextAsset[] testLevels;
+        // [SerializeField]
+        // public int testPackNumber;
+        // [SerializeField]
+        // public Image testPackImage;
+        //
+        // private void Awake()
+        // {
+        //     Levels = testLevels;
+        //     PackNumber = testPackNumber;
+        //     PackImage = testPackImage;
+        //     
+        //     // PlayerPrefs.SetInt("lastPack", 100);
+        // }
         //}
 
         public static void SetLevelPack(TextAsset[] packLevels, int packNumber, Image image)

@@ -25,7 +25,6 @@ namespace Models.Managers
         [SerializeField] 
         private GameConfig config;
         
-
         public int height;
         public int width;
         public Block[,] Blocks;
@@ -146,12 +145,17 @@ namespace Models.Managers
         public void PopBlock(Block block)
         {
             _emptyBlocks++;
-            progressbar.SetProgress((float) _emptyBlocks / _allBlocks);
+            progressbar.SetProgress(GetProgress());
 
-            if (_emptyBlocks == _allBlocks)
+            if (_emptyBlocks >= _allBlocks)
             {
                 EventsAndStates.SetGameWin();
             }
+        }
+
+        public float GetProgress()
+        {
+            return (float) _emptyBlocks / _allBlocks;
         }
 
         private void OnDestroy()

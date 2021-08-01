@@ -82,12 +82,8 @@ namespace Models.Managers
 
         public void PopHeart(int countBalls)
         {
-            if (countBalls > 0 || !EventsAndStates.IsGameRun) return;
-            if (_hearts.Count <= 0)
-            {
-                EventsAndStates.SetGameOver();
-                return;
-            }
+            if (countBalls > 0 || !EventsAndStates.IsGameRun || _hearts.Count <= 0) return;
+            if (_hearts.Count <= 0) return;
 
             _hearts.Last().Pop();
             _hearts.RemoveAt(_hearts.Count - 1);
@@ -95,13 +91,8 @@ namespace Models.Managers
 
         public void PopHeart()
         {
-            if (!EventsAndStates.IsGameRun) return;
-            if (_hearts.Count <= 0)
-            {
-                EventsAndStates.SetGameOver();
-                return;
-            }
-            
+            if (!EventsAndStates.IsGameRun || _hearts.Count <= 0) return;
+
             _hearts.Last().Pop();
             _hearts.RemoveAt(_hearts.Count - 1);
         }

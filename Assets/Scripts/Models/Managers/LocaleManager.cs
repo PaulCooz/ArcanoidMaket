@@ -17,6 +17,7 @@ namespace Models.Managers
         public static void SetLocale(Locale locale)
         {
             _locale = locale;
+            EventsAndStates.ChangeLocale();
         }
 
         public static string GetText(string textId)

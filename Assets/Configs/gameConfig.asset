@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: gameConfig
   m_EditorClassIdentifier: 
   uiZone: 0.9
-  maxEnergy: 100
+  maxEnergy: 5
   energyPerSecond: 0.01
   platformWidth: 0.4
   platformHeight: 0.05
@@ -23,7 +23,7 @@ MonoBehaviour:
   velocityInc: 0.5
   minAngle: 30
   ballStartForce: 300
-  startBallHeight: -3
+  startBallHeight: -3.5
   ballDamage: 1
   packs:
   - levels:

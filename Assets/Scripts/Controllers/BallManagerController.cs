@@ -1,4 +1,5 @@
-﻿using ScriptObjects;
+﻿using Models;
+using ScriptObjects;
 using UnityEngine;
 
 namespace Controllers
@@ -10,7 +11,7 @@ namespace Controllers
         
         public bool MouseButtonUp()
         {
-            return Input.GetMouseButtonUp(0) && Input.mousePosition.y < Screen.height * config.uiZone;
+            return Input.mousePosition.y < Screen.height * config.uiZone && Input.GetMouseButtonUp(0);
         }
     }
 }

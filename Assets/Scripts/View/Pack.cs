@@ -4,6 +4,7 @@ using ScriptObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using View.Popups;
 
 namespace View
 {
@@ -29,6 +30,8 @@ namespace View
         private Foreground foreground;
         [SerializeField] 
         private float sceneSwapDuration = 1;
+        [SerializeField] 
+        private PopupManager popupManager;
 
         private void Start()
         {
@@ -62,7 +65,11 @@ namespace View
 
         public void Pushed()
         {
-            if (PlayerEnergy.Energy < 1) return;
+            if (PlayerEnergy.Energy < 1) 
+            {
+                popupManager.ShowPopup<EnergyPopup>();
+                return;
+            }
 
             var currentPack = PlayerData.GetLastPack();
             if (currentPack < packNumber) return;

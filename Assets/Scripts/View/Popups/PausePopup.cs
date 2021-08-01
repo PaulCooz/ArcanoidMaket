@@ -9,6 +9,7 @@ namespace View.Popups
 {
     public class PausePopup : Popup
     {
+        private PopupManager _popupManager;
         private Foreground _foreground;
         
         [SerializeField] 
@@ -22,8 +23,9 @@ namespace View.Popups
             EventsAndStates.IsGameRun = false;
         }
 
-        public override void Init(Foreground foreground)
+        public override void Init(PopupManager popupManager, Foreground foreground)
         {
+            _popupManager = popupManager;
             _foreground = foreground;
         }
 
@@ -41,7 +43,7 @@ namespace View.Popups
         public void OnResumePush()
         {
             Hide();
-            Destroy(gameObject, animationDuration);
+            Destroy(gameObject, animationDuration + 0.1f);
         }
 
         public void OnExitPush()

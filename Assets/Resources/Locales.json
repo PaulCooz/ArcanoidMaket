@@ -5,6 +5,7 @@
 	"packName2" : ["asphalt", "асфальт"],
 	"packName3" : ["dandelion", "одуванчик"],
 	"packName4" : ["anthill", "муравейник"],
+	"packName5" : ["test", "тест"],
 	"gameOverPopupTitle" : ["game over", "игра проиграна"],
 	"gameWinPopupTitle" : ["you win", "победа"],
 	"pauseTitle" : ["pause", "пауза"]

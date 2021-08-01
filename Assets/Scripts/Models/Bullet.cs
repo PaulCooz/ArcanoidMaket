@@ -13,6 +13,8 @@ namespace Models
 
         [SerializeField] 
         private SpriteRenderer bulletRenderer;
+        [SerializeField] 
+        private Rigidbody2D bulletRigidbody;
 
         public void Init(SpawnManager spawnManager, BlockType blockType, UnityEvent<BlockType> endAction, Color color)
         {
@@ -23,6 +25,11 @@ namespace Models
             
             EventsAndStates.OnGameWin += Remove;
             EventsAndStates.OnGameOver += Remove;
+        }
+        
+        private void Update()
+        {
+            bulletRigidbody.simulated = EventsAndStates.IsGameRun;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

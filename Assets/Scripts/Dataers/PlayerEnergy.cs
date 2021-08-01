@@ -41,7 +41,7 @@ namespace Dataers
             PlayerPrefs.SetString(LastDate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
         }
 
-        private static void IncEnergy()
+        public static void IncEnergy()
         {
             Energy++;
 
